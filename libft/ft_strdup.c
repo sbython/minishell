@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/05/20 13:35:15 by msbai            ###   ########.fr       */
+/*   Created: 2023/11/08 11:32:57 by msbai             #+#    #+#             */
+/*   Updated: 2023/11/26 16:34:52 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-void    get_cmd(t_box *box)
+char	*ft_strdup(const char *s)
 {
-    system(box->cmd);
+	char	*ptr;
+	size_t	len;
+
+	len = ft_strlen(s);
+	ptr = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ptr)
+		return (NULL);
+	ft_memcpy(ptr, s, len);
+	ptr[len] = '\0';
+	return (ptr);
 }

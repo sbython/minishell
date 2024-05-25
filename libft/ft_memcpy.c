@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/05/20 13:35:15 by msbai            ###   ########.fr       */
+/*   Created: 2023/11/01 12:13:22 by msbai             #+#    #+#             */
+/*   Updated: 2023/11/27 11:19:08 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
+#include <stdio.h>
+#include <string.h>
 
-void    get_cmd(t_box *box)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-    system(box->cmd);
+	unsigned char	*d;
+	unsigned char	*s;
+
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
+	if (dest == src)
+		return (dest);
+	if (!dest && !src)
+		return (NULL);
+	while (n--)
+		*d++ = *s++;
+	return (dest);
 }

@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/05/20 13:35:15 by msbai            ###   ########.fr       */
+/*   Created: 2023/11/01 22:04:06 by msbai             #+#    #+#             */
+/*   Updated: 2023/11/26 13:47:31 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-void    get_cmd(t_box *box)
+size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 {
-    system(box->cmd);
+	size_t	len;
+
+	len = 0;
+	if (n == 0)
+	{
+		return (ft_strlen(src));
+	}
+	while (src[len] && len < n - 1)
+		*dest++ = src[len++];
+	*dest = '\0';
+	while (src[len])
+		len++;
+	return (len);
 }

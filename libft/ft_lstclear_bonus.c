@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/05/20 13:35:15 by msbai            ###   ########.fr       */
+/*   Created: 2023/11/23 20:21:38 by msbai             #+#    #+#             */
+/*   Updated: 2023/11/24 14:04:42 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-void    get_cmd(t_box *box)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-    system(box->cmd);
+	t_list	*dee;
+	t_list	*next;
+
+	if (!lst || !del)
+		return ;
+	dee = *lst;
+	while (dee)
+	{
+		next = dee->next;
+		(*del)(dee->content);
+		free(dee);
+		dee = next;
+	}
+	*lst = NULL;
 }

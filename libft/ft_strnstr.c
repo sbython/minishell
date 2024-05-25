@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/05/20 13:35:15 by msbai            ###   ########.fr       */
+/*   Created: 2023/11/07 10:40:10 by msbai             #+#    #+#             */
+/*   Updated: 2023/11/26 17:30:41 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-void    get_cmd(t_box *box)
+char	*ft_strnstr(const char *str, const char *str1, size_t len)
 {
-    system(box->cmd);
+	size_t	i;
+	size_t	i1;
+
+	i = 0;
+	i1 = 0;
+	if (!str && len == 0)
+		return ((char *)str);
+	if (!*str1)
+		return ((char *)str);
+	while (len > i && str[i])
+	{
+		while (str[i + i1] == str1[i1] && str[i + i1] && len > (i + i1))
+			i1++;
+		if (!str1[i1])
+			return ((char *)(str + i));
+		i1 = 0;
+		i++;
+	}
+	return (NULL);
 }

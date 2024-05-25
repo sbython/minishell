@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/05/20 13:35:15 by msbai            ###   ########.fr       */
+/*   Created: 2023/11/06 22:13:35 by msbai             #+#    #+#             */
+/*   Updated: 2023/11/26 19:51:06 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-
-void    get_cmd(t_box *box)
+int	ft_atoi(const char *num)
 {
-    system(box->cmd);
+	int	i;
+	int	res;
+	int	sing;
+
+	i = 0;
+	res = 0;
+	sing = 1;
+	while ((num[i] >= 9 && num[i] <= 13) || num[i] == 32)
+	{
+		i++;
+	}
+	if (num[i] == '-')
+	{
+		i++;
+		sing = -1;
+	}
+	else if (num[i] == '+')
+		i++;
+	while (num[i] <= '9' && num[i] >= '0')
+		res = (res * 10) + num[i++] - '0';
+	return (res * sing);
 }
