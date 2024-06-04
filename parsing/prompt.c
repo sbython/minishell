@@ -36,7 +36,8 @@ char * gethost()
 void join(char **dest, char * src, int i)
 {
     char * tmp;
-
+    if (!src)
+        src = "X";
     tmp = ft_strjoin(*dest, src);
     free(*dest);
     if (i)

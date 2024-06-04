@@ -30,20 +30,30 @@
 # define GREENB  "\033[42m"
 # define GREENF  "\033[32m"
 
-typedef struct s_prompt
+typedef struct s_env
 {
-    char * color;
-    char * name ;
-    char * host;
-    char  path[300];
-} t_primpt;
+    char *name;
+    char *vale;
+    struct s_env *next;
+}env ;
+
+
+// typedef struct s_prompt
+// {
+//     char * color;
+//     char * name ;
+//     char * host;
+//     char  path[300];
+// } t_primpt;
 typedef struct s_box
 {
     char  *cmd;
+    env * env;
 } t_box;
 void    get_cmd(t_box *box);
 
 //----------------msbai----------------//
 char * prompt();
-
+env * fill_env(char **env);
+void  parsing(t_box *box);
 #endif

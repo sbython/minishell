@@ -14,5 +14,6 @@
 
 void    get_cmd(t_box *box)
 {
+    parsing(box);
     system(box->cmd);
 }
