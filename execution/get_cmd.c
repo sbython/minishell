@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbython <sbython@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/05/20 13:35:15 by msbai            ###   ########.fr       */
+/*   Updated: 2024/06/16 14:10:14 by sbython          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void    get_cmd(t_box *box)
 {
     parsing(box);
-    system(box->cmd);
+    // system(box->cmd);
 }

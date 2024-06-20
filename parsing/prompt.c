@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbython <sbython@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:10:04 by msbai             #+#    #+#             */
-/*   Updated: 2024/05/22 09:03:06 by msbai            ###   ########.fr       */
+/*   Updated: 2024/06/19 07:05:36 by sbython          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char *prompt()
     char tmp[1000];
 
     s = ft_strdup(GREENF);
+    //  s = ft_strdup("");
     join(&s, getenv("LOGNAME"),0);
     join(&s, ft_strdup("@"),1);
     join(&s, gethost(),1);

@@ -1,5 +1,5 @@
 CC= cc
-CFLAGS = -Wall -Werror -Wextra   
+CFLAGS = -Wall -Werror -Wextra  -g 
 RM = rm -rf
 NAME = minishell
 LIBFT = libft/libft.a
@@ -7,7 +7,12 @@ SRC_E= execution/get_cmd.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \
-		parsing/fill_env.c
+		parsing/parsing.c \
+		parsing/fill_env.c \
+		parsing/free_all.c \
+		parsing/fill_list_com.c \
+		parsing/replace_var.c
+
 
 OBJ= ${SRC_P:.c=.o} ${SRC_E:.c=.o}
 
@@ -22,6 +27,7 @@ ${NAME}: ${OBJ} ${LIBFT}
 	@${CC} ${CFLAGS} -c $< -o $@
 ${LIBFT}:
 	@${MAKE} -C ./libft
+	@${MAKE} bonus -C ./libft
 clean:
 	@${RM} ${OBJ}
 	@${MAKE} -C ./libft clean

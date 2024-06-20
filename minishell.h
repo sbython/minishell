@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbython <sbython@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:08:35 by msbai             #+#    #+#             */
-/*   Updated: 2024/05/22 09:11:05 by msbai            ###   ########.fr       */
+/*   Updated: 2024/06/18 07:08:53 by sbython          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,28 @@ typedef struct s_env
     struct s_env *next;
 }env ;
 
+typedef struct s_listcom
+{
+    char *com;
+    struct s_listcom *next;
+    struct s_listcom *prev;
+}t_com;
 
-// typedef struct s_prompt
-// {
-//     char * color;
-//     char * name ;
-//     char * host;
-//     char  path[300];
-// } t_primpt;
 typedef struct s_box
 {
     char  *cmd;
+    t_com *l_com;
+    char **ptr;
     env * env;
 } t_box;
 void    get_cmd(t_box *box);
 
 //----------------msbai----------------//
-char * prompt();
-env * fill_env(char **env);
-void  parsing(t_box *box);
-#endif
+char    *prompt();
+env     *fill_env(char **env);
+void    parsing(t_box *box);
+void    free_all(t_box *box);
+void    free_env(env *env);
+void    fill_list(char **ptr, t_box *box);
+void    replace_var(t_box *box);
+#endif////////

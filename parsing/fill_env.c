@@ -37,7 +37,6 @@ env * fill_env(char **en)
         *vale = 0;
         vale++;
         add_front(&lst, add_new_var(name,vale));
-        // printf("%s-- %s -- %s\n", lst->name, lst->vale, new);
         i++;
     }
     return lst;
