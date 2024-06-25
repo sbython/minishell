@@ -6,7 +6,7 @@
 /*   By: sbython <sbython@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:08:35 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/18 07:08:53 by sbython          ###   ########.fr       */
+/*   Updated: 2024/06/24 12:20:25 by sbython          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <signal.h>
+#include <sys/wait.h>
 //-------color-------//
 # define DCOLORB "\033[49m"
 # define DCOLORF "\033[39m"
@@ -61,4 +62,9 @@ void    free_all(t_box *box);
 void    free_env(env *env);
 void    fill_list(char **ptr, t_box *box);
 void    replace_var(t_box *box);
-#endif////////
+void    join(char **dest, char * src, int i);
+char    *str_replace(char * s1, char *rep, char *with);
+void    free_env(env *lst);
+void    collect_string(t_box *box);
+void    simple_check(char *com);
+#endif

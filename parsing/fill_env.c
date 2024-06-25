@@ -13,11 +13,29 @@ env * add_new_var(char *name , char * vale)
     lst->next = NULL;
     return lst;
 }
-void add_front(env **lst, env *new)
+
+env *last_n(env *node)
+{
+    if(!node)
+        return NULL;
+    while (node->next)
+    {
+        node = node->next;
+    }
+    return(node);
+}
+
+void add_back(env **node, env *new)
 {
 
-    new->next = *lst;
-    *lst = new;
+    env *last;
+    if (!*node)
+    {
+        *node = new;
+        return ;
+    }
+    last = last_n(*node);
+    last->next = new;
 }
 env * fill_env(char **en)
 {
@@ -36,7 +54,7 @@ env * fill_env(char **en)
         vale = ft_strchr(new, '=');
         *vale = 0;
         vale++;
-        add_front(&lst, add_new_var(name,vale));
+        add_back(&lst, add_new_var(name,vale));
         i++;
     }
     return lst;

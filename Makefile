@@ -11,8 +11,10 @@ SRC_P= parsing/minishell.c \
 		parsing/fill_env.c \
 		parsing/free_all.c \
 		parsing/fill_list_com.c \
-		parsing/replace_var.c
-
+		parsing/replace_var.c \
+		parsing/replace.c\
+		parsing/collect_string.c\
+		parsing/simple_check.c
 
 OBJ= ${SRC_P:.c=.o} ${SRC_E:.c=.o}
 

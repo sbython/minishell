@@ -6,7 +6,7 @@
 /*   By: sbython <sbython@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/16 14:10:14 by sbython          ###   ########.fr       */
+/*   Updated: 2024/06/24 09:01:55 by sbython          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 
 void    get_cmd(t_box *box)
 {
-    parsing(box);
-    // system(box->cmd);
+    int pid;
+    t_com *ls;
+    
+    pid = fork();
+    if (!pid)
+    {
+        parsing(box);
+        ls = box->l_com;
+        while (ls)
+        {
+            printf("%s\n", ls->com);
+            ls = ls->next;
+        }
+        exit(0);
+    }
+    else
+        wait(NULL);
 }
