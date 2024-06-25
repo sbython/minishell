@@ -6,7 +6,7 @@
 /*   By: sbython <sbython@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:08:35 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/24 12:20:25 by sbython          ###   ########.fr       */
+/*   Updated: 2024/06/25 08:34:52 by sbython          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,6 @@ char    *str_replace(char * s1, char *rep, char *with);
 void    free_env(env *lst);
 void    collect_string(t_box *box);
 void    simple_check(char *com);
+t_com   *new_node(char *str);
+void    split_pip(t_box *box);
 #endif

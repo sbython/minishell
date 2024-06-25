@@ -21,8 +21,8 @@ void  parsing(t_box *box)
     ptr = ft_split(box->cmd , ' ');
     fill_list(ptr, box);
     free_2ptr(ptr);
-    replace_var(box);
     collect_string(box);
+    replace_var(box);
     split_pip(box);
     
 
