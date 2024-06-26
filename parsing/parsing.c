@@ -24,6 +24,4 @@ void  parsing(t_box *box)
     collect_string(box);
     replace_var(box);
     split_pip(box);
-    
-
 }

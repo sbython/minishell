@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbython <sbython@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:08:35 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/25 08:34:52 by sbython          ###   ########.fr       */
+/*   Updated: 2024/06/26 10:40:59 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,9 @@ void    collect_string(t_box *box);
 void    simple_check(char *com);
 t_com   *new_node(char *str);
 void    split_pip(t_box *box);
+
+
+//----------------zibnoukh----------------//
+void    echo(t_com *t_tmp_ls, char *next);
+
 #endif
