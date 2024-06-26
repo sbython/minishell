@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbython <sbython@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/24 08:44:42 by sbython          ###   ########.fr       */
+/*   Updated: 2024/06/26 09:19:41 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void shell_loop(char **en)
     rl_clear_history();
     free_env(lst.env);
 }
+
 int main(int ac, char **av, char **env)
 {
     (void)av;

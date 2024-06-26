@@ -71,5 +71,4 @@ void split_pip(t_box *box)
         }
         com = com->next;
     }
-    
 }

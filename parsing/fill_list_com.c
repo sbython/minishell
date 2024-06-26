@@ -16,11 +16,10 @@ t_com *last_node(t_com *node)
     if(!node)
         return NULL;
     while (node->next)
-    {
         node = node->next;
-    }
     return(node);
 }
+
 void pop(t_com ** node, t_com *new)
 {
     t_com *last;
@@ -49,5 +48,4 @@ void    fill_list(char **ptr, t_box *box)
         i++;
     }
     box->l_com = node;
-    
 }
