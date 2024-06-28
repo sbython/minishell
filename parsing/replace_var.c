@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace_var.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
+/*   Updated: 2024/06/27 22:26:33 by msbai            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "../minishell.h"
 
@@ -87,8 +99,6 @@ void replace_var(t_box *box)
                 com->com = replace(com->com, box->env);
             // printf(com->com);
         }
-        else if(com->com[0] == '~' && com->com[1] != 0)
-                com->com =  str_replace(com->com, "~", "/home/");
         else if(com->com[0] == '~' && com->com[1] == 0)
                 com->com =  str_replace(com->com, "~", getenv("HOME"));
         com = com->next;
