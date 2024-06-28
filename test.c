@@ -4,71 +4,78 @@
 #include <pwd.h>
 #include <unistd.h>
 
-char *expand_tilde(const char *str);
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-int main() {
-    const char *str = "~/projects/minishell";
-    const char *str2 = "~newuser/projects/minishell";
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+
+#define BUFFER_SIZE 1024
+
+void execute_command(char *command) {
+    char *argv[BUFFER_SIZE];
+    int argc = 0;
+    char *token = strtok(command, " ");
     
-    char *result1 = expand_tilde(str);
-    printf("Result1: %s\n", result1);
-    free(result1);
-    
-    char *result2 = expand_tilde(str2);
-    printf("Result2: %s\n", result2);
-    free(result2);
-    
-    return 0;
+    while (token != NULL) {
+        argv[argc++] = token;
+        token = strtok(NULL, " ");
+    }
+    argv[argc] = NULL;
+
+    if (fork() == 0) {
+        // In the child process
+        if (execvp(argv[0], argv) == -1) {
+            perror("execvp failed");
+        }
+        exit(EXIT_FAILURE);
+    } else {
+        // In the parent process
+        wait(NULL);
+    }
 }
 
-char *expand_tilde(const char *str) {
-    if (str[0] != '~') {
-        return strdup(str); // No tilde, return a copy of the original string
+int main(int argc, char *argv[]) {
+    //     return 1;
+    // }
+
+    char cwd[1024];
+    // if (
+        getcwd(cwd, sizeof(cwd));
+        // != NULL
+        // ) {
+    //     printf("Changed directory to: %s\n", cwd);
+    // } else {
+    //     perror("getcwd failed");
+    //     return 1;
+    // }
+
+    char command[1024];
+    while (1) {
+        printf("%s> ", cwd);
+        if (fgets(command, sizeof(command), stdin) == NULL) {
+            perror("fgets failed");
+            break;
+        }
+        // Remove the newline character at the end of the command
+        // command[strcspn(command, "\n")] = '\0';
+
+        // Exit the shell if the user types "exit"
+        // if (strcmp(command, "exit") == 0) {
+        //     break;
+        // }
+
+        execute_command(command);
+
+        // Update the current working directory
+        // if (getcwd(cwd, sizeof(cwd)) == NULL) {
+        //     perror("getcwd failed");
+        //     break;
+        // }
     }
 
-    const char *home = NULL;
-    if (str[1] == '/' || str[1] == '\0') {
-        // Case: "~" or "~/..."
-        home = getenv("HOME");
-        if (!home) {
-            struct passwd *pw = getpwuid(getuid());
-            home = pw ? pw->pw_dir : "";
-        }
-    } else {
-        // Case: "~username"
-        const char *username = str + 1;
-        const char *end = strchr(username, '/');
-        size_t user_len = end ? (size_t)(end - username) : strlen(username);
-
-        char *user = strndup(username, user_len);
-        if (!user) {
-            perror("strndup");
-            exit(EXIT_FAILURE);
-        }
-
-        struct passwd *pw = getpwnam(user);
-        free(user);
-        if (pw) {
-            home = pw->pw_dir;
-        } else {
-            // User not found, return the original string
-            return strdup(str);
-        }
-    }
-
-    // Allocate memory for the new string
-    size_t home_len = strlen(home);
-    size_t str_len = strlen(str);
-    size_t suffix_len = str_len - (strchr(str, '/') - str);
-    char *result = malloc(home_len + suffix_len + 1);
-    if (!result) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-
-    // Construct the new string
-    strcpy(result, home);
-    strcat(result, strchr(str, '/') ? strchr(str, '/') : "");
-
-    return result;
+    return 0;
 }

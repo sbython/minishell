@@ -6,7 +6,11 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:08:35 by msbai             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/06/27 21:09:08 by msbai            ###   ########.fr       */
+=======
+/*   Updated: 2024/06/27 17:02:07 by zibnoukh         ###   ########.fr       */
+>>>>>>> 0ffcca5cbdd01a9e98c2f194936218a12c1f67b8
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +29,7 @@
 # include <fcntl.h>
 # include <signal.h>
 #include <sys/wait.h>
-//-------color-------//
+//-------colors-------//
 # define DCOLORB "\033[49m"
 # define DCOLORF "\033[39m"
 # define GREENB  "\033[42m"
@@ -73,6 +77,14 @@ void    exit_f(char *s, char *msg);
 void    remove_qoute(t_box *box);
 
 //----------------zibnoukh----------------//
+
+/*builtins*/
 void    echo(t_com *t_tmp_ls, char *next);
+void    rebuild_env(env *all_env);
+void    rebuild_exit();
+void    rebuild_cd();
+
+/*functions*/
+int    length_stack(t_com *stack);
 
 #endif

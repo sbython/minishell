@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/27 14:40:31 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:16:25 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-void    echo(t_com *t_tmp_ls, char *next)
+void    rebuild_exit()
 {
-    int check;
-
-    check = 1;
-    if(ft_strncmp("-n", next, 2) == 0)
-        check = 0;
-    while (t_tmp_ls->next)
-    {
-        t_tmp_ls = t_tmp_ls->next;
-        if(!(ft_strncmp("-n", t_tmp_ls->com, 2) == 0))
-        {
-            ft_putstr_fd(t_tmp_ls->com, 1);
-            if(t_tmp_ls->next != NULL)
-                ft_putstr_fd(" ", 1);
-        }
-    }
-    if(check)
-        ft_putstr_fd("\n", 1);
+    ft_putstr_fd("exit", 1);
+    // exit(0);
+    // break;
 }
