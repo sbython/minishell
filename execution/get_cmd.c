@@ -16,16 +16,21 @@ void    get_cmd_to_builtins(t_box *box)
 {
     int pid;
     t_com *ls;
-    t_com *t_tmp_ls;
+    // t_com *t_tmp_ls;
     
     pid = fork();
     if (!pid)
     {
         parsing(box);
         ls = box->l_com;
-        t_tmp_ls = ls;
-        if(ft_strncmp(ls->com, "echo", ft_strlen(ls->com)) == 0)
-            echo(t_tmp_ls, ls->next->com);
+        while(ls)
+        {
+            printf("%s\n",ls->com);
+            ls = ls->next;
+        }
+        // t_tmp_ls = ls;
+        // if(ft_strncmp(ls->com, "echo", ft_strlen(ls->com)) == 0)
+        //     echo(t_tmp_ls, ls->next->com);
         exit(0);
     }
     else
