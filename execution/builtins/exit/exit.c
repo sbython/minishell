@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/27 17:16:25 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:38:34 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    rebuild_exit()
 {
-    ft_putstr_fd("exit", 1);
+    ft_putstr_fd("exit\n", 1);
     // exit(0);
     // break;
 }
