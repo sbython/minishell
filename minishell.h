@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:08:35 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/26 12:47:24 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:02:07 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <fcntl.h>
 # include <signal.h>
 #include <sys/wait.h>
-//-------color-------//
+//-------colors-------//
 # define DCOLORB "\033[49m"
 # define DCOLORF "\033[39m"
 # define GREENB  "\033[42m"
@@ -72,6 +72,14 @@ void    split_pip(t_box *box);
 
 
 //----------------zibnoukh----------------//
+
+/*builtins*/
 void    echo(t_com *t_tmp_ls, char *next);
+void    rebuild_env(env *all_env);
+void    rebuild_exit();
+void    rebuild_cd();
+
+/*functions*/
+int    length_stack(t_com *stack);
 
 #endif
