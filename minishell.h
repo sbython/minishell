@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:08:35 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/26 12:47:24 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/06/27 21:09:08 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void    collect_string(t_box *box);
 void    simple_check(char *com);
 t_com   *new_node(char *str);
 void    split_pip(t_box *box);
-
+void    exit_f(char *s, char *msg);
+void    remove_qoute(t_box *box);
 
 //----------------zibnoukh----------------//
 void    echo(t_com *t_tmp_ls, char *next);
