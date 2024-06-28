@@ -3,9 +3,9 @@ CFLAGS = -Wall -Werror -Wextra  -g
 RM = rm -rf
 NAME = minishell
 LIBFT = libft/libft.a
-SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c \
+SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd.c \
 	   execution/builtins/echo/echo.c execution/builtins/env/env.c \
-	   execution/builtins/echo/length_stack.c execution/builtins/exit/exit.c \
+	   execution/builtins/exit/exit.c execution/builtins/functions/length_stack.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \

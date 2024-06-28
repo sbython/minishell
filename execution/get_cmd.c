@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/27 16:59:42 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:24:55 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ void    set_commands(t_com *ls, t_box *box)
         rebuild_env(box->env);  
     else if((ft_strncmp(ls->com, "exit", ft_strlen(ls->com)) == 0))
         rebuild_exit(box->env);  
+    // else if((ft_strncmp(ls->com, "export", ft_strlen(ls->com)) == 0))
+    //     rebuild_export(box->env);  
+    else if((ft_strncmp(ls->com, "pwd", ft_strlen(ls->com)) == 0))
+            rebuild_pwd(length_stack(ls), ls);
+    // else if((ft_strncmp(ls->com, "unset", ft_strlen(ls->com)) == 0))
+    //     rebuild_unset(box->env);  
 }
 
 void    get_cmd_to_builtins(t_box *box)
@@ -50,5 +56,3 @@ void    get_cmd(t_box *box)
 {
     get_cmd_to_builtins(box);
 }
-
-// echo -nnnnnnnfnn heheh 

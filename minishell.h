@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:08:35 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/27 17:02:07 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:25:15 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void    echo(t_com *t_tmp_ls, char *next);
 void    rebuild_env(env *all_env);
 void    rebuild_exit();
 void    rebuild_cd();
+void rebuild_pwd(int size, t_com *ls);
 
 /*functions*/
 int    length_stack(t_com *stack);
-
 #endif

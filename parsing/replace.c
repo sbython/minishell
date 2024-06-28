@@ -15,7 +15,7 @@ char * str_replace(char * s1, char *rep, char *with)
         ft_memcpy(res_pos, s1 , len);
         res_pos += len;
         ft_memcpy(res_pos, with , with_len);
-        res_pos += len + with_len;
+        res_pos +=  with_len;
         s1 = pos + rep_len;
     }
     ft_strlcpy(res_pos, s1 , -1);
