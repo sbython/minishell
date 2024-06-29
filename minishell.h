@@ -5,14 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 11:08:35 by msbai             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/27 21:09:08 by msbai            ###   ########.fr       */
-=======
-/*   Updated: 2024/06/27 17:02:07 by zibnoukh         ###   ########.fr       */
->>>>>>> 0ffcca5cbdd01a9e98c2f194936218a12c1f67b8
+/*   Created: 2024/06/28 18:36:10 by msbai             #+#    #+#             */
+/*   Updated: 2024/06/29 16:31:04 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -75,7 +72,8 @@ t_com   *new_node(char *str);
 void    split_pip(t_box *box);
 void    exit_f(char *s, char *msg);
 void    remove_qoute(t_box *box);
-
+void    check_gramer(t_box * box);
+void    delete_emty(t_box *box);
 //----------------zibnoukh----------------//
 
 /*builtins*/

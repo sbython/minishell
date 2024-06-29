@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:23 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/28 14:04:21 by msbai            ###   ########.fr       */
+/*   Updated: 2024/06/29 16:12:38 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void  parsing(t_box *box)
     replace_var(box);
     split_pip(box);
     remove_qoute(box);
-    // check_gramer(box);
+    delete_emty(box);
+    check_gramer(box);
     // fill_finale(box)); :TODO.
 }

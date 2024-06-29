@@ -1,38 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_gramer.c                                     :+:      :+:    :+:   */
+/*   delete_emty.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 18:57:19 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/28 21:17:03 by msbai            ###   ########.fr       */
+/*   Created: 2024/06/29 16:13:28 by msbai             #+#    #+#             */
+/*   Updated: 2024/06/29 16:42:02 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-int is_token(t_com *ls)
+
+void delete_(t_com *ls)
 {
-    return(ls && ( !ft_strncmp(ls->com, "|", -1)
-        || !ft_strncmp(ls->com, "<<",-1)
-        || !ft_strncmp(ls->com, ">>", -1)
-        || !ft_strncmp(ls->com, "<", -1)
-        || !ft_strncmp(ls->com, ">", -1)));
+    t_com *next;
+    t_com *prev;
+    
+    next = ls->next;
+    prev = ls->prev;
+
+    next->prev = prev;
+    prev->next = next;
+    free(ls->com);
+    free(ls);
 }
-void check_gramer(t_box * box)
+
+void delete_emty(t_box *box)
 {
     t_com *ls;
-
+    t_com *tmp;
+    char  *str;
     ls = box->l_com;
     while (ls)
     {
-        if (is_token(ls) && is_token(ls->next))
+        str = ls->com;
+        if(!*str)
         {
-            ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
-            exit_f(NULL , "`<< or >> or < or >'\n"); 
+            tmp = ls->next;
+            delete_(ls);
+            ls = tmp;
         }
-        
-        ls = ls->next;
+        else
+             ls = ls->next;
     }
     
 }

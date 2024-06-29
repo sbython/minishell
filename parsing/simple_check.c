@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:54 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/28 14:29:45 by msbai            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:19:25 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 void exit_f(char *s, char *msg)
 {
     ft_putstr_fd(msg, 2);
-    free(s);
+    if(s)
+        free(s);
     exit(1);
 }
 int check_(char *s)
@@ -45,6 +46,8 @@ int check_(char *s)
 }
 void simple_check(char *com)
 {
+    if(!*com)
+        return;
     if (com[0] == '|' || com[ft_strlen(com) - 1] == '|')
          exit_f(com ,"minishell: syntax error near unexpected token `|'\n");
     else if (!(ft_strncmp(com , "<<", -1) 
