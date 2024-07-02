@@ -1,21 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+
+// Function to export data to a file
+void export_data(const char *filename, const char **data, size_t data_size) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        perror("Failed to open file");
+        return;
+    }
+
+    for (size_t i = 0; i < data_size; i++) {
+        fprintf(file, "%s\n", data[i]);
+    }
+
+    fclose(file);
+    printf("Data exported to %s successfully.\n", filename);
+}
 
 int main() {
-    char *cwd;
-    char buffer[1024];
+    // Example data
+    const char *data[] = {
+        "Line 1: Hello, World!",
+        "Line 2: Export command in C",
+        "Line 3: Writing to a file"
+    };
+    size_t data_size = sizeof(data) / sizeof(data[0]);
 
-    // Get the current working directory
-    cwd = getcwd(buffer, sizeof(buffer));
+    // Export the data to a file named "output.txt"
+    export_data("output.txt", data, data_size);
 
-    // If getcwd() returns NULL, an error occurred
-    // if (cwd == NULL) {
-        // perror("getcwd() error");
-        // return 1;
-    // } else {
-        // Print the current working directory
-        printf("%s\n", cwd);
-    //     return 0;
-    // }
+    return 0;
 }
