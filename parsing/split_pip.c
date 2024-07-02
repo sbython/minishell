@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:36 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/29 17:13:38 by msbai            ###   ########.fr       */
+/*   Updated: 2024/06/30 10:52:09 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ char *new_strchr(char *s, char c)
 	int	i;
     char ch;
 	i = 0;
+
+    if (!s)
+		return (NULL);
+	if (!*s)
+		return (NULL);
 	while (s[i])
 	{
         if (s[i] == '\'' || s[i] == '"')
@@ -67,9 +72,9 @@ char	*new_strnstr( char *str,  char *str1)
 	{
         
         if (str[i] == '\'' || str[i] == '"')
-        {
             i += slen(str + i);
-        }
+        if (!str[i])
+            break;
 		while (str[i + i1] && str1[i1] && str[i + i1] == str1[i1])
 			i1++;
 		if (!str1[i1])
@@ -80,7 +85,7 @@ char	*new_strnstr( char *str,  char *str1)
 	return (NULL);
 }
 
-void catit(t_com *com , char *pip1)
+int catit(t_com *com , char *pip1)
 {
     t_com * next;
     t_com *node;
@@ -99,41 +104,33 @@ void catit(t_com *com , char *pip1)
     pip->prev = com;
     pip->next = node;
     node->prev = pip;
-
+    return(1);
 }
 void split_pip(t_box *box)
 {
     t_com * com;
     com = box->l_com;
+    int F;
+
+    F = 0;
     while (com)
     {
-        // pri ntf(com->com);
-
         if(new_strchr(com->com, '|') && ft_strncmp(com->com , "|", -1))
-        {
-            catit(com , "|");
-            com = com->prev;
-        }
+            F = catit(com , "|");
         else if(new_strchr(com->com, '<') && ft_strncmp(com->com , "<", -1))
-        {
-            catit(com , "<");
-            com = com->next;
-        }
+            F = catit(com , "<");
         else if(new_strchr(com->com, '>')&& ft_strncmp(com->com , ">", -1))
-        {
-                catit(com , ">");
-            com = com->next;
-        }
+            F = catit(com , ">");
         else if(new_strnstr(com->com, ">>")&& ft_strncmp(com->com , ">>", -1))
-        {
-                catit(com , ">>");
+            F = catit(com , ">>");
+        else if(new_strnstr(com->com, "<<")&& ft_strncmp(com->com , "<<", -1))
+            F = catit(com , "<<");
+        else
             com = com->next;
-        }
-         else if(new_strnstr(com->com, "<<")&& ft_strncmp(com->com , "<<", -1))
+        if(F && com->prev)
         {
-                catit(com , "<<");
-            com = com->next;
+            com = com->prev;
+            F = 0;
         }
-        com = com->next;
     }
 }

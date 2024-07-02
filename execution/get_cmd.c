@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/28 18:57:04 by msbai            ###   ########.fr       */
+/*   Updated: 2024/06/29 23:21:08 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    get_cmd_to_builtins(t_box *box)
 
         while(ls)
         {
-            printf("%s\n",ls->com);
+            printf("%s => %d\n",ls->com, ls->type);
             ls = ls->next;
         }
         // t_tmp_ls = ls;

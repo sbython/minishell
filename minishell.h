@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 18:36:10 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/29 16:31:04 by msbai            ###   ########.fr       */
+/*   Updated: 2024/06/30 12:56:35 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,19 @@ typedef struct s_env
     char *vale;
     struct s_env *next;
 }env ;
-
+/*
+    type 
+    0 string
+    1  |
+    2 <
+    3 >
+    4 << 
+    5 >>
+*/
 typedef struct s_listcom
 {
     char *com;
+    int type;
     struct s_listcom *next;
     struct s_listcom *prev;
 }t_com;
@@ -74,6 +83,7 @@ void    exit_f(char *s, char *msg);
 void    remove_qoute(t_box *box);
 void    check_gramer(t_box * box);
 void    delete_emty(t_box *box);
+void    put_type(t_box *box);
 //----------------zibnoukh----------------//
 
 /*builtins*/

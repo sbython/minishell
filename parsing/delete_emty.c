@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:13:28 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/29 16:42:02 by msbai            ###   ########.fr       */
+/*   Updated: 2024/06/30 10:59:12 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void delete_(t_com *ls)
     next = ls->next;
     prev = ls->prev;
 
-    next->prev = prev;
+    if(next)
+        next->prev = prev;
     prev->next = next;
     free(ls->com);
     free(ls);
