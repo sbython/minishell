@@ -5,12 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/03 18:31:41 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/03 18:31:42 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/05 00:08:50 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -37,6 +35,7 @@ typedef struct s_env
 {
     char *name;
     char *vale;
+    int   position;
     struct s_env *next;
 }env ;
 /*
@@ -56,12 +55,37 @@ typedef struct s_listcom
     struct s_listcom *prev;
 }t_com;
 
+typedef struct  s_redirection
+{
+    char                    *str;
+    int                     flag;
+    struct  s_redirection   *next;
+} t_redirection;
+
+typedef struct  s_command
+{
+    t_redirection   *redirection;
+    char            **options;
+     struct  s_command   *next;
+
+} t_command;
+
+
+typedef struct  s_node
+{
+    t_command    *command;
+    int          exit_nb;
+    pid_t        last;
+
+} t_node;
 typedef struct s_box
 {
     char  *cmd;
     t_com *l_com;
     char **ptr;
+    t_node * node;
     env * env;
+    char *prompt;
 } t_box;
 void    get_cmd(t_box *box);
 
@@ -85,10 +109,13 @@ void    remove_qoute(t_box *box);
 void    check_gramer(t_box * box);
 void    delete_emty(t_box *box);
 void    put_type(t_box *box);
+char    **join2pointer(char **com, char *str);
+void    fill_finale(t_box *box);
+void    free_node(t_node *node);
 //----------------zibnoukh----------------//
 
 /*builtins*/
-void    rebuild_cd();
+void    rebuild_cd(t_box *box);
 void    rebuild_echo(t_com *t_tmp_ls, char *next);
 void    rebuild_env(env *all_env);
 void    rebuild_exit();

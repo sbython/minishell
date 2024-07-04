@@ -23,6 +23,9 @@ SRC_P= parsing/minishell.c \
 		parsing/check_gramer.c \
 		parsing/delete_emty.c \
 		parsing/put_type.c \
+		parsing/fill_finale.c \
+		parsing/join2pointer.c \
+		
 
 OBJ= ${SRC_P:.c=.o} ${SRC_E:.c=.o}
 
