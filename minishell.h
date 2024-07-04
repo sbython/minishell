@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 18:36:10 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/30 12:56:35 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/04 19:52:10 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,35 @@ typedef struct s_listcom
     struct s_listcom *prev;
 }t_com;
 
+typedef struct  s_redirection
+{
+    char                    *str;
+    int                     flag;
+    struct  s_redirection   *next;
+} t_redirection;
+
+typedef struct  s_command
+{
+    t_redirection   *redirection;
+    char            **options;
+     struct  s_command   *next;
+
+} t_command;
+
+
+typedef struct  s_node
+{
+    t_command    *command;
+    int          exit_nb;
+    pid_t        last;
+
+} t_node;
 typedef struct s_box
 {
     char  *cmd;
     t_com *l_com;
     char **ptr;
+    t_node * node;
     env * env;
 } t_box;
 void    get_cmd(t_box *box);
@@ -84,6 +108,9 @@ void    remove_qoute(t_box *box);
 void    check_gramer(t_box * box);
 void    delete_emty(t_box *box);
 void    put_type(t_box *box);
+char    **join2pointer(char **com, char *str);
+void    fill_finale(t_box *box);
+void    free_node(t_node *node);
 //----------------zibnoukh----------------//
 
 /*builtins*/

@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/30 22:15:30 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/04 19:52:31 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void shell_loop(char **en)
         }
         get_cmd(&lst);
         free(prom);
-        free_all(&lst);
+        free_all(&lst);  
     }
     rl_clear_history();
     free_env(lst.env);
