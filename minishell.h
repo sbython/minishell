@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 11:08:35 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/02 13:22:17 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/03 18:31:41 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/03 18:31:42 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -37,10 +39,19 @@ typedef struct s_env
     char *vale;
     struct s_env *next;
 }env ;
-
+/*
+    type 
+    0 string
+    1  |
+    2 <
+    3 >
+    4 << 
+    5 >>
+*/
 typedef struct s_listcom
 {
     char *com;
+    int type;
     struct s_listcom *next;
     struct s_listcom *prev;
 }t_com;
@@ -69,8 +80,11 @@ void    collect_string(t_box *box);
 void    simple_check(char *com);
 t_com   *new_node(char *str);
 void    split_pip(t_box *box);
-
-
+void    exit_f(char *s, char *msg);
+void    remove_qoute(t_box *box);
+void    check_gramer(t_box * box);
+void    delete_emty(t_box *box);
+void    put_type(t_box *box);
 //----------------zibnoukh----------------//
 
 /*builtins*/

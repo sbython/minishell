@@ -19,6 +19,10 @@ SRC_P= parsing/minishell.c \
 		parsing/collect_string.c\
 		parsing/simple_check.c\
 		parsing/split_pip.c \
+		parsing/remove_qoute.c \
+		parsing/check_gramer.c \
+		parsing/delete_emty.c \
+		parsing/put_type.c \
 
 OBJ= ${SRC_P:.c=.o} ${SRC_E:.c=.o}
 
