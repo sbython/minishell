@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:33:42 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/05 00:42:45 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/05 22:24:59 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void    set_builtins(t_box *box)
             rebuild_pwd(length_stack(box->l_com), box->l_com);
     else if((ft_strncmp(box->l_com->com, "unset", ft_strlen("unset")) == 0))
         rebuild_unset(box->env);
-    else
-        execute(box);
 }
 
 void    get_cmd_(t_box *box)
@@ -180,7 +178,9 @@ void    get_cmd_(t_box *box)
 //         wait(NULL);
 //     }
 // }
+
 void    get_cmd(t_box *box)
 {
-    get_cmd_(box);
+    // get_cmd_(box);
+    execute(box->node);
 }

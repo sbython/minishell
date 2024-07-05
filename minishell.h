@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/05 02:06:32 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/05 22:26:15 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct  s_command
 
 } t_command;
 
-
 typedef struct  s_node
 {
     t_command    *command;
@@ -114,7 +113,7 @@ void    fill_finale(t_box *box);
 void    free_node(t_node *node);
 //----------------zibnoukh----------------//
 
-void    execute(t_box *box);
+void    execute(t_node *node);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);
