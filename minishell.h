@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/05 00:08:50 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/05 02:06:32 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ char    **join2pointer(char **com, char *str);
 void    fill_finale(t_box *box);
 void    free_node(t_node *node);
 //----------------zibnoukh----------------//
+
+void    execute(t_box *box);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);

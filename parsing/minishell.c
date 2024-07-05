@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/05 00:12:46 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/05 02:21:15 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void nongnu(int i)
 
 void shell_loop(char **en)
 {
-    char *prom;
+    // char *prom;
     t_box lst ;
 
     memset((void *)&lst, 0, sizeof(t_box));
@@ -36,16 +36,16 @@ void shell_loop(char **en)
     while (1)
     {
         
-        prom = prompt();  
-        lst.cmd = readline(prom);
+        // prom = prompt();  
+        lst.cmd = readline(">> ");
         add_history(lst.cmd);
         if(!lst.cmd)
         { 
-            free(prom);
+            // free(prom);
             break;
         }
         get_cmd(&lst);
-        free(prom);
+        // free(prom);
         free_all(&lst);  
     }
     rl_clear_history();

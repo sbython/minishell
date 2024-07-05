@@ -7,6 +7,7 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/builtins/echo/echo.c execution/builtins/env/env.c \
 	   execution/builtins/exit/exit.c execution/builtins/functions/length_stack.c \
 	   execution/builtins/export/export.c execution/builtins/unset/unset.c \
+	   execution/execute/execute.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \

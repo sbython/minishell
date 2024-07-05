@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/05 02:55:21 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/05 02:37:42 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../minishell.h"
+#include "../../minishell.h"
 
-void    rebuild_cd(t_box *box)
+void    execute(t_box *box)
 {
-    (void)box;
-    char buffer[1024];
-    
-    chdir(box->l_com->next->com);
-    // char *shell = getenv("SHELL");
-    // if(shell != NULL)
-    //     shell = "/bin/sh";
-    // execlp(shell, shell, NULL);
-    if(getcwd(buffer, sizeof(buffer)) != NULL)
-    {
-        printf("%s\n", buffer);
-    }
-    
+    printf("%s\n", box->l_com->com);
 }
