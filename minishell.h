@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/05 22:26:15 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/06 02:43:26 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,15 @@ void    free_node(t_node *node);
 //----------------zibnoukh----------------//
 
 void    execute(t_node *node);
+void    get_command(t_command *command);
+void    get_options(char **options);
+void    get_redirection(t_redirection *redirection);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);
 void    rebuild_echo(t_com *t_tmp_ls, char *next);
 void    rebuild_env(env *all_env);
 void    rebuild_exit();
-// void    rebuild_export(t_com *ls, env *all_env, char *next);
 void    rebuild_export(t_box *box);
 void    rebuild_pwd(int size, t_com *ls);
 void    rebuild_unset();

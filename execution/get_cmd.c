@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:33:42 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/05 22:24:59 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/05 23:01:58 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ void    get_cmd_(t_box *box)
     {
         parsing(box);
         // ls =box->l_com;
-
-
-        set_builtins(box);    
+        execute(box->node);
+        // set_builtins(box);    
 
 
         // while(ls)
@@ -181,6 +180,5 @@ void    get_cmd_(t_box *box)
 
 void    get_cmd(t_box *box)
 {
-    // get_cmd_(box);
-    execute(box->node);
+    get_cmd_(box);
 }

@@ -1,49 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flex.c                                             :+:      :+:    :+:   */
+/*   get_options.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 21:43:04 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/07 00:44:20 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
+/*   Updated: 2024/07/07 00:50:38 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
-#define MAX_ARGS 1024
-#define PATH_SIZE 256
+#include "../../minishell.h"
 
 void parse_command(char *cmd, char **args) {
     char *token;
     int i = 0;
 
     token = strtok(cmd, " ");
-    while (token != NULL && i < MAX_ARGS - 1) {
+    while (token != NULL && i < 1024 - 1) {
         args[i++] = token;
         token = strtok(NULL, " ");
     }
     args[i] = NULL;
 }
 
-int main(int argc, char *argv[])
+void    get_options(char **options)
 {
-    if (argc < 2) {
-        fprintf(stderr, "Usage: %s <command>\n", argv[0]);
-        exit(EXIT_FAILURE);
-    }
+    // int i;
 
-    char *cmd = strdup(argv[1]);
-    char *args[MAX_ARGS];
+    // i = 0;
+    // while (options[i])
+    // {
+    //     printf("options:     %s\n", options[i]);
+    //     i++;
+    // }
+    // char *args[1024];
+
+    // // args[0] = "-l";
+    // if(execve(options[0], args, NULL) == -1)
+    // {
+    //     printf("ERROR\n");
+    // }
+
+    //     if (argc < 2) {
+    //     fprintf(stderr, "Usage: %s <command>\n", argv[0]);
+    //     exit(EXIT_FAILURE);
+    // }
+
+    char *cmd = strdup(options[0]);
+    char *args[1024];
     char *envp[] = { NULL }; // environment variables
 
     parse_command(cmd, args);
 
-    char path[PATH_SIZE];
+    char path[256];
     strcpy(path, "/bin/");
     strcat(path, args[0]);
 
@@ -53,5 +63,5 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
     free(cmd);
-    return 0;
+    return ;
 }
