@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/29 21:27:19 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/06 02:45:32 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,19 @@ int check_str(char *str)
     }
     return (0);
 }
-void join_node(t_com *com)
+
+int join_node(t_box *box,  t_com *com)
 {
     t_com *ne;
     t_com *ne_ne;
 
+
     if (!com->next)
-        printf("need a \" in the end of : %s\n", com->com),exit(1);
+    {
+        printf("need a \" in the end of : %s\n" , com->com );
+        exit_f(NULL,"",box);
+        return (1);
+    }
     ne = com->next;
     ne_ne = ne->next;
 
@@ -56,17 +62,22 @@ void join_node(t_com *com)
         ne_ne->prev = com;
 
     free(ne);
+    return (0);
 }
-void collect_string(t_box *box)
+int collect_string(t_box *box)
 {
     t_com *ls;
     ls = box->l_com;
     while (ls)
     {
         if (check_str(ls->com))
-            join_node(ls);
+        {
+            if(join_node(box, ls))
+                return (1);            
+        }
         else
             ls = ls->next;
         
     }
+    return (0);
 }

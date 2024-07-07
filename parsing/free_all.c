@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:30 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/04 19:58:24 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/06 02:36:44 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ void  free_env(env *lst)
         lst = lst->next;
         free(tmp);
     }
-    
+    free(lst);
 }
 void  free_lcom(t_com *lst)
 {
     t_com *tmp;
-
+    if(!lst)
+        return ;
     while (lst)
     {
         free(lst->com);
@@ -39,14 +40,15 @@ void  free_lcom(t_com *lst)
         lst = lst->next;
         free(tmp);
     }
-    
+
 }
 void free_node(t_node *node)
 {
     t_redirection   *tmp;   
     t_command   *tmp1;
     t_command    *com;
-
+    if(!node)
+        return ;
     com = node->command;
     while (com)
     {
@@ -64,12 +66,22 @@ void free_node(t_node *node)
         free(tmp1);
     }
     free(node);
+    node = NULL;
 }
 void  free_all(t_box *box)
 {
     
     // if (box->cmd->com)
-    //     printf("fwkergj");  
-    free_lcom(box->l_com);
-    free(box->cmd);
+    //     printf("fwkergj");
+    
+    if(box && box->l_com)
+    {
+        free_lcom(box->l_com);
+            box->l_com = NULL;
+    }
+    if(box && box->cmd)
+    {
+        free(box->cmd);
+        box->cmd = NULL;
+    }
 }

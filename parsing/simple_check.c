@@ -6,19 +6,30 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:54 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/29 17:19:25 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/05 21:53:16 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../minishell.h"
 
-void exit_f(char *s, char *msg)
+void exit_f(char *s, char *msg, t_box * box)
 {
+    // int pid;
+    (void) s;
+    // (void) box;
     ft_putstr_fd(msg, 2);
-    if(s)
-        free(s);
-    exit(1);
+    // pid = fork();
+    // if (!pid)
+    //  {
+    //    // free(box->cmd);
+    //     exit(2);
+    // }
+    // else 
+    // {
+    //     waitpid(pid, &box->node->exit_nb, 0);
+    // }
+    box->exit_val =  2;
 }
 int check_(char *s)
 {
@@ -44,20 +55,28 @@ int check_(char *s)
     }
     return (1);     
 }
-void simple_check(char *com)
+int simple_check(t_box *box)
 {
+    char *com;
+
+    com = box->cmd;
     if(!*com)
-        return;
+        return 1;
     if (com[0] == '|' || com[ft_strlen(com) - 1] == '|')
-         exit_f(com ,"minishell: syntax error near unexpected token `|'\n");
+    {
+        exit_f(com ,"minishell: syntax error near unexpected token `|'\n",box);
+        return (1);
+    }
     else if (!(ft_strncmp(com , "<<", -1) 
     && ft_strncmp(com , ">", -1) 
     && ft_strncmp(com , "<", -1) 
     && ft_strncmp(com , ">>", -1)
-    && check_(com)))
+    && ft_strncmp(com , ">>>", 3)
+    && com))
     {
         ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
-        exit_f(com , "`<< or >> or < or >'\n");
+        exit_f(com , "`<< or >> or < or >'\n", box);
+        return (1);
     }
-    
+    return (0);
 }

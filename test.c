@@ -3,37 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 22:56:07 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/04 23:34:16 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:02:35 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include "libft/libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <limits.h>
+# include <unistd.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <signal.h>
+#include <sys/wait.h>
 
-int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        fprintf(stderr, "Usage: %s <path>\n", argv[0]);
-        return 1;
-    }
+char * get_pid();
 
-    const char *path = argv[1];
+int main() {
+    char * p;
 
-    if (chdir(path) != 0) {
-        perror("chdir failed");
-        return 1;
-    }
 
-    char *shell = getenv("SHELL");
-    // if (shell == NULL) {
-    //     shell = "/bin/sh"; // Default to /bin/sh if SHELL environment variable is not set
-    // }
-
-    execlp(shell, shell, (char *)NULL); // Replace the current process with the shell
-
-    perror("execlp failed"); // If execlp fails, print an error message
-    return 1;
+    p = get_pid();
+    printf("%s\n", p);
+    free (p);
+    printf("%d\n", getpid());
+    return 0;
 }

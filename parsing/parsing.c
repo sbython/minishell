@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:23 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/04 01:50:33 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/06 22:48:33 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,33 @@ void free_2ptr(char **p)
     free(p);
 }
 
-void  parsing(t_box *box)
+int  parsing(t_box *box)
 {
     char *str;
-    char **ptr;
     
     str = ft_strtrim(box->cmd, " \t");
     free(box->cmd);
     box->cmd = str;
-    simple_check(box->cmd);
-    if (ft_strnstr(box->cmd, "||" , -1))
-        exit_f(box->cmd, "minishell: syntax error near unexpected token `|'\n");
-    ptr = ft_split(box->cmd , ' ');
-    fill_list(ptr, box);
-    free_2ptr(ptr);
-    collect_string(box);
-    replace_var(box);
+    if (simple_check(box))  
+        return (1);
+    else if (ft_strnstr(box->cmd, "||" , -1))
+    {
+        exit_f(box->cmd, "minishell: syntax error near unexpected token `|'\n",box);
+        return(1);
+    }
+    box->ptr = ft_split(box->cmd , ' ');
+    fill_list(box->ptr, box);
+    free_2ptr(box->ptr);
+    if (collect_string(box))
+        return 1;
     split_pip(box);
+    replace_var(box);
     put_type(box);
     delete_emty(box);
-    check_gramer(box);
+    if (check_gramer(box))
+        return (1);
     remove_qoute(box);
-
-    // t_com *ls;
-    // ls = box->l_com;
-
-    // while(ls)
-    // {
-    //     printf("%s => %d\n",ls->com, ls->type);
-        
-    //     ls = ls->next;
-    // }
-        fill_finale(box);
+    fill_finale(box);
+    return 0;
 }
+    

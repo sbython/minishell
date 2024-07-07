@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/29 21:33:18 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/06 22:46:09 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int len_to(char *str, char c)
     int i;
 
     i = 0;
-    while (str[i] && str[i] != c && str[i] != '\'' && str[i] != '"') 
+    while (str[i] && str[i] != c && str[i] != '\'' && str[i] != '"'
+        && str[i] != '?' && str[i] != '$') 
         i++;
     return (i);
 }
@@ -40,7 +41,8 @@ char * get_val(char *str1 , env * en)
 {
     char *str;
 
-
+    // if (ft_strncmp(str1, "$$", 3))
+    //     return(__getpgid)
     str = ft_strtrim(str1, "\"'");
     if (!*str)
         return (free(str),ft_strdup("$"));
@@ -67,11 +69,6 @@ char *replace(char *str , env * en)
     {
         ptr[1] = get_to(ptr[2], ' ');
         ptr[0] = get_val(ptr[1] + 1, en);
-        // if (!ptr[0][0])
-        // {
-        //     ptr[2] += 1;
-        //     continue;
-        // }
         str = str_replace(str, ptr[1] , ptr[0]);
         free(ptr[1]);
         free(ptr[0]);

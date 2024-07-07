@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/05 00:12:46 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/06 02:38:02 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+
 
 void nongnu(int i)
 {
@@ -27,29 +29,32 @@ void shell_loop(char **en)
 {
     char *prom;
     t_box lst ;
-
+    (void)en;
     memset((void *)&lst, 0, sizeof(t_box));
+    // printf("%p\n",lst.cmd);
+    // printf("%p\n",lst.l_com);
+    // printf("%p\n",lst.ptr);
+    // printf("%p\n",lst.node);
+    // printf("%p\n",lst.env);
+    // printf("%p\n",lst.prompt);
+    // printf("%d\n",lst.exit_val);
     lst.env = fill_env(en); 
-   
-    
-
     while (1)
     {
         
         prom = prompt();  
         lst.cmd = readline(prom);
-        add_history(lst.cmd);
-        if(!lst.cmd)
-        { 
-            free(prom);
-            break;
-        }
-        get_cmd(&lst);
         free(prom);
-        free_all(&lst);  
+
+        if(get_cmd(&lst))
+            break;
+        add_history(lst.cmd);
+        free_all(&lst);
+        // memset((void *)&lst, 0, sizeof(t_box));
     }
     rl_clear_history();
     free_env(lst.env);
+    exit(lst.exit_val);
 }
 
 int main(int ac, char **av, char **env)
