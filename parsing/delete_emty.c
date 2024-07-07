@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:13:28 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/30 10:59:12 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/06 03:18:58 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,36 @@ void delete_(t_com *ls)
     next = ls->next;
     prev = ls->prev;
 
-    if(next)
+    if(next )
         next->prev = prev;
-    prev->next = next;
+    if(prev)
+        prev->next = next;
     free(ls->com);
     free(ls);
 }
-
+void firs_node(t_box *box)
+{
+    t_com *tmp;
+    char  *str;
+    
+    str = box->l_com->com;
+    if(!*str)
+    {
+        tmp = box->l_com->next;
+        free(box->l_com->com);
+        free(box->l_com);
+        box->l_com = tmp;
+        if (tmp)
+            tmp->prev = NULL;
+    }
+}
 void delete_emty(t_box *box)
 {
     t_com *ls;
     t_com *tmp;
     char  *str;
+    
+    firs_node(box);
     ls = box->l_com;
     while (ls)
     {
@@ -45,5 +63,6 @@ void delete_emty(t_box *box)
         else
              ls = ls->next;
     }
+
     
 }

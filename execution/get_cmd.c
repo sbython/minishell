@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 20:33:42 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/05 23:01:58 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/07 04:44:33 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/07 23:56:19 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../minishell.h"
 
@@ -34,9 +36,9 @@ void    set_builtins(t_box *box)
         rebuild_unset(box->env);
 }
 
-void    get_cmd_(t_box *box)
+int    get_cmd_(t_box *box)
 {
-    int pid;
+ 
     // t_com *ls;
     // t_command    * node;
   
@@ -45,12 +47,11 @@ void    get_cmd_(t_box *box)
     
     // ls =NULL;   
     // node = box->node->command;
-    pid = fork();
-    if (!pid)
+    if(!box->cmd)
     {
         parsing(box);
         // ls =box->l_com;
-        execute(box->node);
+        
         // set_builtins(box);    
 
 
@@ -101,9 +102,63 @@ void    get_cmd_(t_box *box)
         // printf("--%s--", prompt() 
         free_node(box->node);
         exit(0);
+
     }
-    else
-        wait(NULL);    
+    if (parsing(box))
+        return 0;
+    // ls =box->l_com;
+
+
+        
+
+
+    // while(ls)
+    // {
+    //     printf("%s => %d\n",ls->com, ls->type);
+    //     ls = ls->next;
+    // }
+
+    
+    // if (!ls)
+    //     printf("m3art ach tra hnya \n");
+    // // printf("%p\n", node);
+    // // if (node)
+    // //     printf("m3art ach tra hnya node \n");
+    // //  printf("%s => %d\n",ls->com, ls->type);
+    // while(ls)
+    // {
+    //     printf("%s => %d\n",ls->com, ls->type);
+        
+    //     ls = ls->next;
+    // }
+    // node = box->node->command;
+    // int i = 0;
+    // while (node)
+    // {
+    //     printf("\n options\n");
+    //     while (node->options[i])
+    //     {
+    //         printf("%s ", node->options[i++]);
+    //     }
+    //     printf("\n redirection\n");
+    //     while (node->redirection)
+    //     {
+    //         printf("%s ", node->redirection->str);
+    //         node->redirection = node->redirection->next;
+    //     }
+    //     i = 0;
+    //     node = node->next;
+    // }
+    
+
+    // t_tmp_ls = ls;
+    // if(ft_strncmp(ls->com, "echo", ft_strlen(ls->com)) == 0)
+    //     echo(t_tmp_ls, ls->next->com);
+
+    // set_commands(box->l_com, box); 
+    // printf("--%s--", prompt() 
+    free_node(box->node);
+    return (0);
 }
 
 
@@ -178,7 +233,80 @@ void    get_cmd_(t_box *box)
 //     }
 // }
 
-void    get_cmd(t_box *box)
+int    get_cmd(t_box *box)
+
 {
-    get_cmd_(box);
+    
+    if(!box->cmd)
+    {
+        printf("exit\n");
+        box->exit_val = 0;
+        return (1);
+    }
+    if (parsing(box))
+        return 0;
+    // set_builtins(box);
+    execute(box->node);
+    free_node(box->node);
+    // t_com *ls;
+    // t_command    * node;
+  
+
+    // // node= NULL;
+    
+    // ls =NULL;   
+    
+    
+    // ls =box->l_com;
+    // node = box->node->command;
+
+    // set_builtins(box);    
+
+
+    // while(ls)
+    // {
+    //     printf("%s => %d\n",ls->com, ls->type);
+    //     ls = ls->next;
+    // }
+
+    
+    
+    // printf("%p\n", node);
+    // if (node)
+    //     printf("m3art ach tra hnya node \n");
+    //  printf("%s => %d\n",ls->com, ls->type);
+    // while(ls)
+    // {
+    //     printf("%s => %d\n",ls->com, ls->type);
+        
+    //     ls = ls->next;
+    // }
+    // node = box->node->command;
+    // int i = 0;
+    // while (node)
+    // {
+    //     printf("\n options\n");
+    //     while (node->options[i])
+    //     {
+    //         printf("%s ", node->options[i++]);
+    //     }
+    //     printf("\n redirection\n");
+    //     while (node->redirection)
+    //     {
+    //         printf("%s ", node->redirection->str);
+    //         node->redirection = node->redirection->next;
+    //     }
+    //     i = 0;
+    //     node = node->next;
+    // }
+    // printf("\n");
+
+    // t_tmp_ls = ls;
+    // if(ft_strncmp(ls->com, "echo", ft_strlen(ls->com)) == 0)
+    //     echo(t_tmp_ls, ls->next->com);
+
+    // set_commands(box->l_com, box); 
+    // printf("--%s--", prompt() 
+    
+    return (0);
 }

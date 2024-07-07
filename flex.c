@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:43:04 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/07 00:44:20 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/07 23:39:57 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,71 @@
 #include <string.h>
 #include <unistd.h>
 
-#define MAX_ARGS 1024
-#define PATH_SIZE 256
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 void parse_command(char *cmd, char **args) {
     char *token;
     int i = 0;
 
     token = strtok(cmd, " ");
-    while (token != NULL && i < MAX_ARGS - 1) {
+    while (token != NULL && i < 1024 - 1) {
         args[i++] = token;
         token = strtok(NULL, " ");
     }
     args[i] = NULL;
 }
 
-int main(int argc, char *argv[])
+void get_options(char **options) {
+    char *cmd = strdup(options[0]);
+    char *args[1024];
+    char *envp[] = { NULL }; // environment variables
+    pid_t pid;
+    int status;
+
+    parse_command(cmd, args);
+
+    pid = fork();
+    if (pid == -1) {
+        perror("fork");
+        free(cmd);
+        exit(EXIT_FAILURE);
+    } else if (pid == 0) { // Child process
+        char path[256];
+        strcpy(path, "/bin/");
+        strcat(path, args[0]);
+
+        if (execve(path, args, envp) == -1) {
+            perror("execve");
+            free(cmd);
+            exit(EXIT_FAILURE);
+        }
+    } else { // Parent process
+        do {
+            pid_t wpid = waitpid(pid, &status, WUNTRACED);
+            if (wpid == -1) {
+                perror("waitpid");
+                exit(EXIT_FAILURE);
+            }
+        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+    }
+
+    free(cmd);
+    return;
+}
+
+int main(int argc, char **argv)
 {
     if (argc < 2) {
         fprintf(stderr, "Usage: %s <command>\n", argv[0]);
         exit(EXIT_FAILURE);
     }
 
-    char *cmd = strdup(argv[1]);
-    char *args[MAX_ARGS];
-    char *envp[] = { NULL }; // environment variables
+    get_options(&argv[1]);
 
-    parse_command(cmd, args);
-
-    char path[PATH_SIZE];
-    strcpy(path, "/bin/");
-    strcat(path, args[0]);
-
-    if (execve(path, args, envp) == -1) {
-        perror("execve");
-        free(cmd);
-        exit(EXIT_FAILURE);
-    }
-    free(cmd);
     return 0;
 }

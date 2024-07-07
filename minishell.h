@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/06 02:43:26 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/07 04:42:56 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/07 04:43:02 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define DCOLORF "\033[39m"
 # define GREENB  "\033[42m"
 # define GREENF  "\033[32m"
+
+
 
 typedef struct s_env
 {
@@ -73,7 +75,6 @@ typedef struct  s_command
 typedef struct  s_node
 {
     t_command    *command;
-    int          exit_nb;
     pid_t        last;
 
 } t_node;
@@ -85,13 +86,14 @@ typedef struct s_box
     t_node * node;
     env * env;
     char *prompt;
+    int exit_val;
 } t_box;
-void    get_cmd(t_box *box);
+
 
 //----------------msbai----------------//
 char    *prompt();
 env     *fill_env(char **env);
-void    parsing(t_box *box);
+int    parsing(t_box *box);
 void    free_all(t_box *box);
 void    free_env(env *env);
 void    fill_list(char **ptr, t_box *box);
@@ -99,18 +101,19 @@ void    replace_var(t_box *box);
 void    join(char **dest, char * src, int i);
 char    *str_replace(char * s1, char *rep, char *with);
 void    free_env(env *lst);
-void    collect_string(t_box *box);
-void    simple_check(char *com);
+int    collect_string(t_box *box);
+int     simple_check(t_box *box);
 t_com   *new_node(char *str);
 void    split_pip(t_box *box);
-void    exit_f(char *s, char *msg);
+void    exit_f(char *s, char *msg, t_box * box);
 void    remove_qoute(t_box *box);
-void    check_gramer(t_box * box);
+int     check_gramer(t_box * box);
 void    delete_emty(t_box *box);
 void    put_type(t_box *box);
 char    **join2pointer(char **com, char *str);
 void    fill_finale(t_box *box);
 void    free_node(t_node *node);
+int is_token(char * ls, int i);
 //----------------zibnoukh----------------//
 
 void    execute(t_node *node);
@@ -129,4 +132,5 @@ void    rebuild_unset();
 
 /*functions*/
 int    length_stack(t_com *stack);
+int    get_cmd(t_box *box);
 #endif

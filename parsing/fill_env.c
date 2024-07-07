@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:37 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/27 10:12:38 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/05 20:29:37 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ env * add_new_var(char *name , char * vale)
 
     lst = malloc(sizeof(env));
     if (!lst)
-        return NULL;    
+    {
+        perror("allocation error");
+        return NULL;
+    }    
     lst->name = name;
     lst->vale = vale;
     lst->next = NULL;
