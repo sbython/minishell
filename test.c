@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 22:56:07 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/06 22:02:35 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/08 03:20:07 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,19 @@ char * get_pid();
 int main() {
     char * p;
 
-
+    int i = fork();
+    
     p = get_pid();
     printf("%s\n", p);
     free (p);
     printf("%d\n", getpid());
+    if (!i)
+    {
+         printf("%s\n", p);
+        free (p);
+        printf("%d\n", getpid());
+    }
+    else 
+        wait(NULL);
     return 0;
 }

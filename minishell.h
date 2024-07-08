@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/06 03:21:59 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/08 06:58:43 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct s_box
     char **ptr;
     t_node * node;
     env * env;
-    char *prompt;
+    char *getpid;
     int exit_val;
 } t_box;
 
@@ -114,7 +114,9 @@ void    put_type(t_box *box);
 char    **join2pointer(char **com, char *str);
 void    fill_finale(t_box *box);
 void    free_node(t_node *node);
-int is_token(char * ls, int i);
+int     is_token(char * ls, int i);
+char    *get_pid();
+void    tap_to_space(char *s);
 //----------------zibnoukh----------------//
 
 /*builtins*/

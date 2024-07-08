@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:33:42 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/06 22:49:47 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/08 06:16:12 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ int    get_cmd(t_box *box)
 {
     
     t_com *ls;
-    t_command    * node;
+    // t_command    * node;
   
 
     // node= NULL;
@@ -200,7 +200,7 @@ int    get_cmd(t_box *box)
     if (parsing(box))
         return 0;
     ls =box->l_com;
-    node = box->node->command;
+    // node = box->node->command;
 
     // set_builtins(box);    
 
@@ -223,25 +223,25 @@ int    get_cmd(t_box *box)
         
         ls = ls->next;
     }
-    node = box->node->command;
-    int i = 0;
-    while (node)
-    {
-        printf("\n options\n");
-        while (node->options[i])
-        {
-            printf("%s ", node->options[i++]);
-        }
-        printf("\n redirection\n");
-        while (node->redirection)
-        {
-            printf("%s ", node->redirection->str);
-            node->redirection = node->redirection->next;
-        }
-        i = 0;
-        node = node->next;
-    }
-    printf("\n");
+    // node = box->node->command;
+    // int i = 0;
+    // while (node)
+    // {
+    //     printf("\n options\n");
+    //     while (node->options && node->options[i])
+    //     {
+    //         printf("%s ", node->options[i++]);
+    //     }
+    //     printf("\n redirection\n");
+    //     while (node->redirection)
+    //     {
+    //         printf("%s ", node->redirection->str);
+    //         node->redirection = node->redirection->next;
+    //     }
+    //     i = 0;
+    //     node = node->next;
+    // }
+    // printf("\n");
 
     // t_tmp_ls = ls;
     // if(ft_strncmp(ls->com, "echo", ft_strlen(ls->com)) == 0)

@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/06 02:38:02 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/08 07:00:29 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,8 @@ void shell_loop(char **en)
     t_box lst ;
     (void)en;
     memset((void *)&lst, 0, sizeof(t_box));
-    // printf("%p\n",lst.cmd);
-    // printf("%p\n",lst.l_com);
-    // printf("%p\n",lst.ptr);
-    // printf("%p\n",lst.node);
-    // printf("%p\n",lst.env);
-    // printf("%p\n",lst.prompt);
-    // printf("%d\n",lst.exit_val);
+    
+    lst.getpid = get_pid();
     lst.env = fill_env(en); 
     while (1)
     {
@@ -45,7 +40,7 @@ void shell_loop(char **en)
         prom = prompt();  
         lst.cmd = readline(prom);
         free(prom);
-
+        tap_to_space(lst.cmd);
         if(get_cmd(&lst))
             break;
         add_history(lst.cmd);

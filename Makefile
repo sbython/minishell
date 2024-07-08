@@ -25,7 +25,7 @@ SRC_P= parsing/minishell.c \
 		parsing/put_type.c \
 		parsing/fill_finale.c \
 		parsing/join2pointer.c \
-		
+		parsing/gitpid.c 
 
 OBJ= ${SRC_P:.c=.o} ${SRC_E:.c=.o}
 
