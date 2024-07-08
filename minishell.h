@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 04:42:56 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/07 04:43:02 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/09 00:04:16 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,10 @@ typedef struct  s_command
 typedef struct  s_node
 {
     t_command    *command;
-    pid_t        last;
+    // pid_t        last;
 
 } t_node;
+
 typedef struct s_box
 {
     char  *cmd;
@@ -88,7 +89,6 @@ typedef struct s_box
     char *prompt;
     int exit_val;
 } t_box;
-
 
 //----------------msbai----------------//
 char    *prompt();

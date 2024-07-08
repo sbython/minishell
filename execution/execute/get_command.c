@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/07 00:31:00 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:32:21 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void    get_command(t_command *command)
 {
-    get_redirection(command->redirection);
+    // (void)command;
+    // printf("HERO\n");
+    // get_redirection(command->redirection);
     get_options(command->options);
     // while (command)
     // {

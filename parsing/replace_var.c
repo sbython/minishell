@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/06 22:46:09 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/09 00:05:53 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int len_to(char *str, char c)
     int i;
 
     i = 0;
-    while (str[i] && str[i] != c && str[i] != '\'' && str[i] != '"'
-        && str[i] != '?' && str[i] != '$') 
+    while (str[i] && str[i] != c && str[i] != '\'' && str[i] != '"') 
         i++;
     return (i);
 }
