@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/10 01:31:52 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/10 05:19:57 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ int len_to(char *str, char c)
     int i;
 
     i = 0;
-    while (str[i] && str[i] != c && str[i] != '\'' && str[i] != '"') 
+    (void)c;
+    if ( str[i] == '$' && ft_isdelimiter(str[i]))
+        return 0;
+    while (str[i] && !ft_isdelimiter(str[i])) 
     { 
         i++;
-        if (str[i] == '$' || str[i] == '?')
+        if ((str[i] == '$' ) || str[i] == '?' || ft_isdigit(str[i]))
         {
             i++;
             break;
@@ -98,14 +101,15 @@ void replace_var(t_box *box)
     com = box->l_com;
     while (com)
     {
-        if (ft_dchr(com->com, '$'))
+        if (ft_dchr(com->com, '$') 
+            && (com && ft_strncmp(com->prev->com, "<<", -1)))
         {
             
                 com->com = replace(com->com, box->env, box);
             // printf(com->com);
         }
-        else if(com->com[0] == '~' && com->com[1] == 0)
-                com->com =  str_replace(com->com, "~", getenv("HOME"));
+        else if(com->com[0] == '~' && (com->com[1] == 0 || com->com[1] == '/'))
+                com->com =  str_replace(com->com, "~", get_val("HOME", box->env, box));
         com = com->next;
     }
 }
