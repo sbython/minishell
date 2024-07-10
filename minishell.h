@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 04:42:56 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/09 00:04:16 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/09 00:10:33 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/09 23:51:49 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@
 # define GREENB  "\033[42m"
 # define GREENF  "\033[32m"
 
-
-
 typedef struct s_env
 {
     char *name;
@@ -40,6 +38,7 @@ typedef struct s_env
     int   position;
     struct s_env *next;
 }env ;
+
 /*
     type 
     0 string
@@ -49,6 +48,7 @@ typedef struct s_env
     4 << 
     5 >>
 */
+
 typedef struct s_listcom
 {
     char *com;
@@ -68,8 +68,7 @@ typedef struct  s_command
 {
     t_redirection   *redirection;
     char            **options;
-     struct  s_command   *next;
-
+    struct  s_command   *next;
 } t_command;
 
 typedef struct  s_node
@@ -86,7 +85,7 @@ typedef struct s_box
     char **ptr;
     t_node * node;
     env * env;
-    char *prompt;
+    char *getpid;
     int exit_val;
 } t_box;
 
@@ -113,13 +112,16 @@ void    put_type(t_box *box);
 char    **join2pointer(char **com, char *str);
 void    fill_finale(t_box *box);
 void    free_node(t_node *node);
-int is_token(char * ls, int i);
+int     is_token(char * ls, int i);
+char    *get_pid();
+void    tap_to_space(char *s);
 //----------------zibnoukh----------------//
 
-void    execute(t_node *node);
+void    execute(t_box *box);
 void    get_command(t_command *command);
 void    get_options(char **options);
 void    get_redirection(t_redirection *redirection);
+void    pipe_two(char *prev, char *next);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);
@@ -133,4 +135,5 @@ void    rebuild_unset();
 /*functions*/
 int    length_stack(t_com *stack);
 int    get_cmd(t_box *box);
+
 #endif

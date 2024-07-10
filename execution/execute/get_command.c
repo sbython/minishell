@@ -6,11 +6,22 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/08 23:32:21 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/09 22:57:27 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+// void    get_next(t_command  *next)
+// {
+//     // printf("next: %s\n", next->options);
+//     int i = 0;
+//     while (next->options[i])
+//     {
+//         printf("next option: %s\n", next->options[i]);
+//         i++;
+//     }
+// }
 
 void    get_command(t_command *command)
 {
@@ -18,10 +29,5 @@ void    get_command(t_command *command)
     // printf("HERO\n");
     // get_redirection(command->redirection);
     get_options(command->options);
-    // while (command)
-    // {
-    
-    //     printf(" node->exit_nb: %d\n", command->);
-    //     command = command->next;
-    // }
+    // get_next(command->next);
 }

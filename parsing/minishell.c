@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 04:43:14 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/07 23:28:02 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/09 00:10:08 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/09 00:10:14 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,8 @@ void shell_loop(char **en)
     t_box lst ;
     (void)en;
     memset((void *)&lst, 0, sizeof(t_box));
-    // printf("%p\n",lst.cmd);
-    // printf("%p\n",lst.l_com);
-    // printf("%p\n",lst.ptr);
-    // printf("%p\n",lst.node);
-    // printf("%p\n",lst.env);
-    // printf("%p\n",lst.prompt);
-    // printf("%d\n",lst.exit_val);
+    
+    lst.getpid = get_pid();
     lst.env = fill_env(en); 
     while (1)
     {
@@ -43,7 +38,7 @@ void shell_loop(char **en)
         prom = prompt();  
         lst.cmd = readline(prom);
         free(prom);
-
+        tap_to_space(lst.cmd);
         if(get_cmd(&lst))
             break;
         add_history(lst.cmd);

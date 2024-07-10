@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 04:44:33 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/09 00:00:15 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/09 00:12:18 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/09 23:17:55 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../minishell.h"
 
@@ -34,32 +35,42 @@ void    set_builtins(t_box *box)
         rebuild_unset(box->env);
 }
 
-int    get_cmd_(t_box *box)
+// int    get_cmd_(t_box *box)
+// {
+//     if(!box->cmd)
+//     {
+//         parsing(box);
+//         free_node(box->node);
+//         exit(0);
+//     }
+//     if (parsing(box))
+//         return 0;
+//     free_node(box->node);
+//     return (0);
+// }
+
+void    test(t_box *box)
 {
-    if(!box->cmd)
-    {
-        parsing(box);
-        free_node(box->node);
-        exit(0);
-    }
-    if (parsing(box))
-        return 0;
-    free_node(box->node);
-    return (0);
+    printf("type: %d\n", box->l_com->next->type);
 }
 
 int    get_cmd(t_box *box)
 {
     (void)box;
+
     if(!box->cmd)
     {
         printf("exit\n");
         box->exit_val = 0;
         return (1);
     }
-    if ( (box))
+    if (parsing(box))
         return 0;
-    set_builtins(box);
-    // execute(box->node);
+
+    // set_builtins(box);
+    // test(box);
+    execute(box);
+    // printf("FFFF");
+
     return (0);
 }

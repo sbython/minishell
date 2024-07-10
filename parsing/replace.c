@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:59 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/03 18:35:09 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/08 07:00:46 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,31 @@ char * str_replace(char * s1, char *rep, char *with)
     }
     ft_strlcpy(str[1], s1 , -1);
     return (str[0]);
+}
+
+void tap_to_space(char *s)
+{
+    int i;
+    char ch;
+    
+    i = 0;
+    if(!s)
+        return ;
+    while (s[i])
+    {
+        if (s[i] == '\'' || s[i] == '"')
+        {
+            ch = s[i];
+            i++;
+            while (s[i] && s[i] != ch)
+                i++;
+            if(s[i] == '\'' || s[i] == '"')
+                i++;
+        }
+        else if ( s[i] == '\t')
+            s[i] = ' ';
+        else
+            i++;
+    }
+    
 }

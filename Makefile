@@ -9,6 +9,7 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/builtins/export/export.c execution/builtins/unset/unset.c \
 	   execution/execute/execute.c execution/execute/get_command.c \
 	   execution/execute/get_options.c execution/execute/get_redirection.c \
+	   execution/execute/pipe_two.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \
@@ -27,7 +28,7 @@ SRC_P= parsing/minishell.c \
 		parsing/put_type.c \
 		parsing/fill_finale.c \
 		parsing/join2pointer.c \
-		
+		parsing/gitpid.c 
 
 OBJ= ${SRC_P:.c=.o} ${SRC_E:.c=.o}
 

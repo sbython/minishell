@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/09 00:05:53 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/09 00:10:40 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/09 00:11:19 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../minishell.h"
 
@@ -20,7 +19,14 @@ int len_to(char *str, char c)
 
     i = 0;
     while (str[i] && str[i] != c && str[i] != '\'' && str[i] != '"') 
+    { 
         i++;
+        if (str[i] == '$' || str[i] == '?')
+        {
+            i++;
+            break;
+        }
+    }
     return (i);
 }
 char *get_to(char *str, char c)
@@ -36,12 +42,14 @@ char *get_to(char *str, char c)
     p[len] = '\0';
     return (p);
 }
-char * get_val(char *str1 , env * en)
+char * get_val(char *str1 , env * en, t_box *box)
 {
     char *str;
 
-    // if (ft_strncmp(str1, "$$", 3))
-    //     return(__getpgid)
+     if (!ft_strncmp(str1, "$", 2))
+        return(ft_strdup(box->getpid));
+    else if (!ft_strncmp(str1, "?", 2))
+        return(ft_itoa(box->exit_val));
     str = ft_strtrim(str1, "\"'");
     if (!*str)
         return (free(str),ft_strdup("$"));
@@ -57,7 +65,7 @@ char * get_val(char *str1 , env * en)
 // ptr[0] it is a return string 
 // ptr[1] it name of variable 
 // ptr[2] it is left string after take a ptr[1] or ptr [0]
-char *replace(char *str , env * en)
+char *replace(char *str , env * en,t_box *box)
 {
     char *ptr[4];
     char *tmp;
@@ -67,7 +75,7 @@ char *replace(char *str , env * en)
     while ((ptr[2] =  ft_strchr(ptr[2], '$')))
     {
         ptr[1] = get_to(ptr[2], ' ');
-        ptr[0] = get_val(ptr[1] + 1, en);
+        ptr[0] = get_val(ptr[1] + 1, en, box);
         str = str_replace(str, ptr[1] , ptr[0]);
         free(ptr[1]);
         free(ptr[0]);
@@ -92,7 +100,7 @@ void replace_var(t_box *box)
         if (ft_strchr(com->com, '$'))
         {
             
-                com->com = replace(com->com, box->env);
+                com->com = replace(com->com, box->env, box);
             // printf(com->com);
         }
         else if(com->com[0] == '~' && com->com[1] == 0)
