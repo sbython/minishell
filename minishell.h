@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/08 06:58:43 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/10 01:30:25 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_env
     0 string
     1  |
     2 <
-    3 >
+    3 >         
     4 << 
     5 >>
 */
@@ -117,6 +117,7 @@ void    free_node(t_node *node);
 int     is_token(char * ls, int i);
 char    *get_pid();
 void    tap_to_space(char *s);
+char	*ft_dchr(const char *s, int c);
 //----------------zibnoukh----------------//
 
 /*builtins*/

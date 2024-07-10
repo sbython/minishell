@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/08 04:17:24 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/10 01:31:52 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void replace_var(t_box *box)
     com = box->l_com;
     while (com)
     {
-        if (ft_strchr(com->com, '$'))
+        if (ft_dchr(com->com, '$'))
         {
             
                 com->com = replace(com->com, box->env, box);

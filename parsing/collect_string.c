@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/06 02:45:32 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/09 22:43:37 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int check_str(char *str)
     i = 0;
     while (str[i])
     {
+        //echo "rida sbi"gkae"rh
         if(str[i] == '"')
         {
             str = ft_strchr(str + (i + 1), '"');

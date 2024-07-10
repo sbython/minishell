@@ -6,19 +6,21 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:59 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/08 07:00:46 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/10 01:39:13 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../minishell.h"
 
-// rep_len = len[0]
-// with_len = len[1]
-// len = len[2]
-// result = str[0]
-// res_pos = str[1]
-// pos = str[2]
+/*
+  * rep_len = len[0]
+  * with_len = len[1]
+  * len = len[2]
+  * result = str[0]
+  * res_pos = str[1]
+  * pos = str[2]
+*/
 char * str_replace(char * s1, char *rep, char *with)
 {
     size_t len[3];
@@ -41,6 +43,35 @@ char * str_replace(char * s1, char *rep, char *with)
     }
     ft_strlcpy(str[1], s1 , -1);
     return (str[0]);
+}
+
+
+char	*ft_dchr(const char *s, int c)
+{
+	int	i;
+    int F;
+
+    F = 1;
+	i = 0;
+	while (s[i])
+	{
+        if (s[i] == '"')
+            F *= -1;
+        else if (s[i] == '\'' && F == 1)
+        {
+            i++;
+            while (s[i] && s[i] != '\'')
+                i++;
+            if (!s[i])
+                return (NULL);
+        }
+		if ((char)c == s[i])
+			return ((char *)(&s[i]));
+		i++;
+	}
+	if ((char)c == s[i])
+		return ((char *)(&s[i]));
+	return (NULL);
 }
 
 void tap_to_space(char *s)
