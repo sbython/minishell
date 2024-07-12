@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:33:42 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/09 07:21:33 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/12 02:50:54 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void    set_builtins(t_box *box)
 int    get_cmd_(t_box *box)
 {
  
-    // t_com *ls;
+    t_com *ls;
     // t_command    * node;
   
 
     // node= NULL;
     
-    // ls =NULL;   
+    ls =NULL;   
     // node = box->node->command;
     if(!box->cmd)
     {
@@ -53,32 +53,32 @@ int    get_cmd_(t_box *box)
         return (1);
     }
     if (parsing(box))
-        return 0;
-    // ls =box->l_com;
+        return 1;
+    ls = box->l_com;
 
 
-    set_builtins(box);    
+    // set_builtins(box);    
 
 
-    // while(ls)
-    // {
-    //     printf("%s => %d\n",ls->com, ls->type);
-    //     ls = ls->next;
-    // }
+    while(ls)
+    {
+        printf("%s => %d\n",ls->com, ls->type);
+        ls = ls->next;
+    }
 
     
-    // if (!ls)
-    //     printf("m3art ach tra hnya \n");
-    // // printf("%p\n", node);
-    // // if (node)
-    // //     printf("m3art ach tra hnya node \n");
-    // //  printf("%s => %d\n",ls->com, ls->type);
-    // while(ls)
-    // {
-    //     printf("%s => %d\n",ls->com, ls->type);
+    if (!ls)
+        printf("m3art ach tra hnya \n");
+    // printf("%p\n", node);
+    // if (node)
+    //     printf("m3art ach tra hnya node \n");
+    //  printf("%s => %d\n",ls->com, ls->type);
+    while(ls)
+    {
+        printf("%s => %d\n",ls->com, ls->type);
         
-    //     ls = ls->next;
-    // }
+        ls = ls->next;
+    }
     // node = box->node->command;
     // int i = 0;
     // while (node)
@@ -184,10 +184,10 @@ int    get_cmd(t_box *box)
 {
     
     t_com *ls;
-    t_command    * node;
+    // t_command    * node;
   
 
-    // node= NULL;
+    // // node= NULL;
     
     ls =NULL;   
     
@@ -218,31 +218,31 @@ int    get_cmd(t_box *box)
     // if (node)
     //     printf("m3art ach tra hnya node \n");
     //  printf("%s => %d\n",ls->com, ls->type);
-    while(ls)
-    {
-        printf("%s => %d\n",ls->com, ls->type);
+    // while(ls)
+    // {
+    //     printf("%s => %d\n",ls->com, ls->type);
         
-        ls = ls->next;
-    }
-    node = box->node->command;
-    int i = 0;
-    while (node)
-    {
-        printf("\n options\n");
-        while (node->options && node->options[i])
-        {
-            printf("%s ", node->options[i++]);
-        }
-        printf("\n redirection\n");
-        while (node->redirection)
-        {
-            printf("%s ", node->redirection->str);
-            node->redirection = node->redirection->next;
-        }
-        i = 0;
-        node = node->next;
-    }
-    printf("\n");
+    //     ls = ls->next;
+    // }
+    // node = box->node->command;
+    // int i = 0;
+    // while (node)
+    // {
+    //     printf("\n options\n");
+    //     while (node->options && node->options[i])
+    //     {
+    //         printf("%s ", node->options[i++]);
+    //     }
+    //     printf("\n redirection\n");
+    //     while (node->redirection)
+    //     {
+    //         printf("%s ", node->redirection->str);
+    //         node->redirection = node->redirection->next;
+    //     }
+    //     i = 0;
+    //     node = node->next;
+    // }
+    // printf("\n");
 
     // t_tmp_ls = ls;
     // if(ft_strncmp(ls->com, "echo", ft_strlen(ls->com)) == 0)
