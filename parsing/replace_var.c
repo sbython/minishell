@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/12 04:44:13 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/13 00:42:11 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ void replace_var(t_box *box)
         if (ft_dchr(com->com, '$'))
         {
             
-            str = replace(com->com, box);
-            ft_putendl_fd(str, 1);  
+            str = replace(com->com, box); 
             if (!*str && com->prev && ft_isdelimiter(com->prev->com))
                 free(str); 
             else

@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/08 07:00:29 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/12 23:53:31 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void shell_loop(char **en)
         lst.cmd = readline(prom);
         free(prom);
         tap_to_space(lst.cmd);
+        add_history(lst.cmd);
         if(get_cmd(&lst))
             break;
-        add_history(lst.cmd);
         free_all(&lst);
         // memset((void *)&lst, 0, sizeof(t_box));
     }

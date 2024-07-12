@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:23 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/12 06:40:52 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/13 00:23:42 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int  parsing(t_box *box)
     box->ptr = ft_newsplit(box->cmd);
     fill_list(box->ptr, box);
     free_2ptr(box->ptr);
-    // if (collect_string(box))
-    //     return 1;
+    if (collect_string(box))
+        return 1;
     split_pip(box);
     replace_var(box);
     put_type(box);
