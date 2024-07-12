@@ -1,0 +1,10 @@
+Makefile
+README.md
+execution
+libft
+minishell
+minishell.h
+output.txt
+parsing
+test
+test.c

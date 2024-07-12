@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/10 06:56:26 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/13 00:42:29 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,49 @@
 //     printf("next of >: %s\n", next);  
 // }
 
-void    greater_than_sign(t_box *box)
+void    greater_than_sign(t_box *box, t_com *l_com)
 {
-    (void)box;
-    // printf(">\n");
-    // printf("prev of >: %s\n", box->l_com->com);
-    // ex_command(box->l_com->com, box->l_com->next->com);
-    int file = open(box->l_com->next->next->com, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    pid_t pid;
+    int status;
+    int fd;
 
-    if (file < 0) {
-        ft_putstr_fd("Error opening file!\n", 1);
-        return ;
+    fd = open(l_com->next->com, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR);
+    if (fd == -1)
+    {
+        perror("open");
+        exit(0);
     }
 
-    // (write(file, box->l_com->com, ft_strlen(box->l_com->com)) != ft_strlen(box->l_com->com))
-    int length_ = ft_strlen(box->l_com->com);
-    if (write(file, box->l_com->com, ft_strlen(box->l_com->com)) != length_) {
-        ft_putstr_fd("Error writing file!\n", 1);
-        close(file);
-        return ;
-    }
-    close(file);
+    pid = fork();
+    if (pid == -1)
+    {
+        perror("fork");
+        exit(0);
+    } 
+    else if (pid == 0)
+    {
+        char *path = "/bin/";
+        char *full_path = ft_strjoin(path, box->node->command->options[0]);
+        if (dup2(fd, 1) == -1)
+        {
+            perror("dup2");
+            exit(0);
+        }
+        close(fd);
 
+        if (execve(full_path, box->node->command->options, NULL) == -1)
+        {
+            perror("execve");
+            exit(0);
+        }
+    } 
+    else 
+    {
+        close(fd);
+        if (waitpid(pid, &status, 0) == -1) 
+        {
+            perror("waitpid");
+            exit(0);
+        }
+    }
 }

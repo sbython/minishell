@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/12 04:40:58 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/12 23:49:51 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,60 +51,65 @@ t_com*    find_last(t_com *l_com)
 //     }
 // }
 
-void    l_com_command(t_box *box)
+// void    l_com_command(t_box *box)
+// {
+//     // int exe;
+
+//     // exe = 1;
+//     while (box->l_com)
+//     {
+//         if(box->l_com->type == 2)
+//         {
+//             check_if_it_is(box, box->l_com->next->com);
+//             if(box->check_val)
+//                 break;
+                
+//         }
+//         // else if (box->l_com->type == 4)
+//         // {
+//         //     printf("<<\n");
+//         //     break;
+//         // }
+//         box->l_com = box->l_com->next;
+//     }
+
+//     // if(!box->check_val)
+//     //     execute_c_options(box);
+// }
+
+int    no_fake_file(t_com *l_com)
 {
-    (void)box;
-    // if(box->l_com->next->type == 3)
-    //     greater_than_sign(box);
-    // if(box->l_com->next->type == 2)
-    // t_com *lst = find_last(box->l_com);
-    while (box->l_com)
+    int check;
+    while (l_com)
     {
-        if(box->l_com->type == 2)
+        if(ft_strncmp(l_com->com, "<", 1) == 0)
         {
-            check_if_it_is(box, box->l_com->next->com);
-            if(box->check_val)
+            check = check_if_it_is(l_com->next->com);
+            if(check)
             {
+                return 0;
                 break;
             }
-            // printf("%d\n", box->check_val);
-            // if(box->check_val)
-                // printf("%s\n", "sir 3alah");
-            // else
-            // break;
-                
         }
-        //     less_than_sign(box, lst);
-        // printf("%s\n", box->l_com->com);
-        box->l_com = box->l_com->next;
+        l_com = l_com->next;
     }
-
-    if(!box->check_val)
-        execute_c_options(box);
-    // if(!box->check_val)
-    // {
-    //     printf("KAWYA DA3WA\n");
-    // }
-    // printf("la fin: %s\n", box->l_com->com);
-    // printf("lst: %s\n", lst->com);
+    return 1;
 }
 
 void    execute(t_box *box)
 {
-    // printf("size_t_node: %d\n", size_t_node(box->node->command));
-    // get_options(box->node->command);
-    // if(size_t_node((box->node->command)) > 1)
-        // merge_command(box);
-    // else
     if(length_stack(box->l_com) > 1)
-        l_com_command(box);
-        // printf("+++++++++++\n");
-    // int i = 0;
-    // while (box->node->command->options[i])
-    // {
-        // printf("%s\n", box->node->command->options[i]);
-        // i++;
-    // }
+    {
+        if(no_fake_file(box->l_com))
+        {
+            type_of_exe(box, box->l_com);   
+        }
+        // printf("%d\n", box->check_val);
+        // if(box->check_val)
+            // execute_c_options(box);
+        // l_com_command(box);
+    }
 }
 
-// ila kan chi file makaynch i7bes
+// 00 - no fake file
+// stop until end real filedsa

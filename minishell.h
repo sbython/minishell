@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 00:10:33 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/12 03:17:28 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/13 00:28:46 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,11 @@ void    get_command(t_command *command);
 void    get_options(char **options);
 void    get_redirection(t_redirection *redirection);
 void    pipe_two(t_box *box, char *prev, char *next);
-void    greater_than_sign(t_box *box);
-void    less_than_sign(t_box *box, t_com *lst);
+void    greater_than_sign(t_box *box, t_com *l_com);
+void    less_than_sign(char **options);
 void    execute_c_options(t_box *box);
-void    check_if_it_is(t_box *box, char *str);
+int     check_if_it_is(char *str);
+void    type_of_exe(t_box *box, t_com *l_com);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);

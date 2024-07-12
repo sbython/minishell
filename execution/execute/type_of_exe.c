@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_if_it_is.c                                   :+:      :+:    :+:   */
+/*   type_of_exe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/12 21:52:44 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/13 00:28:24 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int    check_if_it_is(char *str)
+void    type_of_exe(t_box *box, t_com *l_com)
 {
-    int get_file;
-    int check;
-
-    check = 0;
-    get_file = open(str, O_RDONLY);
-
-    if(get_file == -1)
+    (void)box;
+    while (l_com)
     {
-        check++;
+        if(l_com->type == 2)
+        {
+            less_than_sign(box->node->command->options);
+            break;
+        }
+        else if(l_com->type == 3)
+            greater_than_sign(box, l_com);
+        else if(l_com->type == 4)
+            printf("%s\n", "<<");
+        else if(l_com->type == 5)
+            printf("%s\n", ">>");
+        // else
+        //     printf("IDONO\n");
+        // printf("%s\n", l_com->com);
+        l_com = l_com->next;
     }
-    if(check)
-    {
-        perror(str);
-        return 1;
-    }
-    return 0;
 }
