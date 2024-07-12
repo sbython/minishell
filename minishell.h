@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 00:10:33 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/10 04:46:18 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/12 03:17:28 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_box
     env * env;
     char *getpid;
     int exit_val;
+    int check_val;
 } t_box;
 
 //----------------msbai----------------//
@@ -97,6 +98,7 @@ void    free_all(t_box *box);
 void    free_env(env *env);
 void    fill_list(char **ptr, t_box *box);
 void    replace_var(t_box *box);
+char    *replace(char *str , env * en,t_box *box);
 void    join(char **dest, char * src, int i);
 char    *str_replace(char * s1, char *rep, char *with);
 void    free_env(env *lst);
@@ -122,8 +124,10 @@ void    get_command(t_command *command);
 void    get_options(char **options);
 void    get_redirection(t_redirection *redirection);
 void    pipe_two(t_box *box, char *prev, char *next);
-void    greater_than_sign();
-void    less_than_sign();
+void    greater_than_sign(t_box *box);
+void    less_than_sign(t_box *box, t_com *lst);
+void    execute_c_options(t_box *box);
+void    check_if_it_is(t_box *box, char *str);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);

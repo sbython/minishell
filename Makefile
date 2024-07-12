@@ -10,7 +10,8 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/execute/execute.c execution/execute/get_command.c \
 	   execution/execute/get_options.c execution/execute/get_redirection.c \
 	   execution/execute/pipe_two.c execution/execute/greater_than_sign.c \
-	   execution/execute/less_than_sign.c \
+	   execution/execute/less_than_sign.c execution/execute/execute_c_options.c \
+	   execution/execute/check_if_it_is.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \
