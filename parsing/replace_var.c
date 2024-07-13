@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/13 00:42:11 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/13 06:13:38 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void replace_var(t_box *box)
     com = box->l_com;
     while (com)
     {
-        if (ft_dchr(com->com, '$'))
+        if ((ft_dchr(com->com, '$')
+            && ((com->prev  && com->prev->type != 4) || !com->prev)))
         {
             
             str = replace(com->com, box); 
@@ -108,4 +109,5 @@ void replace_var(t_box *box)
                 com->com =  str_replace(com->com, "~", get_val("HOME", box->env, box));
         com = com->next;
     }
+    // delete_emty(box);
 }
