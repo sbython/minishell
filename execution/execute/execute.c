@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/12 23:49:51 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/13 05:59:42 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,19 @@ void    execute(t_box *box)
 {
     if(length_stack(box->l_com) > 1)
     {
-        if(no_fake_file(box->l_com))
-        {
-            type_of_exe(box, box->l_com);   
-        }
+        // if(no_fake_file(box->l_com))
+        // {
+        //     type_of_exe(box, box->l_com);   
+        // }
+        // while (box->node->command->redirection)
+        // {
+        //     printf("str: %s\n", box->node->command->redirection->str);
+        //     printf("flag: %d\n", box->node->command->redirection->flag);
+        //     if(box->node->command->redirection->next->next->str)
+        //         printf("next: %s\n", box->node->command->redirection->next->str);
+        //     box->node->command->redirection = box->node->command->redirection->next;
+        // }
+        
         // printf("%d\n", box->check_val);
         // if(box->check_val)
             // execute_c_options(box);

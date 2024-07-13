@@ -1,5 +1,5 @@
 CC= cc
-CFLAGS = -Wall -Werror -Wextra  -g 
+CFLAGS = -Wall -Werror -Wextra 
 RM = rm -rf
 NAME = minishell
 LIBFT = libft/libft.a
@@ -12,7 +12,8 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/execute/pipe_two.c execution/execute/greater_than_sign.c \
 	   execution/execute/less_than_sign.c execution/execute/execute_c_options.c \
 	   execution/execute/check_if_it_is.c execution/execute/execute_heardoc.c \
-	   execution/execute/type_of_exe.c \
+	   execution/execute/type_of_exe.c execution/execute/left_shift.c \
+	   execution/execute/right_shift.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \
@@ -31,7 +32,8 @@ SRC_P= parsing/minishell.c \
 		parsing/put_type.c \
 		parsing/fill_finale.c \
 		parsing/join2pointer.c \
-		parsing/gitpid.c 
+		parsing/gitpid.c \
+		parsing/new_split.c
 
 OBJ= ${SRC_P:.c=.o} ${SRC_E:.c=.o}
 

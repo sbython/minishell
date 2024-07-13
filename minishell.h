@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 00:10:33 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/13 00:28:46 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/13 00:50:14 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/13 01:59:37 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_env
     0 string
     1  |
     2 <
-    3 >
+    3 >         
     4 << 
     5 >>
 */
@@ -93,16 +93,15 @@ typedef struct s_box
 //----------------msbai----------------//
 char    *prompt();
 env     *fill_env(char **env);
-int    parsing(t_box *box);
+int     parsing(t_box *box);
 void    free_all(t_box *box);
 void    free_env(env *env);
 void    fill_list(char **ptr, t_box *box);
 void    replace_var(t_box *box);
-char    *replace(char *str , env * en,t_box *box);
 void    join(char **dest, char * src, int i);
 char    *str_replace(char * s1, char *rep, char *with);
 void    free_env(env *lst);
-int    collect_string(t_box *box);
+int     collect_string(t_box *box);
 int     simple_check(t_box *box);
 t_com   *new_node(char *str);
 void    split_pip(t_box *box);
@@ -117,6 +116,11 @@ void    free_node(t_node *node);
 int     is_token(char * ls, int i);
 char    *get_pid();
 void    tap_to_space(char *s);
+char	*ft_dchr(const char *s, int c);
+int     ft_isdelimiter(char *str);
+char    *replace(char *str, t_box *box);
+int     slen(char *str);
+char    **ft_newsplit(char *s);
 //----------------zibnoukh----------------//
 
 void    execute(t_box *box);
@@ -129,6 +133,8 @@ void    less_than_sign(char **options);
 void    execute_c_options(t_box *box);
 int     check_if_it_is(char *str);
 void    type_of_exe(t_box *box, t_com *l_com);
+void    left_shift(t_box *box, t_com *l_com);
+void    right_shift(t_box *box, t_com *l_com);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);

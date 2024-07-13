@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 00:12:18 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/11 21:40:40 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/13 00:52:59 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/13 00:53:06 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void    set_builtins(t_box *box)
         rebuild_unset(box->env);
 }
 
-// int    get_cmd_(t_box *box)
+// void get_cmd_to_builtins(t_box *box)
+
 // {
 //     if(!box->cmd)
 //     {
@@ -57,7 +58,12 @@ void    test(t_box *box)
 int    get_cmd(t_box *box)
 {
     (void)box;
+    t_com *ls;
 
+    // // node= NULL;
+    
+    ls =NULL;   
+    
     if(!box->cmd)
     {
         printf("exit\n");
@@ -67,10 +73,17 @@ int    get_cmd(t_box *box)
     if (parsing(box))
         return 0;
 
+    fill_finale(box);
+    ls =box->l_com;
+    // node = box->node->command;
+
     // set_builtins(box);
     // test(box);
     execute(box);
-    // printf("FFFF");
+
+
+
+    free_node(box->node);
 
     return (0);
 }

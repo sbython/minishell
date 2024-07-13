@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:54 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/05 21:53:16 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/09 22:35:59 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int simple_check(t_box *box)
     && ft_strncmp(com , ">", -1) 
     && ft_strncmp(com , "<", -1) 
     && ft_strncmp(com , ">>", -1)
-    && ft_strncmp(com , ">>>", 3)
+    // && ft_strncmp(com , ">>>", 3)
     && com))
     {
         ft_putstr_fd("minishell: syntax error near unexpected token ", 2);

@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:23 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/06 22:48:33 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/13 00:23:42 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int  parsing(t_box *box)
         exit_f(box->cmd, "minishell: syntax error near unexpected token `|'\n",box);
         return(1);
     }
-    box->ptr = ft_split(box->cmd , ' ');
+    box->ptr = ft_newsplit(box->cmd);
     fill_list(box->ptr, box);
     free_2ptr(box->ptr);
     if (collect_string(box))
@@ -46,11 +46,13 @@ int  parsing(t_box *box)
     split_pip(box);
     replace_var(box);
     put_type(box);
-    delete_emty(box);
     if (check_gramer(box))
         return (1);
+    
+    delete_emty(box);
+ 
+
     remove_qoute(box);
-    fill_finale(box);
     return 0;
 }
     

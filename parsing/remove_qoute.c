@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:38:13 by msbai             #+#    #+#             */
-/*   Updated: 2024/06/28 12:58:18 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/12 22:28:34 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void remove_(char *str)
                 i++;
             if (str[i] == c)
                 ft_memmove(&str[i],&str[i + 1], ft_strlen(&str[i + 1]));
+            str[ft_strlen(str) -1] = 0; 
         }
         else
             i++;

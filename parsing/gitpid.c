@@ -6,24 +6,13 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 06:55:43 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/07 06:55:44 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/10 04:37:06 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-// #include "../minishell.h"
-# include "../libft/libft.h"
+#include "../minishell.h"
 
-#include <stdio.h>
-# include <stdlib.h>    
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <limits.h>
-# include <unistd.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <signal.h>
-#include <sys/wait.h>
 char * get_pid1(char *str)
 {
     int i;

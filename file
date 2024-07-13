@@ -1,10 +1,11 @@
-Makefile
-README.md
 execution
+f4
+file
 libft
+Makefile
 minishell
 minishell.h
-output.txt
 parsing
+README.md
 test
 test.c
