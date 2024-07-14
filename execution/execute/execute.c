@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/13 22:00:45 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/14 08:30:35 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,30 +102,18 @@ void    execute(t_box *box)
     {
         // if(no_fake_file(box->l_com))
         // {
-        //     type_of_exe(box, box->l_com);   
+            // type_of_exe(box, box->l_com);   
+            int i = 0;
+            while (box->node->command->options[i])
+            {
+                printf("%s\n", box->node->command->options[i]);
+                i++;
+            }
         // }
-        while (box->node->command->redirection)
-        {
-            printf("str: %s\n", box->node->command->redirection->str);
-            printf("flag: %d\n", box->node->command->redirection->flag);
-            // if(box->node->command->redirection->next->next->str)
-                // printf("next: %s\n", box->node->command->redirection->next->str);
-            box->node->command->redirection = box->node->command->redirection->next;
-        }
-
-        // box->node->command->next->options
-        
-        // int i = 0;
-        // while (box->node->command->options[i])
-        // {
-        //     // box->node->command->options
-        //     printf("%s\n", box->node->command->options[i]);
-        //     i++;
-        // }
-        
+        // box->node->command->next->options;
         // printf("%d\n", box->check_val);
         // if(box->check_val)
-            // execute_c_options(box);
+        //     execute_c_options(box);
         // l_com_command(box);
     }
 }
