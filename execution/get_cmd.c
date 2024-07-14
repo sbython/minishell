@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:33:42 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/12 02:50:54 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/14 08:05:36 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,157 +34,13 @@ void    set_builtins(t_box *box)
         rebuild_unset(box->env);  
 }
 
-int    get_cmd_(t_box *box)
-{
- 
-    t_com *ls;
-    // t_command    * node;
-  
-
-    // node= NULL;
-    
-    ls =NULL;   
-    // node = box->node->command;
-    if(!box->cmd)
-    {
-
-        printf("exit\n");
-        box->exit_val = 0;
-        return (1);
-    }
-    if (parsing(box))
-        return 1;
-    ls = box->l_com;
 
 
-    // set_builtins(box);    
-
-
-    while(ls)
-    {
-        printf("%s => %d\n",ls->com, ls->type);
-        ls = ls->next;
-    }
-
-    
-    if (!ls)
-        printf("m3art ach tra hnya \n");
-    // printf("%p\n", node);
-    // if (node)
-    //     printf("m3art ach tra hnya node \n");
-    //  printf("%s => %d\n",ls->com, ls->type);
-    while(ls)
-    {
-        printf("%s => %d\n",ls->com, ls->type);
-        
-        ls = ls->next;
-    }
-    // node = box->node->command;
-    // int i = 0;
-    // while (node)
-    // {
-    //     printf("\n options\n");
-    //     while (node->options[i])
-    //     {
-    //         printf("%s ", node->options[i++]);
-    //     }
-    //     printf("\n redirection\n");
-    //     while (node->redirection)
-    //     {
-    //         printf("%s ", node->redirection->str);
-    //         node->redirection = node->redirection->next;
-    //     }
-    //     i = 0;
-    //     node = node->next;
-    // }
-    
-
-    // t_tmp_ls = ls;
-    // if(ft_strncmp(ls->com, "echo", ft_strlen(ls->com)) == 0)
-    //     echo(t_tmp_ls, ls->next->com);
-
-    // set_commands(box->l_com, box); 
-    // printf("--%s--", prompt() 
-    free_node(box->node);
-    return (0);
-}
-
-
-// void get_cmd_to_builtins(t_box *box)
-// {
-//     int pid;
-//     t_com *ls;
-//     t_command *node;
-
-//     ls = NULL;
-//     node = NULL;
-
-//     pid = fork();
-//     if (pid == 0)
-//     {
-//         parsing(box);
-//         ls = box->l_com;
-//         node = box->node ? box->node->command : NULL;
-
-//         if (!ls)
-//         {
-//             printf("l_com is empty\n");
-//         }
-//         else
-//         {
-//             printf("l_com is not empty\n");
-//             while (ls)
-//             {
-//                 printf("%s => %d\n", ls->com, ls->type);
-//                 ls = ls->next;
-//             }
-//         }
-
-//         if (node)
-//         {
-//             int i;
-//             printf("Node options and redirections:\n");
-//             while (node)
-//             {
-//                 printf("Options:\n");
-//                 if (node->options)
-//                 {
-//                     i = 0;
-//                     while (node->options[i])
-//                     {
-//                         printf("%s ", node->options[i++]);
-//                     }
-//                     printf("\n");
-//                 }
-//                 printf("Redirections:\n");
-//                 t_redirection *redir = node->redirection;
-//                 while (redir)
-//                 {
-//                     printf("%s ", redir->str);
-//                     redir = redir->next;
-//                 }
-//                 printf("\n");
-
-//                 node = node->next;
-//             }
-//         }
-//         else
-//         {
-//             printf("Node is NULL\n");
-//         }
-
-//         exit(0);
-//     }
-//     else
-//     {
-//         wait(NULL);
-//     }
-// }
 int    get_cmd(t_box *box)
 {
     
     t_com *ls;
-    // t_command    * node;
+    t_command    * node;
   
 
     // // node= NULL;
@@ -224,25 +80,25 @@ int    get_cmd(t_box *box)
         
     //     ls = ls->next;
     // }
-    // node = box->node->command;
-    // int i = 0;
-    // while (node)
-    // {
-    //     printf("\n options\n");
-    //     while (node->options && node->options[i])
-    //     {
-    //         printf("%s ", node->options[i++]);
-    //     }
-    //     printf("\n redirection\n");
-    //     while (node->redirection)
-    //     {
-    //         printf("%s ", node->redirection->str);
-    //         node->redirection = node->redirection->next;
-    //     }
-    //     i = 0;
-    //     node = node->next;
-    // }
-    // printf("\n");
+    node = box->node->command;
+    int i = 0;
+    while (node)
+    {
+        printf("\n options\n");
+        while (node->options && node->options[i])
+        {
+            printf("%s ", node->options[i++]);
+        }
+        printf("\n redirection\n");
+        while (node->redirection)
+        {
+            printf("%s ", node->redirection->str);
+            node->redirection = node->redirection->next;
+        }
+        i = 0;
+        node = node->next;
+    }
+    printf("\n");
 
     // t_tmp_ls = ls;
     // if(ft_strncmp(ls->com, "echo", ft_strlen(ls->com)) == 0)

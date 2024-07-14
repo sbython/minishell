@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/12 05:46:54 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/14 08:37:23 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,10 @@ int     ft_isdelimiter(char *str);
 char    *replace(char *str, t_box *box);
 int     slen(char *str);
 char    **ft_newsplit(char *s);
+void	free_2ptr(char **p);
+t_com	*last_node(t_com *node);
+void    sp(t_com **list, char *str, t_com *last, t_com **n_box);
+int     cmala(char * s, char ch, int i);
 //----------------zibnoukh----------------//
 
 /*builtins*/
