@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:23 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:22:48 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/14 10:26:51 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	parsing(t_box *box)
 	box->cmd = str;
 	if (simple_check(box))
 		return (1);
-	else if (ft_strnstr(box->cmd, "||", -1))
+	else if (new_strnstr(box->cmd, "||"))
 	{
 		exit_f(box->cmd, "minishell: syntax error near unexpected token `|'\n",
 			box);
