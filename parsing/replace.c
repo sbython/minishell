@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:59 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/13 00:14:16 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/13 06:13:02 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ char * str_replace(char * s1, char *rep, char *with)
         s1 = str[2] + len[0];
 
     }
-    free(str[3]);
     ft_strlcpy(str[1], s1 , -1);
+    free(str[3]);
     return (str[0]);
 }
 

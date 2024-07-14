@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/13 00:50:38 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/13 00:50:39 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/13 06:36:04 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/13 20:46:05 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 int len_to(char *str, char c)
 {
@@ -91,7 +90,8 @@ void replace_var(t_box *box)
     com = box->l_com;
     while (com)
     {
-        if (ft_dchr(com->com, '$'))
+        if ((ft_dchr(com->com, '$')
+            && ((com->prev  && com->prev->type != 4) || !com->prev)))
         {
             
             str = replace(com->com, box); 
@@ -107,4 +107,5 @@ void replace_var(t_box *box)
                 com->com =  str_replace(com->com, "~", get_val("HOME", box->env, box));
         com = com->next;
     }
+    // delete_emty(box);
 }

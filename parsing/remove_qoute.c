@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:38:13 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/12 22:28:34 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/13 05:58:34 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void remove_(char *str)
     int   i;
 
     i = 0;
+    if (!ft_strncmp(str,"\"", -1))
+        memset((void *)str, 0,2);
     while(str[i])
     {
         c = str[i];
