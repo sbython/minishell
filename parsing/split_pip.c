@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pip.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:36 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:38:24 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/14 09:07:27 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*new_strchr(char *s, char c)
 {
 	int		i;
-	char	ch;
 
 	i = 0;
 	if (!s)
@@ -25,7 +24,7 @@ char	*new_strchr(char *s, char c)
 	while (s[i])
 	{
 		if (s[i] == '\'' || s[i] == '"')
-			i = cmala(s, ch, i);
+			i = kmala(s, i);
 		else if ((char)c == s[i] && (char)c == s[i + 1])
 			return (NULL);
 		else if ((char)c == s[i])

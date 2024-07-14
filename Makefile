@@ -13,7 +13,7 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/execute/less_than_sign.c execution/execute/execute_c_options.c \
 	   execution/execute/check_if_it_is.c execution/execute/execute_heardoc.c \
 	   execution/execute/type_of_exe.c execution/execute/left_shift.c \
-	   execution/execute/right_shift.c \
+	   execution/execute/right_shift.c execution/execute/get_path.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \

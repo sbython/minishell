@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
-/*   Created: 2024/07/13 00:50:14 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/13 01:59:37 by zibnoukh         ###   ########.fr       */
-=======
-/*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/14 08:37:23 by msbai            ###   ########.fr       */
->>>>>>> origin/test
+/*   Created: 2024/07/14 08:43:26 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/14 13:23:18 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +36,7 @@ typedef struct s_env
     char *name;
     char *vale;
     int   position;
+    char **full_string;
     struct s_env *next;
 }env ;
 
@@ -129,7 +125,7 @@ char    **ft_newsplit(char *s);
 void	free_2ptr(char **p);
 t_com	*last_node(t_com *node);
 void    sp(t_com **list, char *str, t_com *last, t_com **n_box);
-int     cmala(char * s, char ch, int i);
+int     kmala(char * s, int i);
 //----------------zibnoukh----------------//
 
 void    execute(t_box *box);
@@ -144,6 +140,7 @@ int     check_if_it_is(char *str);
 void    type_of_exe(t_box *box, t_com *l_com);
 void    left_shift(t_box *box, t_com *l_com);
 void    right_shift(t_box *box, t_com *l_com);
+char**  get_path(env *all_env);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);

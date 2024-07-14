@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   sp.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 01:49:24 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:39:56 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/14 09:07:22 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	cmala(char *s, char ch, int i)
+int	kmala(char *s, int i)
 {
-	ch = s[i++];
+	char ch;
+
+	ch = s[i];
+	i++;
 	while (s[i] && s[i] != ch)
 		i++;
 	if (s[i] == '\'' || s[i] == '"')

@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/12 21:52:44 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/14 09:40:12 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ int    check_if_it_is(char *str)
     int check;
 
     check = 0;
-    get_file = open(str, O_RDONLY);
+    get_file = open(str, O_RDWR | O_CREAT, 0666);
 
     if(get_file == -1)
-    {
         check++;
-    }
     if(check)
     {
         perror(str);
