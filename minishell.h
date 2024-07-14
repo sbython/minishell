@@ -5,8 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2024/07/13 00:50:14 by zibnoukh          #+#    #+#             */
 /*   Updated: 2024/07/13 01:59:37 by zibnoukh         ###   ########.fr       */
+=======
+/*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/14 08:37:23 by msbai            ###   ########.fr       */
+>>>>>>> origin/test
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +126,10 @@ int     ft_isdelimiter(char *str);
 char    *replace(char *str, t_box *box);
 int     slen(char *str);
 char    **ft_newsplit(char *s);
+void	free_2ptr(char **p);
+t_com	*last_node(t_com *node);
+void    sp(t_com **list, char *str, t_com *last, t_com **n_box);
+int     cmala(char * s, char ch, int i);
 //----------------zibnoukh----------------//
 
 void    execute(t_box *box);
