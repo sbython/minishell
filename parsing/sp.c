@@ -54,7 +54,7 @@ void	sp(t_com **list, char *str, t_com *last, t_com **n_box)
 	t_com	*l;
 
 	ls = malloc(sizeof(t_box));
-	ptr = ft_newsplit(str);	
+	ptr = ft_newsplit(str);
 	fill_list(ptr, ls);
 	free_2ptr(ptr);
 	l = ls->l_com;

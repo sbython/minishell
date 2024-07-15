@@ -6,36 +6,11 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:36 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 09:59:03 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/15 10:03:49 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-char	*new_strchr(char *s, char c)
-{
-	int		i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (!*s)
-		return (NULL);
-	while (s[i])
-	{
-		if (s[i] == '\'' || s[i] == '"')
-			i = kmala(s, i);
-		else if ((char)c == s[i] && (char)c == s[i + 1])
-			return (NULL);
-		else if ((char)c == s[i])
-			return ((char *)(&s[i]));
-		else
-			i++;
-	}
-	if ((char)c == s[i])
-		return ((char *)(&s[i]));
-	return (NULL);
-}
 
 int	slen(char *str)
 {
@@ -49,6 +24,31 @@ int	slen(char *str)
 	if (str[i] == '\'' || str[i] == '"')
 		i++;
 	return (i);
+}
+
+char	*new_strchr(char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	if (!*s)
+		return (NULL);
+	while (s[i])
+	{
+		if (s[i] == '\'' || s[i] == '"')
+			i += slen(s + i);
+		else if ((char)c == s[i] && (char)c == s[i + 1])
+			return (NULL);
+		else if ((char)c == s[i])
+			return ((char *)(&s[i]));
+		else
+			i++;
+	}
+	if ((char)c == s[i])
+		return ((char *)(&s[i]));
+	return (NULL);
 }
 
 char	*new_strnstr(char *str, char *str1)

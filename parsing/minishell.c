@@ -6,11 +6,13 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:21:33 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/15 15:44:18 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int		g_status;
 
 void	nongnu(int i)
 {
@@ -20,21 +22,30 @@ void	nongnu(int i)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		g_status = 130;
 	}
 }
 
-void	handlesignal(int i)
+void	handlesignal(int i, t_box *lst)
 {
-	if (i)
+	if (i == 1)
 	{
 		signal(SIGINT, nongnu);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	else
+	else if (i == 2)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 	}
+	else
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	if (g_status == 130)
+		lst->exit_val = g_status;
+	g_status = 0;
 }
 
 void	shell_loop(char **en)
@@ -44,14 +55,13 @@ void	shell_loop(char **en)
 
 	(void)en;
 	ft_memset((void *)&lst, 0, sizeof(t_box));
-	lst.getpid = get_pid();
 	lst.env = fill_env(en);
 	while (1)
 	{
-		handlesignal(1);
 		prom = prompt();
+		handlesignal(1, &lst);
 		lst.cmd = readline(prom);
-		handlesignal(0);
+		handlesignal(0, &lst);
 		free(prom);
 		if (lst.cmd && ft_strncmp(lst.cmd, "", -1))
 			add_history(lst.cmd);

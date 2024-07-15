@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:31:11 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/15 17:14:59 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	len_to(char *str, char c)
 
 	i = 1;
 	(void)c;
-	if (!(ft_isalpha(str[i]) || ft_isdigit(str[i])))
-		return (1);
-	else if ((str[1] == '$') || str[1] == '?' || ft_isdigit(str[1]))
+	if (str[1] == '?' || ft_isdigit(str[1]))
 		return (2);
+	else if (!(ft_isalpha(str[i]) || ft_isdigit(str[i])))
+		return (1);
 	while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])))
 	{
 		i++;
@@ -43,11 +43,9 @@ char	*get_to(char *str, char c)
 	return (p);
 }
 
-char	*get_val(char *str, env *en, t_box *box)
+char	*get_val(char *str, t_env *en, t_box *box)
 {
-	if (!ft_strncmp(str, "$", 2))
-		return (ft_strdup(box->getpid));
-	else if (!ft_strncmp(str, "?", 2))
+	if (!ft_strncmp(str, "?", 2))
 		return (ft_itoa(box->exit_val));
 	while (en)
 	{
