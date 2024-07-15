@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/14 08:43:26 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/14 13:23:18 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/15 04:44:49 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/15 05:57:34 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_box
     char **ptr;
     t_node * node;
     env * env;
+    char **full_env;
+    char **ennvy;
     char *getpid;
     int exit_val;
     int check_val;
@@ -125,7 +127,9 @@ char    **ft_newsplit(char *s);
 void	free_2ptr(char **p);
 t_com	*last_node(t_com *node);
 void    sp(t_com **list, char *str, t_com *last, t_com **n_box);
-int     kmala(char * s, int i);
+int     kmala(char *s, int i);
+char	*new_strnstr(char *str, char *str1);
+
 //----------------zibnoukh----------------//
 
 void    execute(t_box *box);

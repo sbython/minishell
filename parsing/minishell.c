@@ -5,15 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-
-/*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:21:33 by msbai            ###   ########.fr       */
-
+/*   Created: 2024/07/15 05:59:05 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/15 05:59:18 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 void	nongnu(int i)
 {
@@ -38,7 +35,6 @@ void	handlesignal(int i)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 	}
-
 }
 
 void	shell_loop(char **en)
@@ -50,6 +46,7 @@ void	shell_loop(char **en)
 	ft_memset((void *)&lst, 0, sizeof(t_box));
 	lst.getpid = get_pid();
 	lst.env = fill_env(en);
+	lst.full_env = en;
 	while (1)
 	{
 		handlesignal(1);

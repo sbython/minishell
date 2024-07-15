@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/14 01:49:24 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 09:07:22 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/15 04:45:20 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/15 04:45:36 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 int	kmala(char *s, int i)
 {
-	char ch;
+// <<<<<<< HEAD
+// 	char ch;
 
-	ch = s[i];
-	i++;
+// 	ch = s[i];
+// 	i++;
+// =======
+	char	ch;
+
+	ch = s[i++];
 	while (s[i] && s[i] != ch)
 		i++;
 	if (s[i] == '\'' || s[i] == '"')
@@ -52,17 +57,19 @@ void	sp(t_com **list, char *str, t_com *last, t_com **n_box)
 {
 	char	**ptr;
 	t_box	*ls;
+	t_com	*l;
 
 	ls = malloc(sizeof(t_box));
-	ptr = ft_newsplit(str);
+	ptr = ft_newsplit(str);	
 	fill_list(ptr, ls);
 	free_2ptr(ptr);
-	for25line(list, ls, last, n_box);
-	while (ls->l_com)
+	l = ls->l_com;
+	while (l)
 	{
-		ls->l_com->type = 0;
-		ls->l_com = ls->l_com->next;
+		l->type = 0;
+		l = l->next;
 	}
+	for25line(list, ls, last, n_box);
 	free(ls);
 	free(str);
 }
