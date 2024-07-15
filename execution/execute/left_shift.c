@@ -6,92 +6,94 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 01:11:29 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/13 03:26:01 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:10:06 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	left_shift(t_box *box, t_com *l_com)
+void generate_temp_filename(char *temp_file)
 {
-	const char	*delimiter = l_com->next->com;
-	size_t		delimiter_len;
-	char		buffer[1024];
-	char		*input;
-	size_t		input_size;
-	size_t		buffer_index;
-	size_t		delimiter_match;
-	ssize_t		bytes_read;
-	char		*new_input;
+    ft_strlcpy(temp_file, "temp_file", ft_strlen(temp_file));
+}
 
-	(void)box;
-	delimiter_len = strlen(delimiter);
-	input = NULL;
-	input_size = 0;
-	buffer_index = 0;
-	delimiter_match = 0;
-	while (1)
-	{
-		while (1)
-		{
-			bytes_read = read(STDIN_FILENO, buffer + buffer_index, 1);
-			if (bytes_read <= 0)
-				break ;
-			if (buffer[buffer_index] == delimiter[delimiter_match])
-			{
-				delimiter_match++;
-				if (delimiter_match == delimiter_len)
-					break ;
-			}
-			else
-				delimiter_match = 0;
-			buffer_index++;
-			if (buffer_index == 1024)
-			{
-				new_input = realloc(input, input_size + buffer_index + 1);
-				if (!new_input)
-				{
-					perror("Failed to allocate memory");
-					free(input);
-					exit(0);
-				}
-				input = new_input;
-				memcpy(input + input_size, buffer, buffer_index);
-				input_size += buffer_index;
-				buffer_index = 0;
-			}
-			if (buffer[buffer_index - 1] == '\n')
-				break ;
-		}
-		if (delimiter_match == delimiter_len)
-			break ;
-		if (buffer_index > 0)
-		{
-			new_input = realloc(input, input_size + buffer_index + 1);
-			if (!new_input)
-			{
-				perror("Failed to allocate memory");
-				free(input);
-				exit(0);
-			}
-			input = new_input;
-			ft_memcpy(input + input_size, buffer, buffer_index);
-			input_size += buffer_index;
-			buffer_index = 0;
-		}
-	}
-	if (buffer_index > 0)
-	{
-		new_input = realloc(input, input_size + buffer_index + 1);
-		if (!new_input)
-		{
-			perror("Failed to allocate memory");
-			free(input);
-			exit(0);
-		}
-		input = new_input;
-		ft_memcpy(input + input_size, buffer, buffer_index);
-		input_size += buffer_index;
-	}
-	execute_c_options(box);
+void left_shift(t_box *box, char *delimiter)
+{
+    (void)box;
+    int fd;
+    char *line;
+    const char *prompt = "> ";
+    char temp_file[30]; 
+
+    generate_temp_filename(temp_file);
+
+    fd = open(temp_file, O_CREAT | O_RDWR , 0666);
+    if (fd == -1)
+    {
+        perror("open");
+        return;
+    }
+
+    while ((line = readline(prompt)) != NULL)
+    {
+        if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
+        {
+            free(line);
+            box->done_heardoc = 1;
+            break;
+        }
+
+        int len = ft_strlen(line);
+        int written = write(fd, line, len);
+        if (written != len || write(fd, "\n", 1) == -1)
+        {
+            perror("write");
+            return;
+        }
+        free(line);
+    }
+
+    close(fd);
+
+    pid_t pid = fork();
+    if (pid == -1)
+    {
+        perror("fork");
+        exit(0);
+    }
+    else if (pid == 0)
+    {
+        fd = open(temp_file, O_RDONLY);
+        if (fd == -1)
+        {
+            perror("open");
+            exit(0);
+        }
+
+        if (dup2(fd, 0) == -1)
+        {
+            perror("dup2");
+            exit(0);
+        }
+
+        close(fd);
+
+        char **r = get_path(box->env);
+        char *full_path = get_full_path__(box, r);
+        if (execve(full_path, box->node->command->options, box->full_env) == -1)
+        {
+            perror("execve");
+            exit(0);
+        }
+    }
+    else
+    {
+        int status;
+        if (waitpid(pid, &status, 0) == -1)
+        {
+            perror("waitpid");
+            exit(0);
+        }
+        unlink(temp_file);
+    }
 }
