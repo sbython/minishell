@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 04:44:49 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/15 18:06:13 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/16 14:49:11 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,30 @@
 # define MINISHELL_H
 
 //-------library-------//
+# include "libft/libft.h"
+# include <fcntl.h>
+# include <limits.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <limits.h>
-# include <unistd.h>
 # include <sys/stat.h>
-# include <fcntl.h>
-# include <signal.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
+# include <unistd.h>
 //-------colors-------//
 # define DCOLORB "\033[49m"
 # define DCOLORF "\033[39m"
-# define GREENB  "\033[42m"
-# define GREENF  "\033[32m"
+# define GREENB "\033[42m"
+# define GREENF "\033[32m"
 
 typedef struct s_env
 {
-    char *name;
-    char *vale;
-    int   position;
-    char **full_string;
-    struct s_env *next;
-}env ;
-
+	char					*name;
+	char					*vale;
+	int						position;
+	struct s_env			*next;
+}							t_env;
 /*
     type 
     0 string
@@ -52,85 +50,83 @@ typedef struct s_env
 
 typedef struct s_listcom
 {
-    char *com;
-    int type;
-    struct s_listcom *next;
-    struct s_listcom *prev;
-}t_com;
+	char					*com;
+	int						type;
+	struct s_listcom		*next;
+	struct s_listcom		*prev;
+}							t_com;
 
-typedef struct  s_redirection
+typedef struct s_redirection
 {
-    char                    *str;
-    int                     flag;
-    struct  s_redirection   *next;
-} t_redirection;
+	char					*str;
+	int						flag;
+	struct s_redirection	*next;
+}							t_redirection;
 
-typedef struct  s_command
+typedef struct s_command
 {
-    t_redirection   *redirection;
-    char            **options;
-    struct  s_command   *next;
-} t_command;
+	t_redirection			*redirection;
+	char					**options;
+	struct s_command		*next;
 
-typedef struct  s_node
+}							t_command;
+
+typedef struct s_node
 {
-    t_command    *command;
-    // pid_t        last;
+	t_command				*command;
+	pid_t					last;
 
-} t_node;
-
+}							t_node;
 typedef struct s_box
 {
-    char  *cmd;
-    t_com *l_com;
-    char **ptr;
-    t_node * node;
-    env * env;
-    char **full_env;
-    char **ennvy;
-    char *getpid;
-    int exit_val;
-    int check_val;
-    int done_heardoc;
-} t_box;
+	char					*cmd;
+	t_com					*l_com;
+	char					**ptr;
+	t_node					*node;
+	t_env					*env;
+	int						exit_val;
+	char					**full_env;
+	int						done_heardoc;
+	int						MAX_COMMANDS;
+}							t_box;
 
 //----------------msbai----------------//
-
-char    *prompt();
-env     *fill_env(char **env);
-int     parsing(t_box *box);
-void    free_all(t_box *box);
-void    free_env(env *env);
-void    fill_list(char **ptr, t_box *box);
-void    replace_var(t_box *box);
-void    join(char **dest, char * src, int i);
-char    *str_replace(char * s1, char *rep, char *with);
-void    free_env(env *lst);
-int     collect_string(t_box *box);
-int     simple_check(t_box *box);
-t_com   *new_node(char *str);
-void    split_pip(t_box *box);
-void    exit_f(char *s, char *msg, t_box * box);
-void    remove_qoute(t_box *box);
-int     check_gramer(t_box * box);
-void    delete_emty(t_box *box);
-void    put_type(t_box *box);
-char    **join2pointer(char **com, char *str);
-void    fill_finale(t_box *box);
-void    free_node(t_node *node);
-int     is_token(char * ls, int i);
-char    *get_pid();
-void    tap_to_space(char *s);
-char	*ft_dchr(const char *s, int c);
-int     ft_isdelimiter(char *str);
-char    *replace(char *str, t_box *box);
-int     slen(char *str);
-char    **ft_newsplit(char *s);
-void	free_2ptr(char **p);
-t_com	*last_node(t_com *node);
-void    sp(t_com **list, char *str, t_com *last, t_com **n_box);
-int     kmala(char *s, int i);
-char	*new_strnstr(char *str, char *str1);
+char						*prompt(void);
+t_env						*fill_env(char **env);
+int							parsing(t_box *box);
+void						free_all(t_box *box);
+void						free_env(t_env *env);
+void						fill_list(char **ptr, t_box *box);
+void						replace_var(t_box *box);
+void						join(char **dest, char *src, int i);
+char						*str_replace(char *s1, char *rep, char *with);
+int							collect_string(t_box *box);
+int							simple_check(t_box *box);
+t_com						*new_node(char *str);
+void						split_pip(t_box *box);
+void						exit_f(char *s, char *msg, t_box *box);
+void						remove_qoute(t_box *box);
+int							check_gramer(t_box *box);
+void						delete_emty(t_box *box);
+void						put_type(t_box *box);
+char						**join2pointer(char **com, char *str);
+void						fill_finale(t_box *box);
+void						free_node(t_node *node);
+int							is_token(char *ls, int i);
+void						tap_to_space(char *s);
+char						*ft_dchr(const char *s, int c);
+int							ft_isdelimiter(char *str);
+char						*replace(char *str, t_box *box);
+int							slen(char *str);
+char						**ft_newsplit(char *s);
+void						free_2ptr(char **p);
+t_com						*last_node(t_com *node);
+void						sp(t_com **list, char *str, t_com *last,
+								t_com **n_box);
+int							kmala(char *s, int i);
+char						*new_strnstr(char *str, char *str1);
+int							open_here_doc(t_box *box);
+void						handlesignal(int i, t_box *box);
 
 //----------------zibnoukh----------------//
 
@@ -138,7 +134,7 @@ void    execute(t_box *box);
 void    get_command(t_command *command);
 void    get_options(char **options);
 void    get_redirection(t_redirection *redirection);
-void    pipe_two(t_box *box, char *prev, char *next);
+void 	pipe_three(t_box *box, char *cmd1, char *cmd2, char *cmd3);
 void    greater_than_sign(t_box *box, char *file);
 void    less_than_sign(t_box *box, char *file);
 void    execute_c_options(t_box *box);
@@ -146,15 +142,14 @@ int     check_if_it_is(char *str);
 void    type_of_exe(t_box *box, t_com *l_com);
 void left_shift(t_box *box, char *delimiter);
 void    right_shift(t_box *box, char *file);
-char**  get_path(env *all_env);
+char**  get_path(t_env *all_env);
 void    redirection(t_box *box);
 char *get_full_path__(t_box*box,  char **r);
-void    open_1(int *re, t_redirection *file);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);
 void    rebuild_echo(t_com *t_tmp_ls, char *next);
-void    rebuild_env(env *all_env);
+void    rebuild_env(t_env *all_env);
 void    rebuild_exit();
 void    rebuild_export(t_box *box);
 void    rebuild_pwd(int size, t_com *ls);

@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 04:45:20 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/15 04:45:36 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:19:55 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 int	kmala(char *s, int i)
 {
-// <<<<<<< HEAD
-// 	char ch;
-
-// 	ch = s[i];
-// 	i++;
-// =======
 	char	ch;
 
 	ch = s[i++];
@@ -60,7 +54,7 @@ void	sp(t_com **list, char *str, t_com *last, t_com **n_box)
 	t_com	*l;
 
 	ls = malloc(sizeof(t_box));
-	ptr = ft_newsplit(str);	
+	ptr = ft_newsplit(str);
 	fill_list(ptr, ls);
 	free_2ptr(ptr);
 	l = ls->l_com;

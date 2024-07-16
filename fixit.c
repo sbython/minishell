@@ -1,35 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   fixit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 18:26:19 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/16 17:53:47 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/16 06:50:10 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/16 08:54:59 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
 
-int    get_cmd(t_box *box)
-{
-    t_com *ls;
-    ls = NULL;   
-    
-    if(!box->cmd)
-    {
-        printf("exit\n");
-        box->exit_val = 0;
-        return (1);
-    }
-    if (parsing(box))
-        return 0;
 
-    fill_finale(box);
-    ls = box->l_com;
-    execute(box);
 
-    free_node(box->node);
-    return (0);
-}

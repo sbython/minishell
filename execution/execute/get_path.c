@@ -6,23 +6,24 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 13:23:01 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/16 08:39:24 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void   full_string(env *env, char *str)
+void   full_string(t_env *env, char *str)
 {
+    (void)env;
     char **r;
     int i;
     
     i = 0;
     r = ft_split(str, ':');
-    env->full_string = r;
+    // env->full_string = r;
 }
 
-void    get_vale_from_path(env *env, char *vale)
+void    get_vale_from_path(t_env *env, char *vale)
 {
     int i;
     int start;
@@ -51,14 +52,14 @@ void    get_vale_from_path(env *env, char *vale)
     full_string(env, str);
 }
 
-char**    get_path(env *all_env)
+char**    get_path(t_env *all_env)
 {
     while (all_env)
     {
         if(ft_strncmp(all_env->name, "PATH", 4) == 0)
         {
             get_vale_from_path(all_env, all_env->vale);
-            return all_env->full_string;
+            // return all_env->full_string;
         }
         all_env = all_env->next;
     }

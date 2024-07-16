@@ -5,37 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 04:45:01 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/15 04:45:03 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/06/27 10:11:36 by msbai             #+#    #+#             */
+/*   Updated: 2024/07/15 18:18:48 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-char	*new_strchr(char *s, char c)
-{
-	int		i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (!*s)
-		return (NULL);
-	while (s[i])
-	{
-		if (s[i] == '\'' || s[i] == '"')
-			i = kmala(s, i);
-		else if ((char)c == s[i] && (char)c == s[i + 1])
-			return (NULL);
-		else if ((char)c == s[i])
-			return ((char *)(&s[i]));
-		else
-			i++;
-	}
-	if ((char)c == s[i])
-		return ((char *)(&s[i]));
-	return (NULL);
-}
 
 int	slen(char *str)
 {
@@ -49,6 +24,31 @@ int	slen(char *str)
 	if (str[i] == '\'' || str[i] == '"')
 		i++;
 	return (i);
+}
+
+char	*new_strchr(char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	if (!*s)
+		return (NULL);
+	while (s[i])
+	{
+		if (s[i] == '\'' || s[i] == '"')
+			i += slen(s + i);
+		else if ((char)c == s[i] && (char)c == s[i + 1])
+			return (NULL);
+		else if ((char)c == s[i])
+			return ((char *)(&s[i]));
+		else
+			i++;
+	}
+	if ((char)c == s[i])
+		return ((char *)(&s[i]));
+	return (NULL);
 }
 
 char	*new_strnstr(char *str, char *str1)

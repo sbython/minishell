@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:54 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:32:59 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/15 15:47:51 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	exit_f(char *s, char *msg, t_box *box)
 {
-	(void)s;
+	if (open_here_doc(box))
+		box->exit_val = 2;
+	ft_putstr_fd(s, 2);
 	ft_putstr_fd(msg, 2);
-	box->exit_val = 2;
 }
 
 int	check_(char *s)
@@ -53,15 +54,16 @@ int	simple_check(t_box *box)
 		return (1);
 	if (com[0] == '|' || com[ft_strlen(com) - 1] == '|')
 	{
-		exit_f(com, "minishell: syntax error near unexpected token `|'\n", box);
+		exit_f("", "minishell: syntax error near unexpected token `|'\n", box);
 		return (1);
 	}
 	else if (!(ft_strncmp(com, "<<", -1) && ft_strncmp(com, ">", -1)
 			&& ft_strncmp(com, "<", -1) && ft_strncmp(com, ">>", -1)
 			&& com))
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
-		exit_f(com, "`<< or >> or < or >'\n", box);
+		exit_f("minishell: syntax error near unexpected token ",
+			"`<< or >> or < or >'\n",
+			box);
 		return (1);
 	}
 	return (0);

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/04 22:47:32 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:50:25 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-env	*ft_last(env *lst)
+t_env	*ft_last(t_env *lst)
 {
-	env	*ptr;
+	t_env	*ptr;
 
 	if (!lst)
 		return (NULL);
@@ -24,7 +24,7 @@ env	*ft_last(env *lst)
 	return (ptr);
 }
 
-void check_next(env *new_node, char *next)
+void check_next(t_env *new_node, char *next)
 {
     new_node->vale = malloc(ft_strlen(next) + 1);
     new_node->name = malloc(ft_strlen(next) + 1);
@@ -54,12 +54,12 @@ void check_next(env *new_node, char *next)
     new_node->position = count;
 }
 
-void half_rebuild_export(env *box_env, char *next)
+void half_rebuild_export(t_env *box_env, char *next)
 {
     (void)box_env;
     
-    env *last;
-    env *new_node = (env*)malloc(sizeof(env));
+    t_env *last;
+    t_env *new_node = malloc(sizeof(t_env));
     last = ft_last(box_env);
     last->next = new_node;
     check_next(new_node, next);

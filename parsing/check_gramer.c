@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 18:57:19 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 07:51:21 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/15 17:03:31 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,16 @@ int	check_gramer(t_box *box)
 		if ((ls->next && ls->type > 1 && ls->next->type >= 1) || (!ls->next
 				&& ls->type >= 1))
 		{
-			ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
-			exit_f(NULL, "`<< or >> or < or >'\n", box);
+			exit_f("minishell: syntax error near unexpected token ",
+				"`<< or >> or < or >'\n",
+				box);
 			return (1);
 		}
 		else if (ls->next && ls->type == 1 && ls->next->type == 1)
 		{
-			ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
-			exit_f(NULL, "`<< or >> or < or >'\n", box);
+			exit_f("minishell: syntax error near unexpected token ",
+				"`<< or >> or < or >'\n",
+				box);
 			return (1);
 		}
 		ls = ls->next;

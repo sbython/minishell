@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 07:51:50 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/15 08:52:15 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	join_node(t_box *box, t_com *com)
 
 	if (!com->next)
 	{
-		printf("need a \" in the end of : %s\n", com->com);
-		exit_f(NULL, "", box);
+		exit_f("", "", box);
+		printf("need a \" or ' in the end of : %s\n", com->com);
 		return (1);
 	}
 	ne = com->next;

@@ -6,15 +6,15 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:30 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:40:37 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/15 14:51:55 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	free_env(env *lst)
+void	free_env(t_env *lst)
 {
-	env	*tmp;
+	t_env	*tmp;
 
 	while (lst)
 	{
@@ -58,10 +58,12 @@ void	free_node(t_node *node)
 			tmp = com->redirection;
 			com->redirection = com->redirection->next;
 			free(tmp);
+			tmp = NULL;
 		}
 		tmp1 = com;
 		com = com->next;
 		free(tmp1);
+		tmp1 = NULL;
 	}
 	free(node);
 	node = NULL;

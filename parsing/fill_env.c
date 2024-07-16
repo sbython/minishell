@@ -6,17 +6,17 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:37 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:40:52 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/15 14:57:06 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-env	*add_new_var(char *name, char *vale)
+t_env	*add_new_var(char *name, char *vale)
 {
-	env	*lst;
+	t_env	*lst;
 
-	lst = malloc(sizeof(env));
+	lst = malloc(sizeof(t_env));
 	if (!lst)
 	{
 		perror("allocation error");
@@ -28,7 +28,7 @@ env	*add_new_var(char *name, char *vale)
 	return (lst);
 }
 
-env	*last_n(env *node)
+t_env	*last_n(t_env *node)
 {
 	if (!node)
 		return (NULL);
@@ -39,9 +39,9 @@ env	*last_n(env *node)
 	return (node);
 }
 
-void	add_back(env **node, env *new)
+void	add_back(t_env **node, t_env *new)
 {
-	env	*last;
+	t_env	*last;
 
 	if (!*node)
 	{
@@ -57,10 +57,10 @@ void	add_back(env **node, env *new)
 	*vale 	tbl[1]
 	*new	tb[2]
 */
-env	*fill_env(char **en)
+t_env	*fill_env(char **en)
 {
 	int		i;
-	env		*lst;
+	t_env	*lst;
 	char	*tbl[3];
 
 	i = 0;

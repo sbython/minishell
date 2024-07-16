@@ -5,93 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/14 08:47:42 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/15 08:36:05 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
+/*   Updated: 2024/07/15 18:20:36 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// <<<<<<< HEAD
-// int len_to(char *str, char c)
-// {
-//     int i;
-
-//     i = 1;
-//     (void)c;
-    
-//     if (!(ft_isalpha(str[i]) || ft_isdigit(str[i])))
-//         return 1;
-//     else if ((str[1] == '$' ) || str[1] == '?' || ft_isdigit(str[1]))
-//         return 2;
-//     while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i]))) 
-//     { 
-//         i++;
-//     }
-//     return (i);
-// }
-// char *get_to(char *str, char c)
-// {
-//     char *p;
-//     int len;
-
-//     len = len_to(str, c);
-//     p = malloc((len + 1) * sizeof(char));
-//     if(!p)
-//         return (NULL);
-//     ft_memcpy(p, str, len);
-//     p[len] = '\0';
-//     return (p);
-// }
-// char * get_val(char *str , env * en, t_box *box)
-// {
-//     if (!ft_strncmp(str, "$", 2))
-//         return(ft_strdup(box->getpid));
-//     else if (!ft_strncmp(str, "?", 2))
-//         return(ft_itoa(box->exit_val));
-//     while (en)
-//     {
-//         if(!ft_strncmp(str, en->name, -1))
-//             return (ft_strdup(en->vale));
-//         en = en->next;
-//     }
-//     return ft_strdup("");
-// }
-// // ptr[0] it is a return string 
-// // ptr[1] it name of variable 
-// // ptr[2] it is left string after take a ptr[1] or ptr [0]
-// char *replace(char *str, t_box *box)
-// {
-//     char *ptr[5];
-    
-//     // ptr[3] = str;
-//     ptr[2] = ft_strdup(str);
-//     ptr[3] = ptr[2];
-//     while ((ptr[2] =  ft_strchr(ptr[2], '$')))
-//     {
-//         ptr[1] = get_to(ptr[2], ' ');
-//         ptr[0] = get_val(ptr[1] + 1, box->env, box);
-//         ptr[3] = str_replace(ptr[3], ptr[1] , ptr[0]);
-//         free(ptr[1]);
-//         free(ptr[0]);
-//         ptr[2] =  ft_strchr(ptr[2] + 1 , ' ');
-//         if (!ptr[2])
-//         {  
-//             return (ptr[3]);
-//         }
-//     }
-//     return (ptr[3]);
-// =======
 int	len_to(char *str, char c)
 {
 	int	i;
 
 	i = 1;
 	(void)c;
-	if (!(ft_isalpha(str[i]) || ft_isdigit(str[i])))
-		return (1);
-	else if ((str[1] == '$') || str[1] == '?' || ft_isdigit(str[1]))
+	if (str[1] == '?' || ft_isdigit(str[1]))
 		return (2);
+	else if (!(ft_isalpha(str[i]) || ft_isdigit(str[i])))
+		return (1);
 	while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])))
 	{
 		i++;
@@ -113,11 +43,9 @@ char	*get_to(char *str, char c)
 	return (p);
 }
 
-char	*get_val(char *str, env *en, t_box *box)
+char	*get_val(char *str, t_env *en, t_box *box)
 {
-	if (!ft_strncmp(str, "$", 2))
-		return (ft_strdup(box->getpid));
-	else if (!ft_strncmp(str, "?", 2))
+	if (!ft_strncmp(str, "?", 2))
 		return (ft_itoa(box->exit_val));
 	while (en)
 	{
