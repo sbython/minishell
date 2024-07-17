@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_path.c                                         :+:      :+:    :+:   */
+/*   get_path__.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/17 11:45:46 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/17 13:49:52 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void   full_string(t_env *env, char *str)
+char**   full_string__(t_env *env, char *str)
 {
     (void)env;
     char **r;
@@ -20,9 +20,10 @@ void   full_string(t_env *env, char *str)
     
     i = 0;
     r = ft_split(str, ':');
+    return r;
 }
 
-void    get_vale_from_path(t_env *env, char *vale)
+char**    get_vale_from_path__(t_env *env, char *vale)
 {
     int i;
     int start;
@@ -48,19 +49,18 @@ void    get_vale_from_path(t_env *env, char *vale)
         start++;
     }
     str[k] = '\0';
-    full_string(env, str);
+    return full_string__(env, str);
 }
 
-char**    get_path(t_env *all_env)
+char**    get_path__(t_env *all_env)
 {
     while (all_env)
     {
         if(ft_strncmp(all_env->name, "PATH", 4) == 0)
         {
-            get_vale_from_path(all_env, all_env->vale);
+            return get_vale_from_path__(all_env, all_env->vale);
         }
-        // printf("%s\n", all_env)
-        // all_env = all_env->next;
+        all_env = all_env->next;
     }
     return NULL;
 }

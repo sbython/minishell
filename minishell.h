@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/17 08:09:51 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/17 13:50:20 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,19 +132,8 @@ void						handlesignal(int i, t_box *box);
 
 void    execute(t_box *box);
 void    get_command(t_command *command);
-void    get_options(char **options);
-void    get_redirection(t_redirection *redirection);
-void 	pipe_commands(t_box*box, char **commands, int num_commands) ;
-void    greater_than_sign(t_box *box, char *file);
-void    less_than_sign(t_box *box, char *file);
-void    execute_c_options(t_box *box);
-int     check_if_it_is(char *str);
-void    type_of_exe(t_box *box, t_com *l_com);
-void left_shift(t_box *box, char *delimiter);
-void    right_shift(t_box *box, char *file);
-char**  get_path(t_env *all_env);
-void    redirection(t_box *box);
-char *get_full_path__(t_box*box,  char **r);
+char**    get_path__(t_env *all_env);
+char *fully(char **r, char *cmd);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);

@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   banana.c                                           :+:      :+:    :+:   */
+/*   fully.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 09:05:22 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/17 09:08:57 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/17 13:49:47 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
 
-int main()
+char *fully(char **r, char *cmd)
 {
-    char **all_coman[3] = {"ls -al", "cat -e", "pwd"};
-    char **copy_of_;
-
-    
+    int i = 0;
+    while(r[i] != NULL)
+    {
+        char *str = ft_strjoin(r[i], ft_strjoin("/", cmd));
+        if (access(str, X_OK) == 0)
+            return (str);
+        i++;
+    }
+    return NULL;
 }

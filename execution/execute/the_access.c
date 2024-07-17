@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_if_it_is.c                                   :+:      :+:    :+:   */
+/*   the_access.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 09:40:12 by zibnoukh         ###   ########.fr       */
+/*   Created: 2024/07/17 11:53:48 by zibnoukh          #+#    #+#             */
+/*   Updated: 2024/07/17 11:54:10 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int    check_if_it_is(char *str)
+char *the_access(t_box*box,  char **r)
 {
-    int get_file;
-    int check;
-
-    check = 0;
-    get_file = open(str, O_RDWR | O_CREAT, 0666);
-
-    if(get_file == -1)
-        check++;
-    if(check)
+    int i = 0;
+    while(r[i] != NULL)
     {
-        perror(str);
-        return 1;
+        char *str = ft_strjoin(r[i], ft_strjoin("/", box->node->command->options[0]));
+        if (access(str, X_OK) == 0)
+            return (str);
+        i++;
     }
-    return 0;
+    return (NULL);
 }

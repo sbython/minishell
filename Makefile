@@ -7,13 +7,16 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/builtins/echo/echo.c execution/builtins/env/env.c \
 	   execution/builtins/exit/exit.c execution/builtins/functions/length_stack.c \
 	   execution/builtins/export/export.c execution/builtins/unset/unset.c \
-	   execution/execute/execute.c execution/execute/get_command.c \
-	   execution/execute/get_options.c execution/execute/get_redirection.c \
-	   execution/execute/pipe_two.c execution/execute/greater_than_sign.c \
-	   execution/execute/less_than_sign.c execution/execute/execute_c_options.c \
-	   execution/execute/check_if_it_is.c execution/execute/execute_heardoc.c \
-	   execution/execute/left_shift.c execution/execute/right_shift.c \
-	   execution/execute/get_path.c execution/execute/redirection.c \
+	   execution/execute/the_access.c execution/execute/fully.c \
+	   execution/execute/execute.c execution/execute/get_path__.c \
+	#execution/execute/get_command.c \
+	#    execution/execute/get_options.c execution/execute/get_redirection.c \
+	#    execution/execute/pipe_two.c execution/execute/greater_than_sign.c \
+	#    execution/execute/less_than_sign.c execution/execute/execute_c_options.c \
+	#    execution/execute/check_if_it_is.c execution/execute/execute_heardoc.c \
+	#    execution/execute/left_shift.c execution/execute/right_shift.c \
+	#    execution/execute/get_path.c execution/execute/redirection.c \
+	
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \
