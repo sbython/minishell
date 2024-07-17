@@ -6,154 +6,126 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/16 15:59:05 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/17 09:20:01 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// void    execute_command(char *cmd, int input_fd, int output_fd)
-// {
-//     if (input_fd != 0)
-//     { 
-//         dup2(input_fd, 0);
-//     }
-//     if (output_fd != 1)
-//     { 
-//         dup2(output_fd, 1);
-//     }
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <string.h>
 
-//     char *args[3];
-//     char *command_path = ft_strjoin("/usr/bin/", cmd);
-//     args[0] = command_path;
-//     args[1] = NULL;
-
-//     char *env[] = { NULL };
-
-//     if(execve(command_path, args, env) == -1)
-//     {
-//         perror("execve failed");
-//     }
-// }
-
-// void    pipe_two(t_box *box, char *prev, char *next)
-// {
-//     (void)box;
-//     int pipe_fd[2];
-//     if (pipe(pipe_fd) == -1)
-//     {
-//         perror("pipe failed");
-//     }
-
-//     pid_t pid1 = fork();
-//     if (pid1 == -1)
-//     {
-//         perror("fork failed");
-//     }
-
-//     if (pid1 == 0)
-//     { 
-//         execute_command(prev, 0, pipe_fd[1]);
-//     }
-
-//     pid_t pid2 = fork();
-//     if (pid2 == -1)
-//     {
-//         perror("fork failed");
-//     }
-
-//     if (pid2 == 0) 
-//     { 
-//         execute_command(next, pipe_fd[0], 1);
-//     }
-
-//     return ;
-// }
-
-void    execute_command(char *cmd, int input_fd, int output_fd)
+void execute_command(t_box*box, char *cmd, int input_fd, int output_fd)
 {
-    if (input_fd != 0)
-    { 
+    (void)cmd;
+    (void)box;
+    if (input_fd != 0) {
         dup2(input_fd, 0);
+        close(input_fd);
     }
-    if (output_fd != 1)
-    { 
+    if (output_fd != 1) {
         dup2(output_fd, 1);
+        close(output_fd);
     }
 
-    char *args[3];
-    char *command_path = ft_strjoin("/usr/bin/", cmd);
-    args[0] = command_path;
-    args[1] = NULL;
+    // char command_path[1024];
+    // snprintf(command_path, sizeof(command_path), "/bin/%s", cmd);
 
-    char *env[] = { NULL };
+    // char *args[] = {command_path, NULL};
+    // char *env[] = { NULL };
+    char *command_path = ft_strjoin("/bin/", cmd);
 
-    if(execve(command_path, args, env) == -1)
+    // char** r = get_path(box->env);
+    // char *env[] = { NULL };  
+    // char *full_path = get_full_path__(box, r);
+    char *args[] = {command_path, NULL};
+    // if(execve(command_path, args, box->full_env) == -1)
+    if (execvp(command_path, args) == -1) 
     {
         perror("execve failed");
+        exit(1);
+    }
+    {
+        perror("EXIT");
+        exit(0);
     }
 }
 
-void pipe_three(t_box *box, char *cmd1, char *cmd2, char *cmd3) 
+void pipe_commands(t_box*box, char **commands, int num_commands) 
 {
+    (void)num_commands;
     (void)box;
-    int pipe_fd[4];
-    
-    if (pipe(pipe_fd) == -1)
+    // printf("%s\n", commands[0]);
+    // int i = 0;
+    // while (commands[i])
+    // {
+    //     printf("commands: %s", commands[i]);
+    //     i++;
+    // }
+    // printf("\n");
+
+    int i;
+    int pipe_fd[2 * (num_commands - 1)];
+    pid_t pid;
+
+    i = 0;
+    while ( i < num_commands - 1) 
     {
-        perror("pipe failed");
-        exit(1);
+        if (pipe(pipe_fd + i * 2) == -1) 
+        {
+            perror("pipe failed");
+            exit(1);
+        }
+        i++;
     }
 
-    pid_t pid1 = fork();
-    if (pid1 == -1)
+    int command_count = 0;
+    while (command_count < num_commands)
     {
-        perror("fork failed");
-        exit(1);
+        pid = fork();
+        if (pid == -1) 
+        {
+            perror("fork failed");
+            exit(1);
+        }
+        if (pid == 0)
+        { 
+            if (command_count > 0) 
+            {
+                dup2(pipe_fd[(command_count - 1) * 2], 0);
+            }
+            if (command_count < num_commands - 1) 
+            {
+                dup2(pipe_fd[command_count * 2 + 1], 1);
+            }
+
+            i = 0;
+            while ( i < 2 * (num_commands - 1)) 
+            {
+                close(pipe_fd[i]);
+                i++;
+            }
+
+            execute_command(box,commands[command_count], 0, 1);
+        }
+        command_count++;
     }
 
-    if (pid1 == 0)
-    { 
-        close(pipe_fd[0]);
-        close(pipe_fd[2]);
-        execute_command(cmd1, 0, pipe_fd[1]);
-        // execute_c_options(box);
-    }
-
-    pid_t pid2 = fork();
-    if (pid2 == -1)
+    i = 0;
+    while ( i < 2 * (num_commands - 1)) 
     {
-        perror("fork failed");
-        exit(1);
+        close(pipe_fd[i]);
+        i++;
     }
 
-    if (pid2 == 0)
-    { 
-        close(pipe_fd[1]);
-        close(pipe_fd[3]);
-        execute_command(cmd2, pipe_fd[0], pipe_fd[2]);
-    }
-
-    pid_t pid3 = fork();
-    if (pid3 == -1)
+    i = 0;
+    while ( i < num_commands) 
     {
-        perror("fork failed");
-        exit(1);
+        wait(NULL);
+        i++;
     }
-
-    if (pid3 == 0)
-    { 
-        close(pipe_fd[0]);
-        close(pipe_fd[1]);
-        execute_command(cmd3, pipe_fd[2], 1);
-    }
-
-    close(pipe_fd[0]);
-    close(pipe_fd[1]);
-    close(pipe_fd[2]);
-    close(pipe_fd[3]);
-
-    waitpid(pid1, NULL, 0);
-    waitpid(pid2, NULL, 0);
-    waitpid(pid3, NULL, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/16 15:58:56 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/17 09:16:25 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,50 @@ int    length_opp(char **opp)
 
 void    execute(t_box *box)
 {
-    // char** r = get_path(box->env);
-    while (box->node->command)
+   (void)box;
+    int option_count = 0;
+    t_command *current = box->node->command;
+
+    // Count the total number of options across all commands
+    while (current)
     {
-        int i = 0;
-        while (box->node->command->options[i])
+        int t = 0;
+        while (current->options[t])
         {
-            printf("%s", box->node->command->options[i]);
-            // f(box);
-            i++;
+            option_count++;
+            t++;
+        }
+        current = current->next;
+    }
+
+    char **cmds = (char **)malloc(sizeof(char *) * (option_count + 1));
+
+    current = box->node->command;
+    
+
+        int k = 0;
+    while (current)
+    {
+        int t = 0;
+        while (current->options[t])
+        {
+            printf("%s", current->options[t]);
+            cmds[k] = current->options[t];
+            k++;
+            t++;
         }
         printf("\n");
-        box->node->command = box->node->command->next;
+        current = current->next;
     }
+        cmds[k] = NULL;  
+
+    // Print the options to verify
+    // int i = 0;
+    // while (cmds[i])
+    // {
+    //     printf("%s\n", cmds[i]);
+    //     i++;
+    // }
+
+    pipe_commands(box, cmds, option_count);
 }
