@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/19 10:05:39 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/19 11:08:10 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,6 @@ void f(t_command *cmd)
         printf("%s\n", cmd->options[i]);
         i++;
     }
-
-
 }
 
 char*    one_column(t_redirection *redirection, int flag)
@@ -140,22 +138,38 @@ char*    one_column(t_redirection *redirection, int flag)
     return end_file_typex;
 }
 
-void ex___type___2(t_redirection *redirection)
+int ex___type___2(t_redirection *redirection)
 {
-    char *end_File = one_column(redirection, 2);
-    printf("end_File: %s\n", end_File);
+    // char *end_File = one_column(redirection, 2);
+    // printf("end_File: %s\n", end_File);
 
     int fd;
+    int check;
 
+    check = 1;
     while (redirection)
     {
         fd = open(redirection->str, O_RDONLY, 0666);
         if(fd == -1)
         {
+            check = 0;
             perror(redirection->str);
             exit(0);
         }
         redirection = redirection->next;
+    }
+    return check;
+}
+
+void ex___type___3(t_redirection *redirection)
+{
+    int fd;
+    fd = open(redirection->str, O_CREAT | O_WRONLY, 0666);
+    // printf("file: %s\n", redirection->str);
+    if(write(fd, "file name", 9) == -1)
+    {
+        perror("can't write");
+        exit(0);
     }
 }
 
@@ -165,6 +179,8 @@ void execute(t_box *box)
     // f(box->node->command);
     // one_column(box->node->command->redirection);
     int pid = fork();
+    char** r = get_path__(box->env);
+    int ex___;
     while (box->node->command)
     {
         if(pid == -1)
@@ -176,14 +192,20 @@ void execute(t_box *box)
         {
             if(box->node->command->redirection->flag == 2)
             {
-                ex___type___2(box->node->command->redirection);
-                // int fdtype2;
-                // fdtype2 = open(box->node->command->redirection->str, O_RDONLY, 0666);
-                // if(fdtype2 == -1)
-                // {
-                //     perror(box->node->command->redirection->str);
-                //     exit(0);
-                // }
+                ex___ = ex___type___2(box->node->command->redirection);
+                if(ex___)
+                {
+                    char *full_path = fully(r, box->node->command->options[0]);
+                    if((execve(full_path, box->node->command->options, box->full_env) == -1))
+                    {
+                        perror("not found");
+                        exit(0);
+                    }
+                }
+            }
+            else if(box->node->command->redirection->flag == 3)
+            {
+                ex___type___3(box->node->command->redirection);
             }
             exit(0);
         }
