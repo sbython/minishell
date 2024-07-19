@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:59 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/15 17:10:10 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/18 08:18:50 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
   * res_pos = str[1]
   * pos = str[2]
 */
+
 char	*str_replace(char *s1, char *rep, char *with)
 {
 	size_t	len[3];

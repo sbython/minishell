@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/17 13:50:20 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/19 07:58:58 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef struct s_command
 	t_redirection			*redirection;
 	char					**options;
 	struct s_command		*next;
+    char *input_file; // For '<' and '<<'
+    char *output_file; // For '>' and '>>'
+    int append; // 1 for '>>', 0 for '>'
 
 }							t_command;
 
@@ -77,6 +80,7 @@ typedef struct s_node
 	pid_t					last;
 
 }							t_node;
+
 typedef struct s_box
 {
 	char					*cmd;
