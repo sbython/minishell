@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/20 14:22:08 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/20 17:33:26 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*replace(char *str, t_box *box)
 	ptr[4] = ft_strdup(str);
 	ptr[3] = ft_strdup(str);
 	ptr[2] = ptr[4];
-	ptr[2] = ft_strchr(ptr[2], '$');
+	ptr[2] = ft_dchr(ptr[2], '$');
 	while (ptr[2])
 	{
 		ptr[1] = get_to(ptr[2], ' ');
@@ -79,7 +79,7 @@ char	*replace(char *str, t_box *box)
 		ptr[3] = str_replace(ptr[3], ptr[1], ptr[0]);
 		free(ptr[1]);
 		free(ptr[0]);
-		ptr[2] = ft_strchr(ptr[2] + 1, '$');
+		ptr[2] = ft_dchr(ptr[2] + 1, '$');
 	}
 	free(ptr[4]);
 	return (ptr[3]);
