@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:54 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/15 15:47:51 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/20 11:35:54 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	exit_f(char *s, char *msg, t_box *box)
 {
-	if (open_here_doc(box))
-		box->exit_val = 2;
+	box->exit_val = 2;
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd(msg, 2);
 }
@@ -62,8 +61,7 @@ int	simple_check(t_box *box)
 			&& com))
 	{
 		exit_f("minishell: syntax error near unexpected token ",
-			"`<< or >> or < or >'\n",
-			box);
+			"`<< or >> or < or >'\n", box);
 		return (1);
 	}
 	return (0);
