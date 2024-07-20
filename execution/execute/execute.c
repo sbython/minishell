@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/20 15:35:50 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:43:45 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,20 @@ void ex___type___3(char *file)
     }
 }
 
+void ex___type___4(char *file)
+{
+    (void)file;
+    // char *line;
+    // while ((line = readline("> ")) != NULL)
+    // {
+    //     if(ft_strncmp(line, "line", 4) == 0)
+    //     {
+    //         check_heardoc_val = 0;
+    //         break;
+    //     }
+    // }
+}
+
 void f__redirection(t_box *box, t_redirection *redirection)
 {
     (void)box;
@@ -205,16 +219,8 @@ void f__redirection(t_box *box, t_redirection *redirection)
     char *endfile_flag3 = NULL;
     if(check_heardoc_val)
     {
-        // printf("%s\n", "there is");
-        char *line;
-        while ((line = readline("> ")) != NULL)
-        {
-            if(ft_strncmp(line, "line", 4) == 0)
-            {
-                check_heardoc_val = 0;
-                break;
-            }
-        }
+        // ex___type___4();
+        return ;
     }
     else
     {
@@ -243,8 +249,7 @@ void execute(t_box *box)
     // f(box->node->command);
     // one_column(box->node->command->redirection);
     int pid = fork();
-    // char** r = get_path__(box->env);
-    // int ex___;
+    char** r = get_path__(box->env);
     while (box->node->command)
     {
         if(pid == -1)
@@ -255,22 +260,23 @@ void execute(t_box *box)
         else if(pid == 0)
         {
             f__redirection(box, box->node->command->redirection);
-            // printf("box->input_file: %s\n", box->output_file);
-            // printf("box->input_file: %s\n", box->input_file);
-            // printf("box->output_file: %s\n", box->output_file);
-            int get_____f_dinput_file = open(box->output_file, O_WRONLY | O_CREAT, 0666);
-            // if( dup2(get_____f_dinput_file, 1))
-            if(dup2(get_____f_dinput_file, 1) == -1)
+            char *str = box->output_file;
+            printf("str: %s\n", str);
+            if(box->output_file)
             {
-                perror("dup2 fail");
+                int fd = open(str, O_WRONLY | O_CREAT, 0666);
+                if(dup2(fd, 1) == -1)
+                {
+                    perror("dup2 failed");
+                    exit(0);
+                }
+            }
+            char *full_path = fully(r, box->node->command->options[0]);
+            if((execve(full_path, box->node->command->options, box->full_env) == -1))
+            {
+                perror("not found");
                 exit(0);
             }
-            // char *full_path = fully(r, box->node->command->options[0]);
-            // if((execve(full_path, box->node->command->options, box->full_env) == -1))
-            // {
-            //     perror("not found");
-            //     exit(0);
-            // }
             exit(0);
         }
         box->node->command = box->node->command->next;
