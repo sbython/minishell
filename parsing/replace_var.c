@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/20 11:36:25 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/20 14:22:08 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ int	len_to(char *str, char c)
 	(void)c;
 	if (str[1] == '?' || ft_isdigit(str[1]))
 		return (2);
-	else if (!(ft_isalpha(str[1]) || ft_isdigit(str[1])) && str[1] != '_')
+	else if (str[1] == '"' || str[1] == '\'')
 		return (1);
+	else if (!(ft_isalpha(str[1]) || ft_isdigit(str[1])) && str[1] != '_')
+		return (0);
 	while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])
 			|| str[i] == '_'))
 	{

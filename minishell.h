@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/15 15:20:58 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/20 11:43:29 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void						sp(t_com **list, char *str, t_com *last,
 								t_com **n_box);
 int							kmala(char *s, int i);
 char						*new_strnstr(char *str, char *str1);
-int							open_here_doc(t_box *box);
 void						handlesignal(int i, t_box *box);
 //----------------zibnoukh----------------//
 

@@ -26,8 +26,7 @@ SRC_P= parsing/minishell.c \
 		parsing/fill_finale.c \
 		parsing/join2pointer.c \
 		parsing/new_split.c\
-		parsing/sp.c \
-		parsing/here_doc.c
+		parsing/sp.c 	
 
 OBJ= ${SRC_P:.c=.o} ${SRC_E:.c=.o}
 

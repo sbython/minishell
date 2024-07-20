@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:33:42 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/15 14:59:27 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/20 14:24:58 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int    get_cmd(t_box *box)
 {
     
     t_com *ls;
-    // t_command    * node;
+    t_command    * node;
   
 
-    // // node= NULL;
+    // node= NULL;
     
     ls =NULL;   
     
@@ -58,7 +58,7 @@ int    get_cmd(t_box *box)
     fill_finale(box);
     box->exit_val = 0;
     ls =box->l_com;
-    // node = box->node->command;
+    node = box->node->command;
 
     // set_builtins(box);    
 
@@ -81,25 +81,25 @@ int    get_cmd(t_box *box)
         
     //     ls = ls->next;
     // }
-    // node = box->node->command;
-    // int i = 0;
-    // while (node)
-    // {
-    //     printf("\n options\n");
-    //     while (node->options && node->options[i])
-    //     {
-    //         printf("%s ", node->options[i++]);
-    //     }
-    //     printf("\n redirection\n");
-    //     while (node->redirection)
-    //     {
-    //         printf("%s ", node->redirection->str);
-    //         node->redirection = node->redirection->next;
-    //     }
-    //     i = 0;
-    //     node = node->next;
-    // }
-    // printf("\n");
+    node = box->node->command;
+    int i = 0;
+    while (node)
+    {
+        printf("\n options\n");
+        while (node->options && node->options[i])
+        {
+            printf("%s ", node->options[i++]);
+        }
+        printf("\n redirection\n");
+        while (node->redirection)
+        {
+            printf("%s ", node->redirection->str);
+            node->redirection = node->redirection->next;
+        }
+        i = 0;
+        node = node->next;
+    }
+    printf("\n");
 
     // t_tmp_ls = ls;
     // if(ft_strncmp(ls->com, "echo", ft_strlen(ls->com)) == 0)
