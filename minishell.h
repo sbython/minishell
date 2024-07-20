@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/20 14:07:51 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:58:26 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void    execute(t_box *box);
 void    get_command(t_command *command);
 char**    get_path__(t_env *all_env);
 char *fully(char **r, char *cmd);
-int    check_heardoc(t_redirection* redirection);
+int    check_heardoc(t_redirection *redirection);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);
