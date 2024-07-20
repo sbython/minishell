@@ -190,22 +190,11 @@ void execute(t_box *box)
         }
         else if(pid == 0)
         {
-            if(box->node->command->redirection->flag == 2)
+            char *full_path = fully(r, box->node->command->options[0]);
+            if((execve(full_path, box->node->command->options, box->full_env) == -1))
             {
-                ex___ = ex___type___2(box->node->command->redirection);
-                if(ex___)
-                {
-                    char *full_path = fully(r, box->node->command->options[0]);
-                    if((execve(full_path, box->node->command->options, box->full_env) == -1))
-                    {
-                        perror("not found");
-                        exit(0);
-                    }
-                }
-            }
-            else if(box->node->command->redirection->flag == 3)
-            {
-                ex___type___3(box->node->command->redirection);
+                perror("not found");
+                exit(0);
             }
             exit(0);
         }

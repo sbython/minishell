@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/19 07:58:58 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:07:51 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_redirection
 {
 	char					*str;
 	int						flag;
+	int						output_test_file;
 	struct s_redirection	*next;
 }							t_redirection;
 
@@ -68,10 +69,8 @@ typedef struct s_command
 	t_redirection			*redirection;
 	char					**options;
 	struct s_command		*next;
-    char *input_file; // For '<' and '<<'
-    char *output_file; // For '>' and '>>'
-    int append; // 1 for '>>', 0 for '>'
 
+    int append;
 }							t_command;
 
 typedef struct s_node
@@ -92,6 +91,10 @@ typedef struct s_box
 	char					**full_env;
 	int						done_heardoc;
 	int						MAX_COMMANDS;
+	char 					*input_file;
+    char 					*output_file;
+	int						valid_her;
+	int						valid_flag;
 }							t_box;
 
 //----------------msbai----------------//
@@ -138,6 +141,7 @@ void    execute(t_box *box);
 void    get_command(t_command *command);
 char**    get_path__(t_env *all_env);
 char *fully(char **r, char *cmd);
+int    check_heardoc(t_redirection* redirection);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);
