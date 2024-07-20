@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:26:19 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/18 10:59:24 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:08:13 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int    get_cmd(t_box *box)
 {
     t_com *ls;
+
     ls = NULL;   
+
     
     if(!box->cmd)
     {
@@ -29,7 +31,6 @@ int    get_cmd(t_box *box)
     fill_finale(box);
     ls = box->l_com;
     execute(box);
-
     free_node(box->node);
     return (0);
 }

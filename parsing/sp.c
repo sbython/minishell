@@ -6,23 +6,11 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 04:45:20 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/15 18:19:55 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:10:28 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	kmala(char *s, int i)
-{
-	char	ch;
-
-	ch = s[i++];
-	while (s[i] && s[i] != ch)
-		i++;
-	if (s[i] == '\'' || s[i] == '"')
-		i++;
-	return (i);
-}
 
 void	for25line(t_com **list, t_box *ls, t_com *last, t_com **n_box)
 {

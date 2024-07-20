@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/15 18:20:36 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:10:00 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ int	len_to(char *str, char c)
 	(void)c;
 	if (str[1] == '?' || ft_isdigit(str[1]))
 		return (2);
-	else if (!(ft_isalpha(str[i]) || ft_isdigit(str[i])))
+	else if (str[1] == '"' || str[1] == '\'')
 		return (1);
-	while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])))
+	else if (!(ft_isalpha(str[1]) || ft_isdigit(str[1])) && str[1] != '_')
+		return (0);
+	while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])
+			|| str[i] == '_'))
 	{
 		i++;
 	}
@@ -65,9 +68,10 @@ char	*replace(char *str, t_box *box)
 {
 	char	*ptr[5];
 
-	ptr[2] = ft_strdup(str);
-	ptr[3] = ptr[2];
-	ptr[2] = ft_strchr(ptr[2], '$');
+	ptr[4] = ft_strdup(str);
+	ptr[3] = ft_strdup(str);
+	ptr[2] = ptr[4];
+	ptr[2] = ft_dchr(ptr[2], '$');
 	while (ptr[2])
 	{
 		ptr[1] = get_to(ptr[2], ' ');
@@ -75,13 +79,9 @@ char	*replace(char *str, t_box *box)
 		ptr[3] = str_replace(ptr[3], ptr[1], ptr[0]);
 		free(ptr[1]);
 		free(ptr[0]);
-		ptr[2] = ft_strchr(ptr[2] + 1, ' ');
-		if (!ptr[2])
-		{
-			return (ptr[3]);
-		}
-		ptr[2] = ft_strchr(ptr[2], '$');
+		ptr[2] = ft_dchr(ptr[2] + 1, '$');
 	}
+	free(ptr[4]);
 	return (ptr[3]);
 }
 

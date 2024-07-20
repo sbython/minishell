@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/18 08:18:54 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:08:46 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	shell_loop(char **en)
 		prom = prompt();
 		handlesignal(1, &lst);
 		lst.cmd = readline(prom);
-		handlesignal(0, &lst);
 		free(prom);
 		if (lst.cmd && ft_strncmp(lst.cmd, "", -1))
 			add_history(lst.cmd);

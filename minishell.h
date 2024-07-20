@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/20 14:58:26 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:09:20 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,9 @@ void						free_2ptr(char **p);
 t_com						*last_node(t_com *node);
 void						sp(t_com **list, char *str, t_com *last,
 								t_com **n_box);
-int							kmala(char *s, int i);
 char						*new_strnstr(char *str, char *str1);
-int							open_here_doc(t_box *box);
 void						handlesignal(int i, t_box *box);
-
+char						*ft_dstr(const char *s, char * c);
 //----------------zibnoukh----------------//
 
 void    execute(t_box *box);
