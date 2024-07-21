@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/20 16:43:45 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:36:54 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,48 +199,84 @@ void ex___type___3(char *file)
 
 void ex___type___4(char *file)
 {
-    (void)file;
-    // char *line;
-    // while ((line = readline("> ")) != NULL)
+    char *promptt = "> ";
+    int fd;
+    char *line;
+    // char *tmp___col = ft_strjoin("/tmp/", file);
+    // printf("%s\n", tmp___col);
+    fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    // fd = open(tmp___col, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd == -1) {
+        perror("open");
+        return;
+    }
+    while ((line = readline(promptt)) != NULL)
+    {
+        write(fd, line, ft_strlen(line));
+        write(fd, "\n", 1);
+        if(ft_strncmp(line, file, ft_strlen(file)) == 0)
+        {
+            break;
+        }
+    }
+}
+
+void ex___type___5(char *file)
+{
+    // int f___dType_5;
+    
+    // f___dType_5 = open(file, O_WRONLY | O_CREAT, 0666);
+    // if(f___dType_5 == -1)
     // {
-    //     if(ft_strncmp(line, "line", 4) == 0)
-    //     {
-    //         check_heardoc_val = 0;
-    //         break;
-    //     }
+    //     perror(file);
+    //     exit(0);
     // }
+    printf("file: %s\n", file);
 }
 
 void f__redirection(t_box *box, t_redirection *redirection)
 {
     (void)box;
-    int check_heardoc_val = check_heardoc(redirection);
-    char *endfile_flag2 = NULL;
-    char *endfile_flag3 = NULL;
-    if(check_heardoc_val)
-    {
-        // ex___type___4();
-        return ;
-    }
-    else
-    {
+    // int check_heardoc_val = check_heardoc(redirection);
+    char *file_input = NULL;
+    char *file_output = NULL;
+    // if(check_heardoc_val)
+    // {
+    //     // ex___type___4();
+    //     return ;
+    // }
+    // else
+    // {
         while (redirection)
         {
             if(redirection->flag == 2)
             {
-                ex___type___2(redirection->str);
-                endfile_flag2 = redirection->str;
+                file_input = redirection->str;
+                ex___type___2(file_input);
             }
             else if(redirection->flag == 3)
             {
-                ex___type___3(redirection->str);
-                endfile_flag3 = redirection->str;
+                file_output = redirection->str;
+                ex___type___3(file_output);
+            }
+            else if(redirection->flag == 4)
+            {
+                file_input = redirection->str;
+                ex___type___4(file_input);
+            }
+            else if(redirection->flag == 5)
+            {
+                file_output = redirection->str;
+                ex___type___5(file_output);
             }
             redirection = redirection->next;
         }
-    }
-    box->input_file = endfile_flag2;
-    box->output_file = endfile_flag3;
+    // }
+    box->input_file = file_input;
+    box->output_file = file_output;
+    
+    // printf("before box->input_file: %s\n", box->input_file);
+    // printf("before box->output_file: %s\n", box->output_file);
 }
 
 void execute(t_box *box)
@@ -260,14 +296,33 @@ void execute(t_box *box)
         else if(pid == 0)
         {
             f__redirection(box, box->node->command->redirection);
-            char *str = box->output_file;
-            printf("str: %s\n", str);
+            
+
+            if(box->input_file)
+            {
+                // printf("box->input_file: %s\n", box->input_file);
+                // int Get_i___File = open(box->input_file, O_RDONLY, 0666);
+                // printf("%s\n", box->input_file);
+                int Get_i___File = open(box->input_file, O_RDONLY, 0666);
+                // if(Get_i___File == -1)
+                // {
+                //     perror(box->input_file);
+                //     exit(0);
+                // }
+                if (dup2(Get_i___File, 0) == -1) 
+                {
+                    perror("dup2 1");
+                    close(Get_i___File);
+                    exit(0);
+                }
+            }
             if(box->output_file)
             {
-                int fd = open(str, O_WRONLY | O_CREAT, 0666);
-                if(dup2(fd, 1) == -1)
+                int Get_o___File = open(box->output_file, O_WRONLY | O_CREAT, 0644);;
+                if (dup2(Get_o___File, 1) == -1) 
                 {
-                    perror("dup2 failed");
+                    perror("dup2 2");
+                    close(Get_o___File);
                     exit(0);
                 }
             }
