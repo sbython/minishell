@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/20 17:37:43 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/21 13:15:00 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int							is_token(char *ls, int i);
 void						tap_to_space(char *s);
 char						*ft_dchr(const char *s, int c);
 int							ft_isdelimiter(char *str);
-char						*replace(char *str, t_box *box);
+char						*replace(t_com *str, t_box *box);
 int							slen(char *str);
 char						**ft_newsplit(char *s);
 void						free_2ptr(char **p);
@@ -122,6 +122,7 @@ void						sp(t_com **list, char *str, t_com *last,
 char						*new_strnstr(char *str, char *str1);
 void						handlesignal(int i, t_box *box);
 char						*ft_dstr(const char *s, char * c);
+void						remove_(char *str);
 //----------------zibnoukh----------------//
 
 /*builtins*/

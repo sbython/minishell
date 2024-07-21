@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/20 17:33:26 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/21 13:35:29 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	*get_to(char *str, char c)
 
 char	*get_val(char *str, t_env *en, t_box *box)
 {
+	
 	if (!ft_strncmp(str, "?", 2))
 		return (ft_itoa(box->exit_val));
 	while (en)
@@ -64,12 +65,13 @@ char	*get_val(char *str, t_env *en, t_box *box)
 	* ptr[1] it name of variable
 	* ptr[2] it is left string after take a ptr[1] or ptr [0]
 */
-char	*replace(char *str, t_box *box)
+char	*replace(t_com *str, t_box *box)
 {
 	char	*ptr[5];
-
-	ptr[4] = ft_strdup(str);
-	ptr[3] = ft_strdup(str);
+	
+	str->type = -1;
+	ptr[4] = ft_strdup(str->com);
+	ptr[3] = ft_strdup(str->com);
 	ptr[2] = ptr[4];
 	ptr[2] = ft_dchr(ptr[2], '$');
 	while (ptr[2])
@@ -96,7 +98,7 @@ void	replace_var(t_box *box)
 		if ((ft_dchr(com->com, '$') && ((com->prev && com->prev->type != 4)
 					|| !com->prev)))
 		{
-			str = replace(com->com, box);
+			str = replace(com, box);
 			if (!*str && com->prev && ft_isdelimiter(com->prev->com))
 				free(str);
 			else if (ft_strchr(str, '"') || !*str)

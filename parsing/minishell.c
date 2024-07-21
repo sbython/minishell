@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/19 13:23:54 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/21 11:15:28 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	shell_loop(char **en)
 		prom = prompt();
 		handlesignal(1, &lst);
 		lst.cmd = readline(prom);
+		handlesignal(2, &lst);
 		free(prom);
 		if (lst.cmd && ft_strncmp(lst.cmd, "", -1))
 			add_history(lst.cmd);
