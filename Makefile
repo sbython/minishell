@@ -9,7 +9,7 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/builtins/export/export.c execution/builtins/unset/unset.c \
 	   execution/execute/the_access.c execution/execute/fully.c \
 	   execution/execute/execute.c execution/execute/get_path__.c \
-	   execution/execute/check_heardoc.c \
+	   execution/execute/check_heardoc.c execution/execute/random_file.c \
 	#execution/execute/get_command.c \
 	#    execution/execute/get_options.c execution/execute/get_redirection.c \
 	#    execution/execute/pipe_two.c execution/execute/greater_than_sign.c \
