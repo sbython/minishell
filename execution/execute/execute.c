@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/21 18:19:58 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/21 18:38:24 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char* ex___type___4(t_box *box, char *file)
 
 void ex___type___5(char *file)
 {
-    (void)file;
+    // (void)file;
     // int f___dType_5;
     
     // f___dType_5 = open(file, O_WRONLY | O_CREAT, 0666);
@@ -76,7 +76,7 @@ void ex___type___5(char *file)
     //     perror(file);
     //     exit(0);
     // }
-    // printf("file: %s\n", file);
+    printf("file: %s\n", file);
 }
 
 void f__redirection(t_box *box, t_redirection *redirection)
@@ -106,37 +106,35 @@ void f__redirection(t_box *box, t_redirection *redirection)
     {
         while (redirection)
         {
-            // if(redirection->flag == 2)
-            // {
-            //     file_input = redirection->str;
-            //     ex___type___2(file_input);
-            // }
-            // else 
-            if(redirection->flag == 3)
+            if(redirection->flag == 2)
+            {
+                file_input = redirection->str;
+                ex___type___2(file_input);
+            }
+            else if(redirection->flag == 3)
             {
                 file_output = redirection->str;
                 ex___type___3(file_output);
             }
-            // else if(redirection->flag == 5)
-            // {
-            //     file_output = redirection->str;
-            //     ex___type___5(file_output);
-            // }
+            else if(redirection->flag == 5)
+            {
+                file_output = redirection->str;
+                // printf("%s\n", file_output);
+                ex___type___5(file_output);
+            }
             // printf("redirection->str: %s\n", redirection->str);
             // printf("redirection->flag: %d\n", redirection->flag);
             redirection = redirection->next;
         }
-        // printf("%s\n", "AGAIN");
     }
     box->input_file = file_input;
     box->output_file = file_output;
-    // printf("box->input_file: %s\n", box->input_file);
 }
 
 void execute(t_box *box)
 {
     int pid = fork();
-    // char** r = get_path__(box->env);
+    char** r = get_path__(box->env);
     while (box->node->command)
     {
         if(pid == -1)
@@ -150,38 +148,38 @@ void execute(t_box *box)
             // printf("box->input_file: %s\n", box->input_file);
             // printf("box->output_file: %s\n", box->output_file);
 
-            // if(box->input_file)
-            // {
-            //     // printf("box->input_file: %s\n", box->input_file);
-            //     int Get_i___File = open(box->input_file, O_RDONLY, 0666);
-            //     if(Get_i___File == -1)
-            //     {
-            //         perror(box->input_file);
-            //         exit(0);
-            //     }
-            //     if (dup2(Get_i___File, 0) == -1) 
-            //     {
-            //         perror("dup2 1");
-            //         close(Get_i___File);
-            //         exit(0);
-            //     }
-            // }
-            // if(box->output_file)
-            // {
-            //     int Get_o___File = open(box->output_file, O_WRONLY | O_CREAT, 0644);;
-            //     if (dup2(Get_o___File, 1) == -1) 
-            //     {
-            //         perror("dup2 2");
-            //         close(Get_o___File);
-            //         exit(0);
-            //     }
-            // }
-            // char *full_path = fully(r, box->node->command->options[0]);
-            // if((execve(full_path, box->node->command->options, box->full_env) == -1))
-            // {
-            //     perror("not found");
-            //     exit(0);
-            // }
+            if(box->input_file)
+            {
+                // printf("box->input_file: %s\n", box->input_file);
+                int Get_i___File = open(box->input_file, O_RDONLY, 0666);
+                if(Get_i___File == -1)
+                {
+                    perror(box->input_file);
+                    exit(0);
+                }
+                if (dup2(Get_i___File, 0) == -1) 
+                {
+                    perror("dup2 1");
+                    close(Get_i___File);
+                    exit(0);
+                }
+            }
+            if(box->output_file)
+            {
+                int Get_o___File = open(box->output_file, O_WRONLY | O_CREAT, 0644);;
+                if (dup2(Get_o___File, 1) == -1) 
+                {
+                    perror("dup2 2");
+                    close(Get_o___File);
+                    exit(0);
+                }
+            }
+            char *full_path = fully(r, box->node->command->options[0]);
+            if((execve(full_path, box->node->command->options, box->full_env) == -1))
+            {
+                perror("not found");
+                exit(0);
+            }
             exit(0);
         }
         box->node->command = box->node->command->next;
