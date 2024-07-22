@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/22 06:15:11 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/22 09:08:46 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_redirection
 	char					*str;
 	int						flag;
 	int						output_test_file;
+	int						max_here_doc_val;
 	struct s_redirection	*next;
 }							t_redirection;
 
@@ -143,6 +144,7 @@ char**    get_path__(t_env *all_env);
 char *fully(char **r, char *cmd);
 int    check_heardoc(t_redirection *redirection);
 char*   random_file(char *file);
+void    run_all_heardoc___s(t_redirection *redirection);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);
