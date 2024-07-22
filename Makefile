@@ -10,7 +10,8 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/execute/the_access.c execution/execute/fully.c \
 	   execution/execute/execute.c execution/execute/get_path__.c \
 	   execution/execute/check_heardoc.c execution/execute/random_file.c \
-	   execution/execute/heardoc___s.c \
+	   execution/execute/open_all_files.c execution/execute/run_headoc__.c \
+	   execution/execute/ft_redirection.c \
 	#execution/execute/get_command.c \
 	#    execution/execute/get_options.c execution/execute/get_redirection.c \
 	#    execution/execute/pipe_two.c execution/execute/greater_than_sign.c \

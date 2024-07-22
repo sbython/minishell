@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/22 14:40:34 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:36:29 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,9 @@ char**    get_path__(t_env *all_env);
 char *fully(char **r, char *cmd);
 int    check_heardoc(t_redirection *redirection);
 char*   random_file(char *file);
-void    heardoc___s(t_redirection *redirection);
+void    open_all_files(t_box *box);
+void    run_headoc__(t_box *box);
+void    ft_redirection(t_box*box, t_redirection *redirection);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);
