@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/21 15:50:45 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/22 06:15:11 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,10 @@ typedef struct s_box
 	int						MAX_COMMANDS;
 	char 					*input_file;
     char 					*output_file;
+	char					*sp___file_input;
 	int						valid_her;
 	int						valid_flag;
+	int						append;
 }							t_box;
 
 //----------------msbai----------------//

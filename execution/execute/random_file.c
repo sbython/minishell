@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/21 16:05:56 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/22 06:37:49 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ char*   random_file(char *file)
     new_file[i] = '\0';
 
     join_file = ft_strjoin(ft_strjoin("/tmp/0X", ft_itoa(ft_strlen(file) * 1060 / 10)), new_file);
-    
+    printf("%s\n", join_file);
     return join_file;
 }
