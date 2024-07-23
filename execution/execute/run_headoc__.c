@@ -6,20 +6,20 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/22 20:03:51 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/23 09:01:47 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void run___heardoc(char *file)
+char* run___heardoc(char *file)
 {
     char*cpy_str_val = ft_strdup(file);
     char*new_file = random_file(cpy_str_val);
     char *promptt = "> ";
     int fd;
     char *line;
-    fd = open(new_file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+    fd = open(new_file, O_WRONLY | O_CREAT, 0666);
     while ((line = readline(promptt)) != NULL)
     {
         write(fd, line, ft_strlen(line));
@@ -30,6 +30,7 @@ void run___heardoc(char *file)
             break;
         }
     }
+    return new_file;
 }
 
 void    run_headoc__(t_box *box)
@@ -49,7 +50,9 @@ void    run_headoc__(t_box *box)
             while (box->node->command->redirection)
             {
                 if(box->node->command->redirection->flag == 4)
-                    run___heardoc(box->node->command->redirection->str);
+                {
+                   box->speinput_file = run___heardoc(box->node->command->redirection->str);
+                }
                 box->node->command->redirection = box->node->command->redirection->next;
             }
             box->node->command =  box->node->command->next;
