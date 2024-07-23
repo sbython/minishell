@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/21 13:15:00 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/22 13:15:18 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,10 @@ char						*new_strnstr(char *str, char *str1);
 void						handlesignal(int i, t_box *box);
 char						*ft_dstr(const char *s, char * c);
 void						remove_(char *str);
+char						*get_to(char *str, char c);
+char						*get_val(char *str, t_env *en, t_box *box);
+int							len_to(char *str, char c);
+char						*new_replace(char *str, t_box *box);
 //----------------zibnoukh----------------//
 
 /*builtins*/

@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:23 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/20 17:53:00 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/22 14:57:25 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	parsing(t_box *box)
 {
 	char	*str;
 
-	str = ft_strtrim(box->cmd, " \t");
+	str = ft_strtrim(box->cmd, " ");
 	free(box->cmd);
 	box->cmd = str;
 	if (simple_check(box))
@@ -44,9 +44,9 @@ int	parsing(t_box *box)
 	split_pip(box);
 	delete_emty(box);
 	put_type(box);
-	replace_var(box);
 	if (check_gramer(box))
 		return (1);
+	replace_var(box);
 	remove_qoute(box);
 	return (0);
 }

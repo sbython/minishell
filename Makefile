@@ -1,5 +1,5 @@
 CC= cc
-CFLAGS = -Wall -Werror -Wextra  -g3 -fsanitize=address 
+CFLAGS = -Wall -Werror -Wextra  -g3 #-fsanitize=address 
 RM = rm -rf
 NAME = minishell
 LIBFT = libft/libft.a
@@ -26,7 +26,7 @@ SRC_P= parsing/minishell.c \
 		parsing/fill_finale.c \
 		parsing/join2pointer.c \
 		parsing/new_split.c\
-		parsing/sp.c 	
+		parsing/sp.c \
 
 OBJ= ${SRC_P:.c=.o} ${SRC_E:.c=.o}
 
