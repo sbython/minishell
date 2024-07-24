@@ -12,7 +12,8 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/execute/check_heardoc.c execution/execute/random_file.c \
 	   execution/execute/open_all_files.c execution/execute/run_headoc__.c \
 	   execution/execute/ft_redirection.c execution/execute/more_then___.c \
-	   execution/builtins/builtins.c \
+	   execution/builtins/builtins.c execution/filter_n.c execution/filter_v.c \
+	   execution/builtins/export/sort_env.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \

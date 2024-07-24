@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   filter_n.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/24 16:16:10 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/24 12:06:57 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../minishell.h"
+#include "../minishell.h"
 
-void    rebuild_unset(t_box *box)
+char* filter_n(char *r) 
 {
-    char* name;
-    t_env *current;
-    t_env *previous;
-
-    if(box->node->command->options[1])
+    int i = 0;
+    while (r[i] && r[i] != '=')
+        i++;
+    char *name = malloc(i + 1);
+    size_t j = i + 1;
+    int k = 0;
+    while (j < ft_strlen(r))
     {
-        name = filter_v(box->node->command->options[1]);
-        current = box->env;
-        previous = NULL;
-
-        while (current != NULL && ft_strncmp(current->name, name, ft_strlen(name)) != 0) 
-        {
-            previous = current;
-            current = current->next;
-        }
-        previous->next = current->next;
+        name[k] = r[j];
+        k++;
+        j++;
     }
+    name[j] = '\0';
+    return name;
 }
