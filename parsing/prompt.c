@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:19 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:24:28 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/24 20:05:00 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*prompt(void)
 	char	*s;
 	char	tmp[1000];
 
+	ft_bzero(tmp, 1000);
 	s = ft_strdup(GREENF);
 	join(&s, getenv("LOGNAME"), 0);
 	join(&s, ft_strdup("@"), 1);

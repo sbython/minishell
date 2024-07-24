@@ -6,26 +6,30 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/24 15:19:35 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:41:10 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void    builtins(t_box *box)
+int    builtins(char **ptr, t_env *env__)
 {
-    if(ft_strncmp(box->node->command->options[0], "cd", 2) == 0)
-        rebuild_cd(box);
-    else if(ft_strncmp(box->node->command->options[0], "echo", 4) == 0)
-        rebuild_echo(box);
-    else if(ft_strncmp(box->node->command->options[0], "pwd", 3) == 0)
-        rebuild_pwd(box);
-    else if(ft_strncmp(box->node->command->options[0], "env", 3) == 0)
-        rebuild_env(box);
-    else if(ft_strncmp(box->node->command->options[0], "exit", 4) == 0)
-        rebuild_exit(box);
-    else if(ft_strncmp(box->node->command->options[0], "export", 6) == 0)
-        rebuild_export(box);
-    else if(ft_strncmp(box->node->command->options[0], "unset", 5) == 0)
-        rebuild_unset(box);
+    int status;
+
+    status = 0;
+    if(ft_strncmp(ptr[0], "cd", -1) == 0)
+        status = rebuild_cd(ptr, env__);
+    else if(ft_strncmp(ptr[0], "echo", -1) == 0)
+        status = rebuild_echo(ptr);
+    else if(ft_strncmp(ptr[0], "pwd", -1) == 0)
+        status = rebuild_pwd(ptr);
+    else if(ft_strncmp(ptr[0], "env", -1) == 0)
+        status = rebuild_env(ptr, env__);
+    else if(ft_strncmp(ptr[0], "exit", -1) == 0)
+        status = rebuild_exit(ptr, ptr[1]);
+    else if(ft_strncmp(ptr[0], "export", -1) == 0)
+        status = rebuild_export(ptr);
+    else if(ft_strncmp(ptr[0], "unset", -1) == 0)
+        status = rebuild_unset(ptr);
+    return 0;
 }

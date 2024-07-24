@@ -6,16 +6,15 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/24 10:53:14 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:06:07 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-void    rebuild_env(t_box *box)
+int    rebuild_env(char **ptr, t_env *env__)
 {
-    t_env *env__ = box->env;
-
+    (void)ptr;
     while (env__ != NULL)
     {
         if(env__->vale)
@@ -27,4 +26,5 @@ void    rebuild_env(t_box *box)
         }
         env__ = env__->next;
     }
+    return 0;
 }

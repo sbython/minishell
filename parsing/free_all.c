@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:30 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/15 14:51:55 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/24 19:55:31 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	free_env(t_env *lst)
 	while (lst)
 	{
 		free(lst->name);
+		free(lst->vale);
 		tmp = lst;
 		lst = lst->next;
 		free(tmp);

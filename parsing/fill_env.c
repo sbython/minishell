@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:37 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/15 14:57:06 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/24 19:52:20 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_env	*add_new_var(char *name, char *vale)
 		perror("allocation error");
 		return (NULL);
 	}
-	lst->name = name;
-	lst->vale = vale;
+	lst->name = ft_strdup(name);
+	lst->vale = ft_strdup(vale);
 	lst->next = NULL;
 	return (lst);
 }
@@ -73,6 +73,7 @@ t_env	*fill_env(char **en)
 		*tbl[1] = 0;
 		tbl[1]++;
 		add_back(&lst, add_new_var(tbl[0], tbl[1]));
+		free(tbl[2]);
 		i++;
 	}
 	return (lst);
