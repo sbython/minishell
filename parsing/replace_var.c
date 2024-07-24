@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/20 18:10:00 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/23 11:00:32 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	*get_to(char *str, char c)
 
 char	*get_val(char *str, t_env *en, t_box *box)
 {
+	
 	if (!ft_strncmp(str, "?", 2))
 		return (ft_itoa(box->exit_val));
 	while (en)
@@ -64,12 +65,76 @@ char	*get_val(char *str, t_env *en, t_box *box)
 	* ptr[1] it name of variable
 	* ptr[2] it is left string after take a ptr[1] or ptr [0]
 */
-char	*replace(char *str, t_box *box)
+char	*replace(t_com *str, t_box *box)
 {
 	char	*ptr[5];
-
-	ptr[4] = ft_strdup(str);
-	ptr[3] = ft_strdup(str);
+	// char	*li;
+	// int		i;
+	
+	str->type = -1;
+	// ptr[1] = str->com;
+	// ptr[2] = ft_strdup("");
+	// i = 0;
+	// li = ft_strdup(" ");
+	// while (ptr[1] && ptr[1][i])
+	// {
+	// 	if (ptr[1][i] == '\'')
+	// 	{
+	// 		ptr[3] = ft_substr(&ptr[1][i + 1], 0, slen(&ptr[1][i]) - 2);
+	// 		i += slen(&ptr[1][i]);
+	// 		join(&ptr[2], ptr[3],1);
+	// 	}
+	// 	else if (ptr[1][i] == '\"')
+	// 	{
+	// 		i++;
+	// 		while (ptr[1][i] != '\"')
+	// 		{
+	// 			if (ptr[1][i] == '$')
+	// 			{
+	// 				ptr[3] = get_to(&ptr[1][i], ' ');
+	// 				ptr[4] = get_val(ptr[3] + 1, box->env, box);
+	// 				i += ft_strlen(ptr[3]);
+	// 				free(ptr[3]);
+	// 				join(&ptr[2], ptr[4],1);
+	// 			}
+	// 			else
+	// 			{
+	// 				*li = ptr[1][i];
+	// 				join(&ptr[2], li,0);
+	// 				i++;
+	// 			}
+				
+	// 		}
+	// 		i++;
+	// 	}
+	// 	else if (ptr[1][i] == '$')
+	// 	{
+	// 		ptr[3] = get_to(&ptr[1][i], ' ');
+	// 		ptr[4] = get_val(ptr[3] + 1, box->env, box);
+	// 		remove_spes(ptr[4]);
+	// 		if(!ptr[3][0])
+	// 		{
+	// 			*li = ptr[1][i];
+	// 			join(&ptr[2], li,0);
+	// 			i++;
+	// 		}
+	// 		else
+	// 		{
+	// 			i += ft_strlen(ptr[3]);
+	// 			join(&ptr[2], ptr[4],1);
+	// 		}
+	// 		free(ptr[3]);
+	// 	}
+	// 	else
+	// 	{
+	// 		*li = ptr[1][i];
+	// 		join(&ptr[2], li,0);
+	// 		i++;
+	// 	}
+	// }
+	// free(li);
+	ptr[4] = ft_strdup(str->com);
+	ptr[3] = ft_strdup(str->com);
 	ptr[2] = ptr[4];
 	ptr[2] = ft_dchr(ptr[2], '$');
 	while (ptr[2])
@@ -81,6 +146,7 @@ char	*replace(char *str, t_box *box)
 		free(ptr[0]);
 		ptr[2] = ft_dchr(ptr[2] + 1, '$');
 	}
+	
 	free(ptr[4]);
 	return (ptr[3]);
 }
@@ -93,13 +159,11 @@ void	replace_var(t_box *box)
 	com = box->l_com;
 	while (com)
 	{
-		if ((ft_dchr(com->com, '$') && ((com->prev && com->prev->type != 4)
+		if ((ft_dchr(com->com, '$') && ((com->prev && !ft_isdelimiter(com->prev->com))
 					|| !com->prev)))
 		{
-			str = replace(com->com, box);
-			if (!*str && com->prev && ft_isdelimiter(com->prev->com))
-				free(str);
-			else if (ft_strchr(str, '"') || !*str)
+			str = replace(com, box);
+			if (!*str )
 			{
 				free(com->com);
 				com->com = str;
@@ -107,9 +171,9 @@ void	replace_var(t_box *box)
 			else
 				sp(&com, str, com->next, &box->l_com);
 		}
-		else if (com->com[0] == '~' && (com->com[1] == 0 || com->com[1] == '/'))
-			com->com = str_replace(com->com, "~", get_val("HOME", box->env,
-						box));
+		else if (com->prev && 	ft_isdelimiter(com->prev->com))
+			com->type = -1;
+			
 		com = com->next;
 	}
 }

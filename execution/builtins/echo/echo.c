@@ -6,53 +6,45 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/13 06:37:19 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/24 09:29:28 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-int     bad_char(char *str)
+int     notN(char *n)
 {
-    int i = 0;
-    if(str[0] == '-')
+    int i;
+
+    i = 1;
+    while (n[i])
     {
+        if(n[i] != 'n')
+            return 0;
         i++;
-        while (str[i])
-        {
-            printf("%c\n", str[i]);
-            if(str[i] != 'n')
-                return 0;
-            i++;
-        }
     }
     return 1;
 }
 
-void    rebuild_echo(t_com *t_tmp_ls, char *next)
+void    rebuild_echo(t_box *box)
 {
-    (void)t_tmp_ls;
-    (void)next;
-    int check;
-    // int bad_c;
-
-    check = 1;
-    // if(!bad_c)
-    //     check = 0;
-    while (t_tmp_ls->next)
-    {
-        t_tmp_ls = t_tmp_ls->next;
-        // bad_c = bad_char(t_tmp_ls->com);
-        if(!(ft_strncmp("-n", t_tmp_ls->com, 2) == 0))
-        {
-            ft_putstr_fd(t_tmp_ls->com, 1);
-            if(t_tmp_ls->next != NULL)
-                ft_putstr_fd(" ", 1);
-        }
-    }
-    // printf("bad_c: %d\n", bad_c);
-    if(check)
+    t_command *boxy = box->node->command;
+    int length = 0;
+    while (boxy->options[length])
+        length++;
+    if(boxy->options[0] && !boxy->options[1])
         ft_putstr_fd("\n", 1);
+    else
+    {
+        int i = 1;
+        while (boxy->options[i])
+        {
+            printf("%s", boxy->options[i]);
+            if(i < length - 1)
+                printf(" ");
+            i++;
+        }
+        if(!notN(boxy->options[1]))
+            printf("\n");
+    }
 }
-
-// echo -nnnnnnnfnn heheh 

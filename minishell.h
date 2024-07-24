@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/23 10:10:21 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/24 10:31:52 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_box
 	int						valid_her;
 	int						valid_flag;
 	int						append;
+	int						error_file;
 }							t_box;
 
 //----------------msbai----------------//
@@ -126,7 +127,7 @@ int							is_token(char *ls, int i);
 void						tap_to_space(char *s);
 char						*ft_dchr(const char *s, int c);
 int							ft_isdelimiter(char *str);
-char						*replace(char *str, t_box *box);
+char						*replace(t_com *str, t_box *box);
 int							slen(char *str);
 char						**ft_newsplit(char *s);
 void						free_2ptr(char **p);
@@ -136,6 +137,11 @@ void						sp(t_com **list, char *str, t_com *last,
 char						*new_strnstr(char *str, char *str1);
 void						handlesignal(int i, t_box *box);
 char						*ft_dstr(const char *s, char * c);
+void						remove_(char *str);
+char						*get_to(char *str, char c);
+char						*get_val(char *str, t_env *en, t_box *box);
+int							len_to(char *str, char c);
+char						*new_replace(char *str, t_box *box);
 //----------------zibnoukh----------------//
 
 void    execute(t_box *box);
@@ -147,15 +153,17 @@ char*   random_file(char *file);
 void    open_all_files(t_redirection *red);
 void    run_headoc__(t_box *box);
 int    ft_redirection(t_box*box, t_redirection *redirection);
+void    more_then___(t_box *box);
+void    builtins(t_box *box);
 
 /*builtins*/
 void    rebuild_cd(t_box *box);
-void    rebuild_echo(t_com *t_tmp_ls, char *next);
-void    rebuild_env(t_env *all_env);
-void    rebuild_exit();
-void    rebuild_export(t_box *box);
-void    rebuild_pwd(int size, t_com *ls);
-void    rebuild_unset();
+void    rebuild_echo(t_box *box);
+void    rebuild_pwd(t_box *box);
+void    rebuild_env(t_box *box);
+void    rebuild_exit(t_box *box);
+// void    rebuild_export(t_box *box);
+// void    rebuild_unset();
 
 /*functions*/
 int    length_stack(t_com *stack);

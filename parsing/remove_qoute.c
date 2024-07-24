@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:38:13 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:26:45 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/22 14:58:17 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,11 @@ void	remove_(char *str)
 void	remove_qoute(t_box *box)
 {
 	t_com	*ls;
-	char	*tmp;
 
 	ls = box->l_com;
 	while (ls)
 	{
-		tmp = ft_strtrim(ls->com, "\t");
-		free(ls->com);
-		ls->com = tmp;
-		if (ft_strchr(ls->com, '\'') || ft_strchr(ls->com, '"'))
+		if (ls->type != -1 && (ft_strchr(ls->com, '\'') || ft_strchr(ls->com, '"')))
 			remove_(ls->com);
 		ls = ls->next;
 	}

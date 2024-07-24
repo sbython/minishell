@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:56:03 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/15 09:09:35 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/21 14:17:23 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	take_it(t_redirection **re, t_com *ls)
 
 void	for25line2(t_com **ls, t_command **command)
 {
-	if (!(*ls)->type && ft_strlen((*ls)->com))
+	if ((*ls)->type < 1 && ft_strlen((*ls)->com))
 		(*command)->options = join2pointer((*command)->options, (*ls)->com);
 	else if ((*ls)->type > 1)
 	{

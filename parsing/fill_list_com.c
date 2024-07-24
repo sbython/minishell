@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:34 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/14 08:16:48 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/22 14:43:58 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	fill_list(char **ptr, t_box *box)
 
 	i = 0;
 	node = NULL;
-	while (ptr[i])
+	while (ptr && ptr[i])
 	{
 		str = ft_strdup(ptr[i]);
 		pop(&node, new_node(str));

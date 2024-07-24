@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:59 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/20 18:10:17 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/23 11:01:02 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*ft_dchr(const char *s, int c)
 
 	f = 1;
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		if (s[i] == '"')
 			f *= -1;

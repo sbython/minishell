@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/15 14:52:22 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/24 10:28:52 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-void    rebuild_env(t_env *all_env)
+void    rebuild_env(t_box *box)
 {
-    while (all_env)
+    t_env *env__ = box->env;
+
+    while (env__ != NULL)
     {
-        ft_putstr_fd(all_env->name, 1);
+        ft_putstr_fd(env__->name, 1);
         ft_putstr_fd("=", 1);
-        ft_putstr_fd(all_env->vale, 1);
+        ft_putstr_fd(env__->vale, 1);
         ft_putstr_fd("\n", 1);
-        all_env = all_env->next;
+        env__ = env__->next;
     }
 }

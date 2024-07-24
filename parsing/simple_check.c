@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:54 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/20 17:52:43 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/22 13:19:03 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	simple_check(t_box *box)
 	char	*com;
 
 	com = box->cmd;
-	if (!*com)
+	if (!com ||	 !*com)
 		return (1);
 	if (com[0] == '|' || com[ft_strlen(com) - 1] == '|')
 	{

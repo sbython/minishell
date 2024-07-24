@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/23 10:10:07 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/23 10:50:24 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ char*   ft_s(char *file)
     fd = open(new_file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
     while ((line = readline(promptt)) != NULL)
     {
-        write(fd, line, ft_strlen(line));
-        write(fd, "\n", 1);
         if(ft_strncmp(line, file, ft_strlen(file)) == 0 
         && ft_strlen(file) == ft_strlen(line))
         {
             break;
         }
+        write(fd, line, ft_strlen(line));
+        write(fd, "\n", 1);
     }
     return new_file;
 }
@@ -53,8 +53,8 @@ void    ex___2(char *file)
     if(fd == -1)
     {
         perror(file);
-        exit(EXIT_FAILURE);
-    }
+        exit(1);
+    }       
 }
 
 int    ft_redirection(t_box*box, t_redirection *redirection)
@@ -81,9 +81,9 @@ int    ft_redirection(t_box*box, t_redirection *redirection)
         {
             if(redirection->flag == 2 && !riGt_input)
             {
-                
                 box->input_file = redirection->str;
-                ex___2(box->input_file);
+                // printf("box->input_file: %s\n", box->input_file);
+                // ex___2(box->input_file);
             }
             else if (redirection->flag == 3)
                 box->output_file = redirection->str;

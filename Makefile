@@ -1,5 +1,5 @@
 CC= cc
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra -g
 RM = rm -rf
 NAME = minishell
 LIBFT = libft/libft.a
@@ -11,15 +11,8 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/execute/execute.c execution/execute/get_path__.c \
 	   execution/execute/check_heardoc.c execution/execute/random_file.c \
 	   execution/execute/open_all_files.c execution/execute/run_headoc__.c \
-	   execution/execute/ft_redirection.c \
-	#execution/execute/get_command.c \
-	#    execution/execute/get_options.c execution/execute/get_redirection.c \
-	#    execution/execute/pipe_two.c execution/execute/greater_than_sign.c \
-	#    execution/execute/less_than_sign.c execution/execute/execute_c_options.c \
-	#    execution/execute/check_if_it_is.c execution/execute/execute_heardoc.c \
-	#    execution/execute/left_shift.c execution/execute/right_shift.c \
-	#    execution/execute/get_path.c execution/execute/redirection.c \
-	
+	   execution/execute/ft_redirection.c execution/execute/more_then___.c \
+	   execution/builtins/builtins.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \
@@ -39,7 +32,7 @@ SRC_P= parsing/minishell.c \
 		parsing/fill_finale.c \
 		parsing/join2pointer.c \
 		parsing/new_split.c\
-		parsing/sp.c 	
+		parsing/sp.c \
 
 OBJ= ${SRC_P:.c=.o} ${SRC_E:.c=.o}
 
