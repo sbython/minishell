@@ -12,7 +12,6 @@
 
 #include "../../minishell.h"
 
-void    execute_heardoc()
+void	execute_heardoc(void)
 {
-    
 }

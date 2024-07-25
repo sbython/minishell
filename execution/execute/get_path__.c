@@ -12,55 +12,54 @@
 
 #include "../../minishell.h"
 
-char**   full_string__(t_env *env, char *str)
+char	**full_string__(t_env *env, char *str)
 {
-    (void)env;
-    char **r;
-    int i;
-    
-    i = 0;
-    r = ft_split(str, ':');
-    return r;
+	char	**r;
+	int		i;
+
+	(void)env;
+	i = 0;
+	r = ft_split(str, ':');
+	return (r);
 }
 
-char**    get_vale_from_path__(t_env *env, char *vale)
+char	**get_vale_from_path__(t_env *env, char *vale)
 {
-    int i;
-    int start;
-    char *str;
-    int k;
+	int		i;
+	int		start;
+	char	*str;
+	int		k;
 
-    str = malloc(ft_strlen(vale) + 1);
-    i = 0;
-    start = 0;
-    while (vale[i])
-    {
-        if(vale[i] == ':')
-            break;
-        i++;
-    }
-    
-    start = i + 1;
-    k = 0;
-    while (vale[start])
-    {
-        str[k] = vale[start];
-        k++;
-        start++;
-    }
-    str[k] = '\0';
-    return full_string__(env, str);
+	str = malloc(ft_strlen(vale) + 1);
+	i = 0;
+	start = 0;
+	while (vale[i])
+	{
+		if (vale[i] == ':')
+			break ;
+		i++;
+	}
+	start = i + 1;
+	k = 0;
+	while (vale[start])
+	{
+		str[k] = vale[start];
+		k++;
+		start++;
+	}
+	str[k] = '\0';
+	return (full_string__(env, str));
 }
 
-char**    get_path__(t_env *all_env)
+char	**get_path__(t_env *all_env)
 {
-    while (all_env)
-    {
-        if(ft_strncmp(all_env->name, "PATH", 4) == 0)
-        {
-            return get_vale_from_path__(all_env, all_env->vale);
-        }
-        all_env = all_env->next;
-    }
-    return NULL;
+	while (all_env)
+	{
+		if (ft_strncmp(all_env->name, "PATH", 4) == 0)
+		{
+			return (get_vale_from_path__(all_env, all_env->vale));
+		}
+		all_env = all_env->next;
+	}
+	return (NULL);
 }

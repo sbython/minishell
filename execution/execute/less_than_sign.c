@@ -12,17 +12,17 @@
 
 #include "../../minishell.h"
 
-void    less_than_sign(t_box *box, char *file)
+void	less_than_sign(t_box *box, char *file)
 {
-    (void)box;
-    int fd;
+	int	fd;
 
-    fd = open(file, O_WRONLY , 0666);
-    if (fd == -1)
-    {
-        perror(file);
-        return;
-    }
-    else
-        execute_c_options(box);
+	(void)box;
+	fd = open(file, O_WRONLY, 0666);
+	if (fd == -1)
+	{
+		perror(file);
+		return ;
+	}
+	else
+		execute_c_options(box);
 }

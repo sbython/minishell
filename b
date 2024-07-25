@@ -1,0 +1,12 @@
+a.out
+b
+c.c
+execution
+libft
+Makefile
+minishell
+minishell.h
+minishell_tester
+parsing
+README.md
+test.c

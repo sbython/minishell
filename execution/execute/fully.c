@@ -12,15 +12,18 @@
 
 #include "../../minishell.h"
 
-char *fully(char **r, char *cmd)
+char	*fully(char **r, char *cmd)
 {
-    int i = 0;
-    while(r[i] != NULL)
-    {
-        char *str = ft_strjoin(r[i], ft_strjoin("/", cmd));
-        if (access(str, X_OK) == 0)
-            return (str);
-        i++;
-    }
-    return NULL;
+	int		i;
+	char	*str;
+
+	i = 0;
+	while (r[i] != NULL)
+	{
+		str = ft_strjoin(r[i], ft_strjoin("/", cmd));
+		if (access(str, X_OK) == 0)
+			return (str);
+		i++;
+	}
+	return (NULL);
 }

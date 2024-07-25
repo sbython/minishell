@@ -23,11 +23,11 @@
 //     }
 // }
 
-void    get_command(t_command *command)
+void	get_command(t_command *command)
 {
-    // (void)command;
-    // printf("HERO\n");
-    // get_redirection(command->redirection);
-    get_options(command->options);
-    // get_next(command->next);
+	// (void)command;
+	// printf("HERO\n");
+	// get_redirection(command->redirection);
+	get_options(command->options);
+	// get_next(command->next);
 }

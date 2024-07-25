@@ -12,13 +12,13 @@
 
 #include "../../minishell.h"
 
-int    check_heardoc(t_redirection *redirection)
+int	check_heardoc(t_redirection *redirection)
 {
-    while (redirection)
-    {
-        if(redirection->flag == 4)
-            return 1;
-        redirection = redirection->next;
-    }
-    return 0;
+	while (redirection)
+	{
+		if (redirection->flag == 4)
+			return (1);
+		redirection = redirection->next;
+	}
+	return (0);
 }

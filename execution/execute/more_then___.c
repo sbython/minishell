@@ -6,23 +6,23 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/23 22:50:54 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/25 11:35:49 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void    more_then___(t_box *box)
+void	more_then___(t_box *box)
 {
-    char			**r;
-	int				fd[2];
-	int				prev_fd;
-	int				pid;
-	// t_redirection	*rd;
-	int				Getfd_input__;
-	int				Getfd_output__;
-	char			*full_path;
+	char	**r;
+	int		fd[2];
+	int		prev_fd;
+	int		pid;
+	int		Getfd_input__;
+	int		Getfd_output__;
+	char	*full_path;
 
+	// t_redirection	*rd;
 	r = get_path__(box->env);
 	prev_fd = -1;
 	while (box->node->command)
@@ -51,7 +51,6 @@ void    more_then___(t_box *box)
 				Getfd_input__ = open(box->input_file, O_RDONLY);
 				if (Getfd_input__ == -1)
 				{
-					printf("min hna: ");
 					perror(box->input_file);
 					exit(1);
 				}
@@ -129,5 +128,5 @@ void    more_then___(t_box *box)
 		box->node->command = box->node->command->next;
 	}
 	while (wait(NULL) > 0)
-		;   
+		;
 }

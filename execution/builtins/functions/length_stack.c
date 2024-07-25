@@ -12,15 +12,15 @@
 
 #include "../../../minishell.h"
 
-int    length_stack(t_com *stack)
+int	length_stack(t_com *stack)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (stack)
-    {
-        i++;
-        stack = stack->next;
-    }
-    return i;
+	i = 0;
+	while (stack)
+	{
+		i++;
+		stack = stack->next;
+	}
+	return (i);
 }

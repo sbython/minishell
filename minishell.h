@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/24 19:11:06 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:07:27 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,10 +156,10 @@ void    open_all_files(t_redirection *red);
 void    run_headoc__(t_box *box);
 int    ft_redirection(t_box*box, t_redirection *redirection);
 void    more_then___(t_box *box);
-int    builtins(char **ptr, t_env *env__);
+int    builtins(char **ptr,t_box * box);
 char* filter_v(char *r);
 char* filter_n(char *r);
-t_env* sort_env(t_env *env);
+void sort_env(t_env *env);
 
 /*builtins*/
 
@@ -167,9 +167,9 @@ int    rebuild_cd(char **ptr, t_env *env__);
 int    rebuild_echo(char **ptr);
 int    rebuild_pwd(char **ptr);
 int    rebuild_env(char **ptr, t_env *env__);
-int    rebuild_exit(char **ptr, char *s);
-int    rebuild_export(char **ptr);
-int    rebuild_unset(char **ptr);
+int    rebuild_exit(char **ptr, t_box *box);
+int    rebuild_export(char **ptr, t_env *env);
+int    rebuild_unset(char **ptr, t_box *box);
 
 /*functions*/
 int    length_stack(t_com *stack);
