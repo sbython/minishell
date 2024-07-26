@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/25 17:12:08 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/25 20:17:26 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,19 @@ int	rebuild_export(char **ptr, t_env *env)
 		add_env_variable(env, new_vale, new_name);
 		i++;
 	}
-	sort_env(tmp_env);
+	t_env* newenv = sort_env(tmp_env);
+	
 	if (!ptr[1])
 	{
-		while (tmp_env != NULL)
+		while (newenv != NULL)
 		{
 			ft_putstr_fd("declare -x ", 1);
-			ft_putstr_fd(tmp_env->name, 1);
-			if (tmp_env->vale && ft_strlen(tmp_env->vale) != 0)
-				ft_putstr_fd("=", 1);
-			ft_putstr_fd(tmp_env->vale, 1);
+			ft_putstr_fd(newenv->name, 1);
+			// if (newenv->vale && ft_strlen(newenv->vale) != 0)
+			ft_putstr_fd("=", 1);
+			ft_putstr_fd(newenv->vale, 1);
 			ft_putstr_fd("\n", 1);
-			tmp_env = tmp_env->next;
+			newenv = newenv->next;
 		}
 	}
 	return (0);

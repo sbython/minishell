@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/25 16:07:27 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/25 20:13:18 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ typedef struct s_env
 	char					*vale;
 	int						position;
 	struct s_env			*next;
+	struct s_env			*prev;
 }							t_env;
+
 /*
     type 
     0 string
@@ -104,6 +106,7 @@ typedef struct s_box
 }							t_box;
 
 //----------------msbai----------------//
+
 char						*prompt(void);
 t_env						*fill_env(char **env);
 int							parsing(t_box *box);
@@ -144,6 +147,7 @@ char						*get_to(char *str, char c);
 char						*get_val(char *str, t_env *en, t_box *box);
 int							len_to(char *str, char c);
 char						*new_replace(char *str, t_box *box);
+
 //----------------zibnoukh----------------//
 
 void    execute(t_box *box);
@@ -159,7 +163,7 @@ void    more_then___(t_box *box);
 int    builtins(char **ptr,t_box * box);
 char* filter_v(char *r);
 char* filter_n(char *r);
-void sort_env(t_env *env);
+t_env*	sort_env(t_env *env);
 
 /*builtins*/
 
@@ -172,6 +176,7 @@ int    rebuild_export(char **ptr, t_env *env);
 int    rebuild_unset(char **ptr, t_box *box);
 
 /*functions*/
+
 int    length_stack(t_com *stack);
 int    get_cmd(t_box *box);
 

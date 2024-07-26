@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:37 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/24 19:52:20 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:56:13 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_env	*add_new_var(char *name, char *vale)
 	lst->name = ft_strdup(name);
 	lst->vale = ft_strdup(vale);
 	lst->next = NULL;
+	lst->prev = NULL;
 	return (lst);
 }
 
@@ -50,6 +51,7 @@ void	add_back(t_env **node, t_env *new)
 	}
 	last = last_n(*node);
 	last->next = new;
+	new->prev = last;
 }
 
 /*
