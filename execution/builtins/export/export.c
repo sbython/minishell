@@ -6,78 +6,64 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/25 20:17:26 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:16:42 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-t_env	*create_env_node(char *name, char *value)
+void	add_one(char **ptr, t_env *env)
 {
-	t_env	*new_node;
+	int		i;
+	char	*arr[2];
+	t_env	*new;
 
-	new_node = malloc(sizeof(t_env));
-	if (!new_node)
+	i = 1;
+	while (ptr[i])
 	{
-		perror("error");
-		exit(0);
+		arr[0] = filter_v(ptr[i]);
+		arr[1] = filter_n(ptr[i]);
+		new = envchr(env, arr[0]);
+		if (new)
+		{
+			if (arr[1])
+			{
+				free(new->vale);
+				new->vale = arr[1];
+			}
+		}
+		else
+			add_env_variable(env, arr[0], arr[1]);
+		i++;
 	}
-	new_node->name = ft_strdup(name);
-	new_node->vale = ft_strdup(value);
-	new_node->next = NULL;
-	return (new_node);
-}
-
-t_env	*find_last_node(t_env *env)
-{
-	t_env	*curr;
-
-	curr = env;
-	while (curr->next)
-		curr = curr->next;
-	return (curr);
-}
-
-void	add_env_variable(t_env *env, char *name, char *value)
-{
-	t_env	*new_node;
-	t_env	*last;
-
-	new_node = create_env_node(name, value);
-	last = find_last_node(env);
-	last->next = new_node;
 }
 
 int	rebuild_export(char **ptr, t_env *env)
 {
-	char	*new_name;
-	char	*new_vale;
+	t_env	*newenv;
 	t_env	*tmp_env;
-	int		i;
 
 	tmp_env = env;
-	i = 1;
-	while (ptr[i])
-	{
-		new_vale = filter_v(ptr[i]);
-		new_name = filter_n(ptr[i]);
-		add_env_variable(env, new_vale, new_name);
-		i++;
-	}
-	t_env* newenv = sort_env(tmp_env);
-	
+	add_one(ptr, env);
+	newenv = sort_env(tmp_env);
 	if (!ptr[1])
 	{
 		while (newenv != NULL)
 		{
 			ft_putstr_fd("declare -x ", 1);
 			ft_putstr_fd(newenv->name, 1);
-			// if (newenv->vale && ft_strlen(newenv->vale) != 0)
-			ft_putstr_fd("=", 1);
-			ft_putstr_fd(newenv->vale, 1);
-			ft_putstr_fd("\n", 1);
+			if (newenv->vale)
+				printf("=\"%s\"", newenv->vale);
+			printf("\n");
 			newenv = newenv->next;
 		}
 	}
 	return (0);
 }
+
+/* s_cases
+
+	- = for not value
+	- replace last value
+
+*/

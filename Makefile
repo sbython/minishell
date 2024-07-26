@@ -13,7 +13,7 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/execute/open_all_files.c execution/execute/run_headoc__.c \
 	   execution/execute/ft_redirection.c execution/execute/more_then___.c \
 	   execution/builtins/builtins.c execution/filter_n.c execution/filter_v.c \
-	   execution/builtins/export/sort_env.c \
+	   execution/builtins/export/sort_env.c execution/builtins/export/add_env_variable.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \

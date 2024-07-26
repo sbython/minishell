@@ -1,33 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   add_env_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/26 10:39:26 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:07:37 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-int	rebuild_env(char **ptr, t_env *env__)
+t_env	*create_env_node(char *name, char *value)
 {
-	t_env	*tampy__;
+	t_env	*new_node;
 
-	(void)ptr;
-	tampy__ = env__;
-	while (tampy__ != NULL)
+	if (!name)
+		return (NULL);
+	new_node = malloc(sizeof(t_env));
+	if (!new_node)
 	{
-		if (tampy__->vale && ft_strlen(tampy__->vale) != 0)
-		{
-			ft_putstr_fd(tampy__->name, 1);
-			ft_putstr_fd("=", 1);
-			ft_putstr_fd(tampy__->vale, 1);
-			ft_putstr_fd("\n", 1);
-		}
-		tampy__ = tampy__->next;
+		perror("error");
+		exit(0);
 	}
-	return (0);
+	new_node->name = ft_strdup(name);
+	new_node->vale = ft_strdup(value);
+	new_node->next = NULL;
+	return (new_node);
+}
+
+t_env	*find_last_node(t_env *env)
+{
+	t_env	*curr;
+
+	curr = env;
+	while (curr->next)
+		curr = curr->next;
+	return (curr);
+}
+
+void	add_env_variable(t_env *env, char *name, char *value)
+{
+	t_env	*new_node;
+	t_env	*last;
+
+	new_node = create_env_node(name, value);
+	last = find_last_node(env);
+	last->next = new_node;
 }

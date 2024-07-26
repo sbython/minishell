@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/25 20:13:18 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/26 14:58:48 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ void						remove_(char *str);
 char						*get_to(char *str, char c);
 char						*get_val(char *str, t_env *en, t_box *box);
 int							len_to(char *str, char c);
-char						*new_replace(char *str, t_box *box);
 
 //----------------zibnoukh----------------//
 
@@ -164,7 +163,8 @@ int    builtins(char **ptr,t_box * box);
 char* filter_v(char *r);
 char* filter_n(char *r);
 t_env*	sort_env(t_env *env);
-
+void	add_env_variable(t_env *env, char *name, char *value);
+t_env	*envchr(t_env *env__, char *name);
 /*builtins*/
 
 int    rebuild_cd(char **ptr, t_env *env__);
