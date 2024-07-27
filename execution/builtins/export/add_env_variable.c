@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/26 15:07:37 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:17:28 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 t_env	*create_env_node(char *name, char *value)
 {
 	t_env	*new_node;
-
+	
 	if (!name)
 		return (NULL);
+	new_node = NULL;
 	new_node = malloc(sizeof(t_env));
 	if (!new_node)
 	{

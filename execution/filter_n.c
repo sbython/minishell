@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/27 14:47:33 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 16:51:39 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 char* filter_n(char *r) 
 {
-    int i = 0;
+    int i;
+    char *val;
+
+    i = 0;
     while (r[i] && r[i] != '=')
-    {
         i++;
-    }
-    char *val = malloc(i + 1);
+    val = malloc(i + 1);
     int j = 0;
     while (j < i)
     {

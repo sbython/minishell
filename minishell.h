@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/27 16:04:31 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:26:08 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,8 @@ void						remove_(char *str);
 char						*get_to(char *str, char c);
 char						*get_val(char *str, t_env *en, t_box *box);
 int							len_to(char *str, char c);
-
+void						add_back(t_env **node, t_env *new);
+t_env						*add_new_var(char *name, char *vale);
 //----------------zibnoukh----------------//
 
 void    execute(t_box *box);

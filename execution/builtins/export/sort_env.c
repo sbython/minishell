@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/27 15:52:34 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:55:18 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,13 @@ void	swap_nodes(t_env *a, t_env *b)
 t_env	*cpy_list(t_env *env)
 {
 	t_env	*new_list;
-	t_env	*the_last_;
 	t_env	*new_node;
 
 	new_list = NULL;
-	the_last_ = NULL;
+	new_node = NULL;
 	while (env)
 	{
-		new_node = (t_env *)malloc(sizeof(t_env));
-		new_node->name = ft_strdup(env->name);
-		new_node->vale = ft_strdup(env->vale);
-		new_node->next = NULL;
-		if (!new_list)
-			new_list = new_node;
-		else
-			the_last_->next = new_node;
-		the_last_ = new_node;
+		add_back(&new_list, add_new_var(env->name, env->vale));
 		env = env->next;
 	}
 	return (new_list);
@@ -51,11 +42,13 @@ t_env	*cpy_list(t_env *env)
 
 t_env	*sort_env(t_env *env)
 {
-	t_env	*new_env;
+	(void)env;
+	t_env	*new_env = NULL;
 	t_env	*curr;
 	int		is_swap;
 
 	new_env = cpy_list(env);
+	
 	if (!new_env)
 		return (NULL);
 	while (1)
