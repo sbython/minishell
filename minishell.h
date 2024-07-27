@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/26 14:58:48 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:12:12 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,11 +160,13 @@ void    run_headoc__(t_box *box);
 int    ft_redirection(t_box*box, t_redirection *redirection);
 void    more_then___(t_box *box);
 int    builtins(char **ptr,t_box * box);
-char* filter_v(char *r);
+char* filter_v(char *r) ;
 char* filter_n(char *r);
 t_env*	sort_env(t_env *env);
 void	add_env_variable(t_env *env, char *name, char *value);
 t_env	*envchr(t_env *env__, char *name);
+int    ft_utils(char *ptr);
+
 /*builtins*/
 
 int    rebuild_cd(char **ptr, t_env *env__);

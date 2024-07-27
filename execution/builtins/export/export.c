@@ -6,46 +6,85 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/26 15:16:42 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:12:31 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-void	add_one(char **ptr, t_env *env)
+int invalid_identifier(char *ptr)
+{
+	if(!isalpha(ptr[0]))
+		return 0;
+	int i = 0;
+	while (ptr[i])
+	{
+		i++;
+	}
+	
+	return 1;
+}
+
+int check_plus(char *str, int size_name)
+{
+	if(str[size_name] == '+' && str[size_name + 1] == '=')
+		return 1;
+	else
+		return 0;
+}
+
+int	add_one(char **ptr, t_env *env)
 {
 	int		i;
 	char	*arr[2];
 	t_env	*new;
+	int status = 0;
 
 	i = 1;
 	while (ptr[i])
 	{
-		arr[0] = filter_v(ptr[i]);
-		arr[1] = filter_n(ptr[i]);
-		new = envchr(env, arr[0]);
-		if (new)
+		arr[0] = filter_n(ptr[i]);
+		if(ft_utils(ptr[i]))
 		{
-			if (arr[1])
+			arr[1] = filter_v(ptr[i]);
+			new = envchr(env, arr[0]);
+			if (new != NULL)
 			{
-				free(new->vale);
-				new->vale = arr[1];
+				if(check_plus(ptr[i], ft_strlen(filter_n(ptr[i]))))
+				{
+					new->vale = ft_strjoin(new->vale, arr[1]);
+					new->name = filter_n(arr[0]);
+				}
+				else
+				{
+					if (arr[1])
+					{
+						// free(new->vale);
+					  	new->vale = arr[1];
+					}
+				}
+					
 			}
+			else
+				add_env_variable(env, arr[0], arr[1]);
 		}
 		else
-			add_env_variable(env, arr[0], arr[1]);
+			printf("export: `%s': not a valid identifier\n", ptr[i]);
 		i++;
 	}
+	return status;
 }
 
 int	rebuild_export(char **ptr, t_env *env)
 {
 	t_env	*newenv;
 	t_env	*tmp_env;
+	int status = 0;
 
 	tmp_env = env;
-	add_one(ptr, env);
+	status = add_one(ptr, env);
 	newenv = sort_env(tmp_env);
+
 	if (!ptr[1])
 	{
 		while (newenv != NULL)
@@ -58,12 +97,14 @@ int	rebuild_export(char **ptr, t_env *env)
 			newenv = newenv->next;
 		}
 	}
-	return (0);
+	return (status);
 }
 
-/* s_cases
+/*
 
-	- = for not value
-	- replace last value
+	- no bac c in ptr[0] /
+	- ignore one plus /
+	-  /
+	-  / 
 
 */

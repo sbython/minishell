@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/26 13:13:33 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 10:05:32 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 char* filter_v(char *r) 
 {
     int i = 0;
+    char *vale;
+    int     j;
     while (r[i] && r[i] != '=')
         i++;
-    char *val = malloc(i + 1);
-    int j = 0;
-    while (j < i)
-    {
-        val[j] = r[j];
-        j++;
-    }
-    val[j] = '\0';
-    return val;
+    if (!r[i])
+        return (NULL);
+    vale = malloc(i + 1);
+    j = i + 1;
+    ft_strlcpy(vale,r + j, -1);
+    return vale;
 }
