@@ -6,24 +6,11 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/27 14:12:31 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:48:21 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
-
-int invalid_identifier(char *ptr)
-{
-	if(!isalpha(ptr[0]))
-		return 0;
-	int i = 0;
-	while (ptr[i])
-	{
-		i++;
-	}
-	
-	return 1;
-}
 
 int check_plus(char *str, int size_name)
 {
@@ -59,17 +46,18 @@ int	add_one(char **ptr, t_env *env)
 				{
 					if (arr[1])
 					{
-						// free(new->vale);
 					  	new->vale = arr[1];
 					}
 				}
-					
 			}
 			else
 				add_env_variable(env, arr[0], arr[1]);
 		}
 		else
+		{
 			printf("export: `%s': not a valid identifier\n", ptr[i]);
+			status = 1;
+		}
 		i++;
 	}
 	return status;
@@ -99,12 +87,3 @@ int	rebuild_export(char **ptr, t_env *env)
 	}
 	return (status);
 }
-
-/*
-
-	- no bac c in ptr[0] /
-	- ignore one plus /
-	-  /
-	-  / 
-
-*/
