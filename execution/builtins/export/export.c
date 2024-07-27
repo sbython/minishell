@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/27 14:48:21 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 16:13:10 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ int	add_one(char **ptr, t_env *env)
 				else
 				{
 					if (arr[1])
-					{
 					  	new->vale = arr[1];
-					}
 				}
 			}
 			else
@@ -60,6 +58,8 @@ int	add_one(char **ptr, t_env *env)
 		}
 		i++;
 	}
+
+	env->theEponew = cpy_list(env);
 	return status;
 }
 

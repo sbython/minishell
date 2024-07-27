@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/27 14:12:12 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 16:04:31 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_env
 	char					*name;
 	char					*vale;
 	int						position;
+	struct s_env			*theEponew;
 	struct s_env			*next;
 	struct s_env			*prev;
 }							t_env;
@@ -166,13 +167,14 @@ t_env*	sort_env(t_env *env);
 void	add_env_variable(t_env *env, char *name, char *value);
 t_env	*envchr(t_env *env__, char *name);
 int    ft_utils(char *ptr);
+t_env	*cpy_list(t_env *env);
 
 /*builtins*/
 
 int    rebuild_cd(char **ptr, t_env *env__);
 int    rebuild_echo(char **ptr);
 int    rebuild_pwd(char **ptr);
-int    rebuild_env(char **ptr, t_env *env__);
+int    rebuild_env(t_env *env__);
 int    rebuild_exit(char **ptr, t_box *box);
 int    rebuild_export(char **ptr, t_env *env);
 int    rebuild_unset(char **ptr, t_box *box);

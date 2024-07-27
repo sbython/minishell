@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/26 09:16:10 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/27 16:04:24 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	builtins(char **ptr, t_box *box)
 	else if (ft_strncmp(ptr[0], "export", -1) == 0)
 		status = rebuild_export(ptr, box->env);
 	else if (ft_strncmp(ptr[0], "env", -1) == 0)
-		status = rebuild_env(ptr, box->env);
+		status = rebuild_env(box->env);
 	else if (ft_strncmp(ptr[0], "unset", -1) == 0)
 		status = rebuild_unset(ptr, box);
 	return (status);
