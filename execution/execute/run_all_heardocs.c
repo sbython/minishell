@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/30 10:05:58 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:43:12 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char **run_all_heardocs(t_box *box)
     int j = 0;
 	int k = 0;
     t_command *tmp = box->node->command;
-    char **files = (char **)malloc(sizeof(char *) * how_her(box));
+    char **files = (char **)malloc(sizeof(char *) * (how_her(box) + 1));
     if (!files) 
 	{
         perror("malloc");
@@ -52,36 +52,53 @@ char **run_all_heardocs(t_box *box)
 	
     while (tmp) 
 	{
-		t_redirection *red_tmp = tmp->redirection;
-		char *last_file = NULL;
-		while (red_tmp) 
-		{
-			if (red_tmp->flag == 4) 
-			{ 
-				if (last_file) 
-					free(last_file);
-				last_file = ft___(red_tmp->str, i);
-				if (!last_file) 
-				{
-					k = 0;
-					while (k < j) 
+        // int pid = fork();
+        // if(pid == -1)
+        // {
+        //     perror("fork failed");
+        //     exit(0);
+        // }
+        // else if (pid == 0)
+        // {
+			t_redirection *red_tmp = tmp->redirection;
+			char *last_file = NULL;
+			while (red_tmp) 
+			{
+				if (red_tmp->flag == 4) 
+				{ 
+					if (last_file) 
+						free(last_file);
+					last_file = ft___(red_tmp->str, i);
+					if (!last_file) 
 					{
-						free(files[k]);
-						k++;
+						k = 0;
+						while (k < j) 
+						{
+							free(files[k]);
+							k++;
+						}
+						free(files);
+						return NULL;
 					}
-					free(files);
-					return NULL;
+					i++;
 				}
-				i++;
+				else
+					last_file = ft_strdup("");
+				red_tmp = red_tmp->next;
 			}
-			else
-				last_file = ft_strdup("N");
-			red_tmp = red_tmp->next;
-		}
-		if (last_file) 
-			files[j++] = last_file;
+			if (last_file) 
+				files[j++] = last_file;
+			// exit(0);
+		// exit(0);
+		// }
 		tmp = tmp->next;
     }
+
+	// while (wait(NULL) > 0)
+	// {
+
+	// };
+
     files[j] = NULL;
     return files;
 }

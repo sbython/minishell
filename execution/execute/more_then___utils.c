@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/30 10:15:41 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 10:42:05 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int    n(char **str)
 {
+    if(!str)
+        return 0;
     char **tmp = str;
     int i = 0;
     while (tmp[i])
