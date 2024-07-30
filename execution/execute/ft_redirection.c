@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/30 16:49:09 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:12:25 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,15 @@ int ft_redirection(t_box *box, t_redirection *redirection, char* file)
 	int i = 0;
     while (redirection)
     {
-        if(redirection->flag == 2 && flag_input)
+        if(redirection->flag == 2)
+        // && flag_input)
         {
 			box->input_file = redirection->str;
 			if(ft_strncmp(file, "N", -1) != 0)
 				ex___2(box->input_file);
         }
-        else if(redirection->flag == 3 && flag_output)
+        else if(redirection->flag == 3)
+        //  && flag_output)
         {
             box->output_file = redirection->str;
             ex___3(box->output_file);
@@ -126,7 +128,7 @@ int ft_redirection(t_box *box, t_redirection *redirection, char* file)
 			if(ft_strncmp(file, "N", -1) != 0)
 			{
 				box->input_file = file;
-				flag_input = 0;
+				// flag_input = 0;
 			}
         }
         else if(redirection->flag == 5)
