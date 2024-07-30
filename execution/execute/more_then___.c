@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/30 17:26:43 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:41:29 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void more_then___(t_box *box)
         }
         else if (pid == 0)
         {
-            t_redirection *red = box->node->command->redirection;
-            ft_redirection(box, red, files[i]);
-
+            ft_redirection(box, box->node->command->redirection, files[i]);
             if (box->input_file)
             {
                 int Getfd_input__ = open(box->input_file, O_RDONLY);
