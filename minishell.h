@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/27 18:26:08 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 10:15:52 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,14 +152,12 @@ t_env						*add_new_var(char *name, char *vale);
 //----------------zibnoukh----------------//
 
 void    execute(t_box *box);
-void    get_command(t_command *command);
 char**    get_path__(t_env *all_env);
 char *fully(char **r, char *cmd);
 int    check_heardoc(t_redirection *redirection);
-char*   random_file(char *file);
-void    open_all_files(t_redirection *red);
-void    run_headoc__(t_box *box);
-int    ft_redirection(t_box*box, t_redirection *redirection);
+char*   random_file(char *file, int c);
+char** run_all_heardocs(t_box *box);
+int ft_redirection(t_box *box, t_redirection *redirection, char* file);
 void    more_then___(t_box *box);
 int    builtins(char **ptr,t_box * box);
 char* filter_v(char *r) ;
@@ -169,6 +167,11 @@ void	add_env_variable(t_env *env, char *name, char *value);
 t_env	*envchr(t_env *env__, char *name);
 int    ft_utils(char *ptr);
 t_env	*cpy_list(t_env *env);
+int     how_her(t_box *box);
+void    ex_execve(t_box *box);
+void    put_output_file(t_box *box);
+void    put_input_file(t_box *box);
+int    n(char **str);
 
 /*builtins*/
 
