@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/30 15:53:27 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:26:55 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_box
 	int						error_file;
 	char*					export_val;
 	char*					export_name;
+	int						n;
 }							t_box;
 
 //----------------msbai----------------//
@@ -168,11 +169,6 @@ t_env	*envchr(t_env *env__, char *name);
 int    ft_utils(char *ptr);
 t_env	*cpy_list(t_env *env);
 int     how_her(t_box *box);
-void    ex_execve(t_box *box);
-void    put_output_file(t_box *box);
-void    put_input_file(t_box *box);
-int    n(char **str);
-void f(t_box *box);
 
 /*builtins*/
 

@@ -6,22 +6,11 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/30 16:48:37 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:26:43 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-int    n(char **str)
-{
-    if(!str)
-        return 0;
-    char **tmp = str;
-    int i = 0;
-    while (tmp[i])
-        i++;
-    return i;
-}
 
 void more_then___(t_box *box)
 {
@@ -32,9 +21,8 @@ void more_then___(t_box *box)
     int prev_fd = -1;
     int pid;
     char **files = run_all_heardocs(box);
-    
     int i = 0;
-    while (box->node->command && i < 4)
+    while (box->node->command)
     {
         if (box->node->command->next)
         {
