@@ -1,40 +1,94 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   more_then___.c                                     :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/30 16:48:37 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:24:21 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int    n(char **str)
+void	ex___22(char *file)
 {
-    if(!str)
-        return 0;
-    char **tmp = str;
-    int i = 0;
-    while (tmp[i])
-        i++;
-    return i;
+	int	fd;
+
+	fd = open(file, O_RDONLY, 0666);
+	if (fd == -1)
+	{
+		perror(file);
+		exit(1);
+	}
 }
 
-void more_then___(t_box *box)
+void	ex___33(char *file)
 {
-    int fd[2];
+	int	fd;
+
+	fd = open(file, O_WRONLY | O_CREAT, 0666);
+	if (fd == -1)
+	{
+		perror(file);
+		exit(1);
+	}
+}
+
+void get_input_output(t_box *box, t_redirection *redirection)
+{
+    int flag_input;
+	int flag_output;
+
+	flag_input = 1;
+	flag_output = 1;
+
+	while (redirection)
+	{
+		if(redirection->flag == 2)
+		{
+			box->input_file = redirection->str;
+			// if(ft_strncmp(file, "N", -1) != 0)
+				// ex___2(box->input_file);
+		}
+		else if(redirection->flag == 3)
+		{
+			box->output_file = redirection->str;
+			ex___33(box->output_file);
+		}
+		// else if(redirection->flag == 4)
+		// {
+		// 	i++;
+		// 	if(ft_strncmp(file, "N", -1) != 0)
+		// 	{
+		// 		box->input_file = file;
+		// 		flag_input = 0;
+		// 	}
+		// }
+		else if(redirection->flag == 5)
+		{
+			box->output_file = redirection->str;
+			flag_output = 0;
+			box->append = 400;
+		}
+		redirection = redirection->next;
+	}
+	// return i;
+}
+
+void f(t_box *box)
+{
+    int        fd[2];
+    int        prev_fd;
+    int        pid;
     char **r;
     char *full_path;
     r = get_path__(box->env);
-    int prev_fd = -1;
-    int pid;
-    char **files = run_all_heardocs(box);
-    
-    int i = 0;
-    while (box->node->command && i < 4)
+    box->input_file = NULL;
+    box->output_file = NULL;
+    prev_fd = -1;
+    while (box->node->command)
     {
         if (box->node->command->next)
         {
@@ -44,7 +98,6 @@ void more_then___(t_box *box)
                 exit(1);
             }
         }
-
         pid = fork();
         if (pid == -1)
         {
@@ -53,17 +106,14 @@ void more_then___(t_box *box)
         }
         else if (pid == 0)
         {
-            t_redirection *red = box->node->command->redirection;
-            ft_redirection(box, red, files[i]);
-
+            get_input_output(box, box->node->command->redirection);
+            printf("input_file: %s\n", box->input_file);
+            printf("output_file: %s\n", box->output_file);
+        //     // open_files(box->node->command->redirection);
+            int Getfd_input__;
             if (box->input_file)
             {
-                int Getfd_input__ = open(box->input_file, O_RDONLY);
-                if (Getfd_input__ == -1)
-                {
-                    perror(box->input_file);
-                    exit(1);
-                }
+                Getfd_input__ = open(box->input_file, O_RDONLY);
                 if (dup2(Getfd_input__, 0) == -1)
                 {
                     perror("dup2 input failed");
@@ -71,7 +121,7 @@ void more_then___(t_box *box)
                 }
                 close(Getfd_input__);
             }
-            else if (prev_fd != -1)
+            if (prev_fd != -1)
             {
                 if (dup2(prev_fd, 0) == -1)
                 {
@@ -80,10 +130,9 @@ void more_then___(t_box *box)
                 }
                 close(prev_fd);
             }
-
+            int Getfd_output__;
             if (box->output_file)
             {
-                int Getfd_output__;
                 if (box->append)
                     Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_APPEND, 0666);
                 else
@@ -100,7 +149,7 @@ void more_then___(t_box *box)
                 }
                 close(Getfd_output__);
             }
-            else if (box->node->command->next)
+            if (box->node->command->next)
             {
                 if (dup2(fd[1], 1) == -1)
                 {
@@ -109,7 +158,6 @@ void more_then___(t_box *box)
                 }
                 close(fd[1]);
             }
-
             full_path = fully(r, box->node->command->options[0]);
             if (!full_path)
             {
@@ -122,7 +170,6 @@ void more_then___(t_box *box)
                 exit(1);
             }
         }
-
         if (prev_fd != -1)
             close(prev_fd);
         if (box->node->command->next)
@@ -130,9 +177,8 @@ void more_then___(t_box *box)
             close(fd[1]);
             prev_fd = fd[0];
         }
-        i++;
         box->node->command = box->node->command->next;
     }
-
-    while (wait(NULL) > 0);
+    while (wait(NULL) > 0)
+        ;
 }

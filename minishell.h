@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/30 10:15:52 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:53:27 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ void    ex_execve(t_box *box);
 void    put_output_file(t_box *box);
 void    put_input_file(t_box *box);
 int    n(char **str);
+void f(t_box *box);
 
 /*builtins*/
 
