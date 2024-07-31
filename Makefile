@@ -10,7 +10,7 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/execute/the_access.c execution/execute/fully.c \
 	   execution/execute/execute.c execution/execute/get_path__.c \
 	   execution/execute/check_heardoc.c execution/execute/random_file.c \
-	   execution/execute/run_all_heardocs.c \
+	   execution/execute/run_all_heardocs.c execution/execute/more_then___utils.c \
 	   execution/execute/ft_redirection.c execution/execute/more_then___.c \
 	   execution/builtins/builtins.c execution/filter_n.c execution/filter_v.c \
 	   execution/builtins/export/sort_env.c execution/builtins/export/add_env_variable.c \
