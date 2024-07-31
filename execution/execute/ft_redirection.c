@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/30 18:12:25 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:17:59 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ void ex___3(char *file)
 
 int ft_redirection(t_box *box, t_redirection *redirection, char* file)
 {
-    int flag_input = 1;
-    int flag_output = 1;
+    // int flag_input = 1;
+    // int flag_output = 1;
 
 	int i = 0;
     while (redirection)
@@ -134,7 +134,7 @@ int ft_redirection(t_box *box, t_redirection *redirection, char* file)
         else if(redirection->flag == 5)
         {
             box->output_file = redirection->str;
-            flag_output = 0;
+            // flag_output = 0;
             box->append = 400;
         }
         redirection = redirection->next;

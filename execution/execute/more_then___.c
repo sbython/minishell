@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/30 17:41:29 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/31 10:47:08 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void more_then___(t_box *box)
     int pid;
     char **files = run_all_heardocs(box);
     int i = 0;
+    int status = 0;
     while (box->node->command)
     {
         if (box->node->command->next)
@@ -108,7 +109,6 @@ void more_then___(t_box *box)
                 exit(1);
             }
         }
-
         if (prev_fd != -1)
             close(prev_fd);
         if (box->node->command->next)
@@ -120,5 +120,5 @@ void more_then___(t_box *box)
         box->node->command = box->node->command->next;
     }
 
-    while (wait(NULL) > 0);
+    while (waitpid(pid, &status, 0) > 0);
 }
