@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/17 11:45:46 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:11:32 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,8 @@ char	**get_path(t_env *all_env)
 	while (all_env)
 	{
 		if (ft_strncmp(all_env->name, "PATH", 4) == 0)
-		{
 			get_vale_from_path(all_env, all_env->vale);
-		}
-		// printf("%s\n", all_env)
-		// all_env = all_env->next;
+		all_env = all_env->next;
 	}
 	return (NULL);
 }

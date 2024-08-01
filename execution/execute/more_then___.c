@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/01 15:43:20 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:10:18 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void more_then___(t_box *box)
     int j = 0;
     int status = 0;
     files = run_all_heardocs(box);
+    while (files[i])
+    {
+        printf("%s\n", files[i]);
+        i++;
+    }
+    
     box->pid = malloc(sizeee(box) * sizeof(int *));
     box->input_file = NULL;
     box->output_file = NULL;

@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/01 16:51:09 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:29:58 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void exe_cvee(t_box *box)
     {
         r = get_path__(box->env);
         full_path = fully(r, box->node->command->options[0]);
-        if (!full_path || !ft_isalpha(full_path[0]))
+        if (!full_path)
         {
             ft_putstr_fd("Command '", 2);
             ft_putstr_fd(box->node->command->options[0], 2);
