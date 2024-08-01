@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/31 19:09:40 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:04:20 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_box
 	char*					export_val;
 	char*					export_name;
 	int						n;
+	int						*pid;
 }							t_box;
 
 //----------------msbai----------------//
@@ -150,6 +151,7 @@ char						*get_val(char *str, t_env *en, t_box *box);
 int							len_to(char *str, char c);
 void						add_back(t_env **node, t_env *new);
 t_env						*add_new_var(char *name, char *vale);
+
 //----------------zibnoukh----------------//
 
 void    execute(t_box *box);
@@ -158,7 +160,7 @@ char *fully(char **r, char *cmd);
 int    check_heardoc(t_redirection *redirection);
 char*   random_file(char *file, int c);
 char** run_all_heardocs(t_box *box);
-int ft_redirection(t_box *box, t_redirection *redirection, char* file);
+void ft_redirection(t_box *box, t_redirection *redirection, char* file);
 void    more_then___(t_box *box);
 int    builtins(char **ptr,t_box * box);
 char* filter_v(char *r) ;
@@ -174,6 +176,8 @@ void use_pipe(int fd[2]);
 void put_input_file(t_box *box);
 void put_output_file(t_box *box);
 int  put_builtins(char *ptr);
+int sizeee(t_box *box);
+void f(t_box *box);
 
 /*builtins*/
 

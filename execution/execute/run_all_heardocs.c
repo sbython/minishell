@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/30 15:40:04 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 00:38:19 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char **run_all_heardocs(t_box *box)
         perror("malloc");
         return NULL;
     }
-	
     while (tmp) 
 	{
         // int pid = fork();
@@ -82,8 +81,6 @@ char **run_all_heardocs(t_box *box)
 					}
 					i++;
 				}
-				else
-					last_file = ft_strdup("N");
 				red_tmp = red_tmp->next;
 			}
 			if (last_file) 
