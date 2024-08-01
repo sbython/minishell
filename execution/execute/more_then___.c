@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/01 18:10:18 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 19:17:23 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,13 @@ void more_then___(t_box *box)
     int j = 0;
     int status = 0;
     files = run_all_heardocs(box);
-    while (files[i])
-    {
-        printf("%s\n", files[i]);
-        i++;
-    }
-    
     box->pid = malloc(sizeee(box) * sizeof(int *));
     box->input_file = NULL;
     box->output_file = NULL;
     while (box->node->command)
     {
         if (box->node->command->next)
-        {
-            if (pipe(fd) == -1)
-            {
-                perror("pipe failed");
-                exit(1);
-            }
-        }
+            use_pipe(fd);
         box->pid[j] = fork();
         if (box->pid[j] == -1)
         {
@@ -50,9 +38,7 @@ void more_then___(t_box *box)
         {
             ft_redirection(box, box->node->command->redirection, files[i], 1);
             if (box->input_file)
-            {
                 put_input_file(box);
-            }
             else if (prev_fd != -1)
             {
                 if (dup2(prev_fd, 0) == -1)
@@ -63,9 +49,7 @@ void more_then___(t_box *box)
                 close(prev_fd);
             }
             if (box->output_file)
-            {
                 put_output_file(box);
-            }
             else if (box->node->command->next)
             {
                 if (dup2(fd[1], 1) == -1)
