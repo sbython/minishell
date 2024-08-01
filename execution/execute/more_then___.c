@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/01 15:17:29 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:43:20 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,10 @@ void more_then___(t_box *box)
         }
         else if (box->pid[j] == 0)
         {
-            ft_redirection(box, box->node->command->redirection, files[i]);
+            ft_redirection(box, box->node->command->redirection, files[i], 1);
             if (box->input_file)
             {
-                int Getfd_input__ = open(box->input_file, O_RDONLY);
-                if (dup2(Getfd_input__, 0) == -1)
-                {
-                    perror("dup2 input failed");
-                    exit(1);
-                }
-                close(Getfd_input__);
+                put_input_file(box);
             }
             else if (prev_fd != -1)
             {
@@ -64,17 +58,7 @@ void more_then___(t_box *box)
             }
             if (box->output_file)
             {
-                int Getfd_output__;
-                if (box->append)
-                    Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_APPEND, 0666);
-                else
-                    Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-                if (dup2(Getfd_output__, 1) == -1)
-                {
-                    perror("dup2 output failed");
-                    exit(1);
-                }
-                close(Getfd_output__);
+                put_output_file(box);
             }
             else if (box->node->command->next)
             {
@@ -100,5 +84,5 @@ void more_then___(t_box *box)
     }
     j = 0;
     while (waitpid(box->pid[j++], &status, 0) > 0);
-    // box->exit_val =  WEXITSTATUS(status);
+    // box->exit_val = WEXITSTATUS(status);
 }

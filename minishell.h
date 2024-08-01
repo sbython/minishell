@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/08/01 15:04:20 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:22:29 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ char *fully(char **r, char *cmd);
 int    check_heardoc(t_redirection *redirection);
 char*   random_file(char *file, int c);
 char** run_all_heardocs(t_box *box);
-void ft_redirection(t_box *box, t_redirection *redirection, char* file);
+void ft_redirection(t_box *box, t_redirection *redirection, char* file, int move);
 void    more_then___(t_box *box);
 int    builtins(char **ptr,t_box * box);
 char* filter_v(char *r) ;

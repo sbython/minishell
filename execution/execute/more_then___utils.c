@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/01 00:56:08 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:51:09 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ void put_output_file(t_box *box)
         Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_APPEND, 0666);
     else
         Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-    if (Getfd_output__ == -1)
-    {
-        perror(box->output_file);
-        exit(1);
-    }
     if (dup2(Getfd_output__, 1) == -1)
     {
         perror("dup2 output failed");
@@ -35,11 +30,6 @@ void put_output_file(t_box *box)
 void put_input_file(t_box *box)
 {
     int Getfd_input__ = open(box->input_file, O_RDONLY);
-    if (Getfd_input__ == -1)
-    {
-        perror(box->input_file);
-        exit(1);
-    }
     if (dup2(Getfd_input__, 0) == -1)
     {
         perror("dup2 input failed");
@@ -90,7 +80,7 @@ void exe_cvee(t_box *box)
     {
         r = get_path__(box->env);
         full_path = fully(r, box->node->command->options[0]);
-        if (!full_path)
+        if (!full_path || !ft_isalpha(full_path[0]))
         {
             ft_putstr_fd("Command '", 2);
             ft_putstr_fd(box->node->command->options[0], 2);

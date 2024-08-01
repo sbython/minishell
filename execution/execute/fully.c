@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/17 13:49:47 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:50:01 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@ char	*fully(char **r, char *cmd)
 	i = 0;
 	while (r[i] != NULL)
 	{
-		str = ft_strjoin(r[i], ft_strjoin("/", cmd));
-		if (access(str, X_OK) == 0)
-			return (str);
+		if (access(cmd, X_OK) == 0)
+			return cmd;
+		else
+		{
+			str = ft_strjoin(r[i], ft_strjoin("/", cmd));
+			if (access(str, X_OK) == 0)
+				return (str);
+		}
 		i++;
 	}
 	return (NULL);

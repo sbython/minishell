@@ -6,19 +6,20 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/01 15:16:42 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:22:20 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void ex___2(char *file)
+void ex___2(char *file, int move)
 {
     int fd = open(file, O_RDONLY, 0666);
     if (fd == -1)
     {
         perror(file);
-        exit(1);
+        if(move)
+             exit(1);
     }
     close(fd);
 }
@@ -34,7 +35,7 @@ void ex___3(char *file)
     close(fd);
 }
 
-void ft_redirection(t_box *box, t_redirection *redirection, char* file)
+void ft_redirection(t_box *box, t_redirection *redirection, char* file, int move)
 {
     char *out_put = NULL;
     char *in_put = NULL;
@@ -45,7 +46,7 @@ void ft_redirection(t_box *box, t_redirection *redirection, char* file)
             if(redirection->str)
             {
                 in_put = redirection->str;
-                ex___2(in_put);
+                ex___2(in_put, move);
             }
             else
                 in_put = NULL;
