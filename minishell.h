@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/22 13:15:18 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/23 21:57:23 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char						*ft_dchr(const char *s, int c);
 int							ft_isdelimiter(char *str);
 char						*replace(t_com *str, t_box *box);
 int							slen(char *str);
-char						**ft_newsplit(char *s);
+char						**ft_newsplit(char *s, int i);
 void						free_2ptr(char **p);
 t_com						*last_node(t_com *node);
 void						sp(t_com **list, char *str, t_com *last,
@@ -126,7 +126,6 @@ void						remove_(char *str);
 char						*get_to(char *str, char c);
 char						*get_val(char *str, t_env *en, t_box *box);
 int							len_to(char *str, char c);
-char						*new_replace(char *str, t_box *box);
 //----------------zibnoukh----------------//
 
 /*builtins*/

@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/22 20:46:48 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/24 14:47:30 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,18 @@ void	shell_loop(char **en)
 	free_env(lst.env);
 	exit(lst.exit_val);
 }
+#include <sys/time.h>
+
+long get_time()
+{
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
 
 int	main(int ac, char **av, char **env)
 {
+
 	(void)av;
 	if (ac != 1)
 	{

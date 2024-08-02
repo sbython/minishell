@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:23 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/22 14:57:25 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/23 21:56:14 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	parsing(t_box *box)
 			box);
 		return (1);
 	}
-	box->ptr = ft_newsplit(box->cmd);
+	box->ptr = ft_newsplit(box->cmd, 1);
 	fill_list(box->ptr, box);
 	if (collect_string(box))
 		return (1);

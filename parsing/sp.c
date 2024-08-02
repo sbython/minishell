@@ -6,7 +6,7 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 01:49:24 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/22 15:03:08 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/23 21:55:31 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	sp(t_com **list, char *str, t_com *last, t_com **n_box)
 	t_com	*l;
 
 	ls = malloc(sizeof(t_box));
-	ptr = ft_newsplit(str);
+	ptr = ft_newsplit(str, 0);
 	fill_list(ptr, ls);
 	free_2ptr(ptr);
 	l = ls->l_com;

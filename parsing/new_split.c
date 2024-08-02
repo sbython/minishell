@@ -6,13 +6,13 @@
 /*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 05:06:49 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/20 11:34:22 by msbai            ###   ########.fr       */
+/*   Updated: 2024/07/23 21:57:42 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**ft_newsplit(char *s)
+char	**ft_newsplit(char *s, int w )
 {
 	char	**ptr;
 	char	*start;
@@ -23,7 +23,7 @@ char	**ft_newsplit(char *s)
 	start = s;
 	while (s[i])
 	{
-		if (s[i] == '\'' || s[i] == '"')
+		if ((s[i] == '\'' || s[i] == '"') && w)
 			i += slen(s + i);
 		else
 			i++;
