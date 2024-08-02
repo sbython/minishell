@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/01 19:17:23 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:34:07 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void more_then___(t_box *box)
     }
     j = 0;
     while (waitpid(box->pid[j++], &status, 0) > 0);
-    // box->exit_val = WEXITSTATUS(status);
+    box->exit_val = WEXITSTATUS(status);
 }
