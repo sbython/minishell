@@ -6,13 +6,13 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/02 12:34:07 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:32:52 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void more_then___(t_box *box)
+int more_then___(t_box *box)
 {
     int fd[2];
     int prev_fd = -1;
@@ -36,6 +36,7 @@ void more_then___(t_box *box)
         }
         else if (box->pid[j] == 0)
         {
+            handlesignal(2, box);
             ft_redirection(box, box->node->command->redirection, files[i], 1);
             if (box->input_file)
                 put_input_file(box);
@@ -74,5 +75,12 @@ void more_then___(t_box *box)
     }
     j = 0;
     while (waitpid(box->pid[j++], &status, 0) > 0);
-    box->exit_val = WEXITSTATUS(status);
+    if (WIFSIGNALED(status))
+    {
+        write(0, "\n", 1);
+        box->exit_val = WTERMSIG(status) + 128;
+    }
+    else
+        box->exit_val = WEXITSTATUS(status);
+    return box->exit_val;
 }

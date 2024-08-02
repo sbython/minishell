@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/01 15:36:22 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:30:07 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,13 @@ char **run_all_heardocs(t_box *box)
 			if (last_file) 
 				files[j++] = last_file;
 			// exit(0);
-		// exit(0);
 		// }
 		tmp = tmp->next;
     }
 
 	// while (wait(NULL) > 0)
 	// {
-
 	// };
-
     files[j] = NULL;
     return files;
 }

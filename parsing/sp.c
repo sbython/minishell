@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 04:45:20 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/07/23 11:01:15 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:15:20 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,11 @@ void	sp(t_com **list, char *str, t_com *last, t_com **n_box)
 	for25line(list, ls, last, n_box);
 	free(ls);
 	free(str);
+}
+char find_(char *p)
+{
+	if (ft_strchr(p, '\''))
+		return ('"');
+	else
+		return ('\'');
 }

@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/02 14:38:11 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:46:00 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,19 @@ void exe_cvee(t_box *box)
 
     if(put_builtins(box->node->command->options[0]))
     {
-        builtins(box->node->command->options, box);
+        builtins(box->node->command->options, box, 0);
         exit(0);
     }
     else
     {
         r = get_path__(box->env);
         full_path = fully(r, box->node->command->options[0]);
-        if (!full_path)
+        if (!full_path || (ft_strncmp(box->node->command->options[0], "", -1) == 0))
         {
             ft_putstr_fd("Command '", 2);
             ft_putstr_fd(box->node->command->options[0], 2);
             ft_putstr_fd("' not found\n", 2);
-            exit(0);
+            exit(127);
         }
         if (execve(full_path, box->node->command->options, box->full_env) == -1)
         {

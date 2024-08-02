@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/08/01 15:22:29 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:47:00 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,18 +151,18 @@ char						*get_val(char *str, t_env *en, t_box *box);
 int							len_to(char *str, char c);
 void						add_back(t_env **node, t_env *new);
 t_env						*add_new_var(char *name, char *vale);
-
+char						find_(char *p);
 //----------------zibnoukh----------------//
 
-void    execute(t_box *box);
+int    execute(t_box *box);
 char**    get_path__(t_env *all_env);
 char *fully(char **r, char *cmd);
 int    check_heardoc(t_redirection *redirection);
 char*   random_file(char *file, int c);
 char** run_all_heardocs(t_box *box);
 void ft_redirection(t_box *box, t_redirection *redirection, char* file, int move);
-void    more_then___(t_box *box);
-int    builtins(char **ptr,t_box * box);
+int    more_then___(t_box *box);
+int    builtins(char **ptr,t_box * box, int val);
 char* filter_v(char *r) ;
 char* filter_n(char *r);
 t_env*	sort_env(t_env *env);
@@ -177,7 +177,6 @@ void put_input_file(t_box *box);
 void put_output_file(t_box *box);
 int  put_builtins(char *ptr);
 int sizeee(t_box *box);
-void f(t_box *box);
 
 /*builtins*/
 
@@ -185,7 +184,7 @@ int    rebuild_cd(char **ptr, t_env *env__);
 int    rebuild_echo(char **ptr);
 int    rebuild_pwd(char **ptr);
 int    rebuild_env(t_env *env__);
-int    rebuild_exit(char **ptr, t_box *box);
+int	   rebuild_exit(char **ptr, t_box *box, int val);
 int    rebuild_export(char **ptr, t_env *env);
 int    rebuild_unset(char **ptr, t_box *box);
 
