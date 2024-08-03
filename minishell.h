@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/08/02 19:47:00 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:35:00 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_box
 	char*					export_name;
 	int						n;
 	int						*pid;
+	char**					files;
+	char*					new_file_val;
 }							t_box;
 
 //----------------msbai----------------//
@@ -159,7 +161,7 @@ char**    get_path__(t_env *all_env);
 char *fully(char **r, char *cmd);
 int    check_heardoc(t_redirection *redirection);
 char*   random_file(char *file, int c);
-char** run_all_heardocs(t_box *box);
+int run_all_heardocs(t_box *box);
 void ft_redirection(t_box *box, t_redirection *redirection, char* file, int move);
 int    more_then___(t_box *box);
 int    builtins(char **ptr,t_box * box, int val);

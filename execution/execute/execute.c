@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/02 19:57:02 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:35:40 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int sizeee(t_box *box)
 
 int    execute(t_box *box)
 {
-    char** files;
-    files = NULL;
     int status;
 
     status = 0;
@@ -37,8 +35,8 @@ int    execute(t_box *box)
         status = builtins(box->node->command->options, box, 1);
     else if(sizeee(box) == 1 && box->node->command->options && put_builtins(box->node->command->options[0]) && box->node->command->redirection)
     {
-        files = run_all_heardocs(box);
-        ft_redirection(box, box->node->command->redirection, files[0], 0);
+        run_all_heardocs(box);
+        ft_redirection(box, box->node->command->redirection, box->files[0], 0);
         status = builtins(box->node->command->options, box, 1);
     }
     else

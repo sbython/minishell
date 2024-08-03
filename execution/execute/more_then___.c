@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/02 19:32:52 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:56:06 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int more_then___(t_box *box)
 {
     int fd[2];
     int prev_fd = -1;
-    char **files;
     int i = 0;
     int j = 0;
     int status = 0;
-    files = run_all_heardocs(box);
+    if (run_all_heardocs(box))
+        return (box->exit_val);
     box->pid = malloc(sizeee(box) * sizeof(int *));
     box->input_file = NULL;
     box->output_file = NULL;
@@ -37,7 +37,7 @@ int more_then___(t_box *box)
         else if (box->pid[j] == 0)
         {
             handlesignal(2, box);
-            ft_redirection(box, box->node->command->redirection, files[i], 1);
+            ft_redirection(box, box->node->command->redirection, box->files[i], 1);
             if (box->input_file)
                 put_input_file(box);
             else if (prev_fd != -1)
