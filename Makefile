@@ -15,6 +15,7 @@ SRC_E= execution/get_cmd.c execution/builtins/cd/cd.c execution/builtins/pwd/pwd
 	   execution/builtins/builtins.c execution/filter_n.c execution/filter_v.c \
 	   execution/builtins/export/sort_env.c execution/builtins/export/add_env_variable.c \
 	   execution/builtins/export/ft_utils.c execution/execute/how_her.c \
+	   execution/execute/test.c \
 
 SRC_P= parsing/minishell.c \
 		parsing/prompt.c \

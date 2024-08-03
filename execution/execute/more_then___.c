@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/03 14:56:06 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/03 15:32:57 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,13 @@ int more_then___(t_box *box)
     while (box->node->command)
     {
         if (box->node->command->next)
-            use_pipe(fd);
+        {
+            if (pipe(fd) == -1)
+            {
+                perror("pipe failed");
+                exit(1);
+            }
+        }
         box->pid[j] = fork();
         if (box->pid[j] == -1)
         {
@@ -39,7 +45,15 @@ int more_then___(t_box *box)
             handlesignal(2, box);
             ft_redirection(box, box->node->command->redirection, box->files[i], 1);
             if (box->input_file)
-                put_input_file(box);
+            {
+                int Getfd_input__ = open(box->input_file, O_RDONLY);
+                if (dup2(Getfd_input__, 0) == -1)
+                {
+                    perror("dup2 input failed");
+                    exit(1);
+                }
+                close(Getfd_input__);
+            }
             else if (prev_fd != -1)
             {
                 if (dup2(prev_fd, 0) == -1)
@@ -50,7 +64,19 @@ int more_then___(t_box *box)
                 close(prev_fd);
             }
             if (box->output_file)
-                put_output_file(box);
+            {
+                int Getfd_output__;
+                if (box->append)
+                    Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_APPEND, 0666);
+                else
+                    Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+                if (dup2(Getfd_output__, 1) == -1)
+                {
+                    perror("dup2 output failed");
+                    exit(1);
+                }
+                close(Getfd_output__);
+            }
             else if (box->node->command->next)
             {
                 if (dup2(fd[1], 1) == -1)
