@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/03 15:56:28 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/03 16:21:22 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,43 +41,25 @@ void ft_redirection(t_box *box, t_redirection *redirection, char* file, int move
     char *in_put = NULL;
     while (redirection)
     {
-        if(redirection->flag == 2)
+        if (redirection->flag == 2) // Input redirection '<'
         {
-            if(redirection->str)
-            {
-                in_put = redirection->str;
-                ex___2(in_put, move);
-            }
-            else
-                in_put = NULL;
+            in_put = redirection->str;
+            ex___2(in_put, move);
         }
-        else if(redirection->flag == 3)
+        else if (redirection->flag == 3) // Output redirection '>'
         {
-            if(redirection->str)
-            {
-                out_put = redirection->str;
-                ex___3(out_put);
-            }
-            else
-                out_put = NULL;
+            out_put = redirection->str;
+            ex___3(out_put);
         }
-        else if(redirection->flag == 4)
+        else if (redirection->flag == 4) // Heredoc '<<'
         {
-            if(redirection->str)
-                in_put = file;
-            else
-                in_put = NULL;
+            in_put = file;
         }
-        else if(redirection->flag == 5)
+        else if (redirection->flag == 5) // Append '>>'
         {
-            if(redirection->str)
-            {
-                out_put = redirection->str;
-                box->append = 400;
-                ex___3(out_put);
-            }
-            else
-                out_put = NULL;
+            out_put = redirection->str;
+            box->append = 400;
+            ex___3(out_put);
         }
         redirection = redirection->next;
     }
