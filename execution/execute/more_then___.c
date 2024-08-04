@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/03 16:16:01 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/04 17:19:29 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int more_then___(t_box *box)
         {
             handlesignal(2, box);
             ft_redirection(box, box->node->command->redirection, box->files[i], 1);
-            // printf("box->input_file: %s\n", box->input_file);
-            // printf("box->output_file: %s\n", box->output_file);
             if (box->input_file)
             {
                 int Getfd_input__ = open(box->input_file, O_RDONLY);

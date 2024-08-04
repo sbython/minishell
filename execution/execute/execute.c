@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/03 16:40:54 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/04 17:20:55 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ int    execute(t_box *box)
     }
     else
         status = more_then___(box);
-    // test(box);
     return status;
 }

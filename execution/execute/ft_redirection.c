@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/03 16:21:22 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/04 17:21:08 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ void ft_redirection(t_box *box, t_redirection *redirection, char* file, int move
     char *in_put = NULL;
     while (redirection)
     {
-        if (redirection->flag == 2) // Input redirection '<'
+        if (redirection->flag == 2)
         {
             in_put = redirection->str;
             ex___2(in_put, move);
         }
-        else if (redirection->flag == 3) // Output redirection '>'
+        else if (redirection->flag == 3)
         {
             out_put = redirection->str;
             ex___3(out_put);
         }
-        else if (redirection->flag == 4) // Heredoc '<<'
+        else if (redirection->flag == 4)
         {
             in_put = file;
         }
-        else if (redirection->flag == 5) // Append '>>'
+        else if (redirection->flag == 5)
         {
             out_put = redirection->str;
             box->append = 400;
