@@ -6,13 +6,13 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/03 14:37:40 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/04 19:45:19 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	ft___(t_box* box ,char *file, int i)
+int	run_her(t_box* box ,char *file, int i)
 {
 	char	*new_file;
 	char	*cpy_str_val;
@@ -43,6 +43,7 @@ int	ft___(t_box* box ,char *file, int i)
 			write(fd, line, ft_strlen(line));
 			write(fd, "\n", 1);
 		}
+		free(line);
 		exit(0);
 	}
 	waitpid(box->pid[j], &status, 0);
@@ -53,6 +54,8 @@ int	ft___(t_box* box ,char *file, int i)
 		write(0, "\n", 1);
         box->exit_val = 130;
     }
+	free(cpy_str_val);
+	free(box->pid);
     return box->exit_val;
 }
 
@@ -78,7 +81,7 @@ int run_all_heardocs(t_box *box)
 			{ 
 				if (last_file) 
 					free(last_file);
-				if(ft___(box, red_tmp->str, i))
+				if(run_her(box, red_tmp->str, i))
 					return 1;
 				last_file = box->new_file_val;
 				if (!last_file) 
