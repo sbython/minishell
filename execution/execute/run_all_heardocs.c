@@ -6,18 +6,18 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/04 19:45:19 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/04 19:55:20 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	run_her(t_box* box ,char *file, int i)
+int	run_her(t_box* box ,char *file)
 {
 	char	*new_file;
 	char	*cpy_str_val;
 	cpy_str_val = ft_strdup(file);
-	new_file = random_file(cpy_str_val, i);
+	new_file = random_file(cpy_str_val);
 	int status = 0;
 	int j = 0;
 	box->pid = malloc(sizeee(box) * sizeof(int *));
@@ -54,6 +54,8 @@ int	run_her(t_box* box ,char *file, int i)
 		write(0, "\n", 1);
         box->exit_val = 130;
     }
+	if(!new_file)
+		free(new_file);
 	free(cpy_str_val);
 	free(box->pid);
     return box->exit_val;
@@ -61,7 +63,6 @@ int	run_her(t_box* box ,char *file, int i)
 
 int run_all_heardocs(t_box *box) 
 {
-    int i = 0;
     int j = 0;
 	int k = 0;
     t_command *tmp = box->node->command;
@@ -81,7 +82,7 @@ int run_all_heardocs(t_box *box)
 			{ 
 				if (last_file) 
 					free(last_file);
-				if(run_her(box, red_tmp->str, i))
+				if(run_her(box, red_tmp->str))
 					return 1;
 				last_file = box->new_file_val;
 				if (!last_file) 
@@ -95,7 +96,6 @@ int run_all_heardocs(t_box *box)
 					free(r);
 					return 0;
 				}
-				i++;
 			}
 			red_tmp = red_tmp->next;
 		}
@@ -105,5 +105,6 @@ int run_all_heardocs(t_box *box)
     }
     r[j] = NULL;
 	box->files = r;
+	free(r);
 	return (0);
 }

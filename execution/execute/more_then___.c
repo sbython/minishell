@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/04 19:39:49 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/04 20:01:31 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int more_then___(t_box *box)
     int i = 0;
     int j = 0;
     int status = 0;
+    box->files = NULL;
     if (run_all_heardocs(box))
         return (box->exit_val);
     int the_size = sizeee(box);
@@ -117,5 +118,6 @@ int more_then___(t_box *box)
             box->exit_val = WEXITSTATUS(status);
         j++;
     }
+    free(box->pid);
     return box->exit_val;
 }

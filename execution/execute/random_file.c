@@ -6,19 +6,17 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/04 19:46:38 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/04 19:48:07 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*random_file(char *file, int c)
+char	*random_file(char *file)
 {
-	char	*new_file;
-	char	*join_file;
+	char	*new_file = NULL;
+	char	*join_file = NULL;
 	int		i;
-	char	*e;
-	char	*put;
 
 	i = 0;
 	new_file = malloc(sizeof(file) + 1);
