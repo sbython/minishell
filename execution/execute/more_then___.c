@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/04 17:26:49 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/04 19:39:49 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int more_then___(t_box *box)
                 }
                 close(fd[1]);
             }
-            exe_cvee(box);
+            exe_cvee(box, cmd);
         }
         if (prev_fd != -1)
             close(prev_fd);

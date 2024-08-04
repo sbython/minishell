@@ -1,9 +1,8 @@
-10
-12
+1
 2
-4
-6
-8
+a
+b
+c
 execution
 libft
 Makefile

@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/08/03 15:08:18 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/04 19:38:44 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ t_env	*envchr(t_env *env__, char *name);
 int    ft_utils(char *ptr);
 t_env	*cpy_list(t_env *env);
 int     how_her(t_box *box);
-void exe_cvee(t_box *box);
+void exe_cvee(t_box *box, t_command* cmd);
 void use_pipe(int fd[2]);
 void put_input_file(t_box *box);
 void put_output_file(t_box *box);
