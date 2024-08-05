@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:34:21 by zibnoukh          #+#    #+#             */
-/*   Updated: 2024/08/04 19:48:15 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:34:27 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ typedef struct s_redirection
 
 typedef struct s_command
 {
+	char 					*input_file;
+	char**					files;
+    char 					*output_file;
 	t_redirection			*redirection;
 	char					**options;
 	struct s_command		*next;
@@ -95,8 +98,6 @@ typedef struct s_box
 	char					**full_env;
 	int						done_heardoc;
 	int						MAX_COMMANDS;
-	char 					*input_file;
-    char 					*output_file;
 	char					*speinput_file;
 	int						valid_her;
 	int						valid_flag;
@@ -106,7 +107,6 @@ typedef struct s_box
 	char*					export_name;
 	int						n;
 	int						*pid;
-	char**					files;
 	char*					new_file_val;
 }							t_box;
 
@@ -162,7 +162,7 @@ char *fully(char **r, char *cmd);
 int    check_heardoc(t_redirection *redirection);
 char*   random_file(char *file);
 int run_all_heardocs(t_box *box);
-void ft_redirection(t_box *box, t_redirection *redirection, char* file, int move);
+void ft_redirection(t_command *cmd, t_redirection *redirection, char* file, int move);
 int    more_then___(t_box *box);
 int    builtins(char **ptr,t_box * box, int val);
 char* filter_v(char *r) ;
@@ -179,7 +179,7 @@ void put_input_file(t_box *box);
 void put_output_file(t_box *box);
 int  put_builtins(char *ptr);
 int sizeee(t_box *box);
-void    test(t_box *box);
+int    test(t_box *box);
 
 /*builtins*/
 

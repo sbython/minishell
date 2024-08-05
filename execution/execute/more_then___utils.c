@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/04 19:38:22 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:36:17 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,30 @@
 
 void put_output_file(t_box *box)
 {
-    int Getfd_output__;
-    if (box->append)
-        Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_APPEND, 0666);
-    else
-        Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-    if (dup2(Getfd_output__, 1) == -1)
-    {
-        perror("dup2 output failed");
-        exit(1);
-    }
-    close(Getfd_output__);
+    (void)box;
+    // int Getfd_output__;
+    // if (box->append)
+    //     Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_APPEND, 0666);
+    // else
+    //     Getfd_output__ = open(box->output_file, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+    // if (dup2(Getfd_output__, 1) == -1)
+    // {
+    //     perror("dup2 output failed");
+    //     exit(1);
+    // }
+    // close(Getfd_output__);
 }
 
 void put_input_file(t_box *box)
 {
-    int Getfd_input__ = open(box->input_file, O_RDONLY);
-    if (dup2(Getfd_input__, 0) == -1)
-    {
-        perror("dup2 input failed");
-        exit(1);
-    }
-    close(Getfd_input__);
+    (void)box;
+    // int Getfd_input__ = open(box->input_file, O_RDONLY);
+    // if (dup2(Getfd_input__, 0) == -1)
+    // {
+    //     perror("dup2 input failed");
+    //     exit(1);
+    // }
+    // close(Getfd_input__);
 }
 
 void use_pipe(int fd[2])

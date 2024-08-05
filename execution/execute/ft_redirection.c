@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/04 17:21:08 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:27:31 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void ex___3(char *file)
     close(fd);
 }
 
-void ft_redirection(t_box *box, t_redirection *redirection, char* file, int move)
+void ft_redirection(t_command *cmd, t_redirection *redirection, char* file, int move)
 {
     char *out_put = NULL;
     char *in_put = NULL;
@@ -58,11 +58,11 @@ void ft_redirection(t_box *box, t_redirection *redirection, char* file, int move
         else if (redirection->flag == 5)
         {
             out_put = redirection->str;
-            box->append = 400;
+            cmd->append = 400;
             ex___3(out_put);
         }
         redirection = redirection->next;
     }
-    box->input_file = in_put;
-    box->output_file = out_put;
+    cmd->input_file = in_put;
+    cmd->output_file = out_put;
 }
