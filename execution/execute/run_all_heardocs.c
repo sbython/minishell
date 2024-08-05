@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/05 14:25:28 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:04:10 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	run_her(t_box* box ,char *file)
 			}
 			write(fd, line, ft_strlen(line));
 			write(fd, "\n", 1);
+			free(line);
 		}
-		free(line);
 		exit(0);
 	}
 	waitpid(box->pid[j], &status, 0);
