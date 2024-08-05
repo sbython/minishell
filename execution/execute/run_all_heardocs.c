@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/05 13:35:26 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:25:28 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,12 @@ int	run_her(t_box* box ,char *file)
 		write(0, "\n", 1);
         box->exit_val = 130;
     }
-	if(!new_file)
-		free(new_file);
 	free(cpy_str_val);
 	free(box->pid);
     return box->exit_val;
 }
 
-int run_all_heardocs(t_box *box) 
+int run_all_heardocs(t_command*cmd, t_box *box) 
 {
     int j = 0;
 	int k = 0;
@@ -104,7 +102,6 @@ int run_all_heardocs(t_box *box)
 		tmp = tmp->next;
     }
     r[j] = NULL;
-	// box->files = r;
-	free(r);
+	cmd->files = r;
 	return (0);
 }
