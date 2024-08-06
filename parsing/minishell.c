@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:12:40 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/03 12:35:53 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:36:24 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ void    handlesignal(int i, t_box *lst)
     {
         signal(SIGINT, SIG_DFL);
         signal(SIGQUIT, SIG_DFL);
-    }
-    else if (i == 4)
-    {
-        signal(SIGINT, SIG_DFL);
-        signal(SIGQUIT, SIG_IGN);
     }
     else
     {

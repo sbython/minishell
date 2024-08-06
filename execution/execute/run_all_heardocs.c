@@ -6,102 +6,96 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/05 15:04:10 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:36:22 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	run_her(t_box* box ,char *file)
+char	*ft___(char *file, int i)
 {
-	char	*new_file;
 	char	*cpy_str_val;
+	char	*new_file;
+	char	*promptt;
+	int		fd;
+	char	*line;
+
 	cpy_str_val = ft_strdup(file);
-	new_file = random_file(cpy_str_val);
-	int status = 0;
-	int j = 0;
-	box->pid = malloc(sizeee(box) * sizeof(int *));
-	box->pid[j] = fork();
-	if(box->pid[j] == -1)
+	new_file = random_file(cpy_str_val, i);
+	promptt = "> ";
+	fd = open(new_file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	while ((line = readline(promptt)) != NULL)
 	{
-		perror("fork failed");
-        exit(1);
-	}
-	else if (box->pid[j] == 0)
-	{
-		handlesignal(4, box);
-		int		fd;
-		char	*line;
-		fd = open(new_file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-		while ((line = readline("> ")) != NULL)
+		if (ft_strncmp(line, file, ft_strlen(file)) == 0
+			&& ft_strlen(file) == ft_strlen(line))
 		{
-			if (ft_strncmp(line, file, ft_strlen(file)) == 0
-				&& ft_strlen(file) == ft_strlen(line))
-			{
-				break ;
-			}
-			write(fd, line, ft_strlen(line));
-			write(fd, "\n", 1);
-			free(line);
+			break ;
 		}
-		exit(0);
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
 	}
-	waitpid(box->pid[j], &status, 0);
-	box->new_file_val = new_file;
-	box->exit_val = 0;
-	if (WIFSIGNALED(status))
-    {
-		write(0, "\n", 1);
-        box->exit_val = 130;
-    }
-	free(cpy_str_val);
-	free(box->pid);
-    return box->exit_val;
+	return (new_file);
 }
 
-int run_all_heardocs(t_command*cmd, t_box *box) 
+char **run_all_heardocs(t_box *box) 
 {
+    int i = 0;
     int j = 0;
 	int k = 0;
     t_command *tmp = box->node->command;
-    char **r = (char **)malloc(sizeof(char *) * (how_her(box) + 1));
-    if (!r) 
+    char **files = (char **)malloc(sizeof(char *) * (how_her(box) + 1));
+    if (!files) 
 	{
         perror("malloc");
-        return 0;
+        return NULL;
     }
     while (tmp) 
 	{
-		t_redirection *red_tmp = tmp->redirection;
-		char *last_file = NULL;
-		while (red_tmp) 
-		{
-			if (red_tmp->flag == 4) 
-			{ 
-				if (last_file) 
-					free(last_file);
-				if(run_her(box, red_tmp->str))
-					return 1;
-				last_file = box->new_file_val;
-				if (!last_file) 
-				{
-					k = 0;
-					while (k < j) 
+        // int pid = fork();
+        // if(pid == -1)
+        // {
+        //     perror("fork failed");
+        //     exit(0);
+        // }
+        // else if (pid == 0)
+        // {
+			t_redirection *red_tmp = tmp->redirection;
+			char *last_file = NULL;
+			while (red_tmp) 
+			{
+				if (red_tmp->flag == 4) 
+				{ 
+					if (last_file) 
+						free(last_file);
+					last_file = ft___(red_tmp->str, i);
+					if (!last_file) 
 					{
-						free(r[k]);
-						k++;
+						k = 0;
+						while (k < j) 
+						{
+							free(files[k]);
+							k++;
+						}
+						free(files);
+						return NULL;
 					}
-					free(r);
-					return 0;
+					i++;
 				}
+				red_tmp = red_tmp->next;
 			}
-			red_tmp = red_tmp->next;
-		}
-		if (last_file) 
-			r[j++] = last_file;
+			if (last_file) 
+				files[j++] = last_file;
+			// exit(0);
+		// exit(0);
+		// }
 		tmp = tmp->next;
     }
-    r[j] = NULL;
-	cmd->files = r;
-	return (0);
+
+	// while (wait(NULL) > 0)
+	// {
+
+	// };
+
+    files[j] = NULL;
+    return files;
 }

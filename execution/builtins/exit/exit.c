@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/02 19:46:33 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:56:38 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,24 @@ int	not_numeric(char *s)
 	}
 	return (0);
 }
-
-int	rebuild_exit(char **ptr, t_box *box, int val)
+int check_max(ssize_t c , char *s)
+{
+	if(!s)
+		return 0;
+	return(!((*s == '-' && c < 0) || (*s != '-' && c > 0)));
+}
+int	rebuild_exit(char **ptr, t_box *box)
 {
 	ssize_t	c;
 	
 	c = 0;
-	if(val)
-		ft_putstr_fd("exit\n", 1);
+	ft_putstr_fd("exit\n", 1);
 	if (ptr[1])
 		c = ft_latoi(ptr[1]);
 	else
 		c = 0;
-	if (c < (ssize_t)LONG_MIN || c > (ssize_t)LONG_MAX || (ptr[1]
-			&& ft_strlen(ptr[1]) > 20))
+	printf("%ld\n", c);
+	if (check_max(c , ptr[1])|| (ptr[1] && ft_strlen(ptr[1]) > 20))
 	{
 		ft_putendl_fd("exit: numeric argument required", 2);
 	}
@@ -78,7 +82,7 @@ int	rebuild_exit(char **ptr, t_box *box, int val)
 	}
 	else if (ptr[1] && not_numeric(ptr[1]))
 		ft_putendl_fd("exit: numeric argument required", 2);
-	if (not_numeric(ptr[1]) || c < (ssize_t)LONG_MIN || c > (ssize_t)LONG_MAX
+	if (not_numeric(ptr[1]) || check_max(c , ptr[1])
 		|| (ptr[1] && ft_strlen(ptr[1]) > 20))
 		c = 2;
 	free_all(box);

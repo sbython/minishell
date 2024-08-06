@@ -6,7 +6,7 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:59 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/02 19:13:00 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/23 11:01:02 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,22 @@ char	*str_replace(char *s1, char *rep, char *with)
 {
 	size_t	len[3];
 	char	*str[4];
-	char	p;
 
-	p = find_(with);
 	if (!rep || !*rep)
 		return (s1);
 	len[0] = ft_strlen(rep);
 	len[1] = ft_strlen(with);
-	str[0] = ft_calloc(ft_strlen(s1) + (len[1] - len[0]) + 3, sizeof(char));
+	str[0] = ft_calloc(ft_strlen(s1) + (len[1] - len[0]) + 1, sizeof(char));
 	str[3] = s1;
 	str[1] = str[0];
 	str[2] = ft_dstr(s1, rep);
 	len[2] = str[2] - s1;
 	ft_memcpy(str[1], s1, len[2]);
 	str[1] += len[2];
-	str[1][0] = p;
-	ft_memcpy(++str[1], with, len[1]);
+	ft_memcpy(str[1], with, len[1]);
 	str[1] += len[1];
-	str[1][0] = p;
 	s1 = str[2] + len[0];
-	ft_strlcpy(++str[1], s1, -1);
+	ft_strlcpy(str[1], s1, -1);
 	free(str[3]);
 	return (str[0]);
 }

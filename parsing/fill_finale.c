@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_finale.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:56:03 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/02 18:46:58 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/07/21 14:17:23 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	take_it(t_redirection **re, t_com *ls)
 
 void	for25line2(t_com **ls, t_command **command)
 {
-	if ((*ls)->type < 1 )
+	if ((*ls)->type < 1)
 		(*command)->options = join2pointer((*command)->options, (*ls)->com);
 	else if ((*ls)->type > 1)
 	{

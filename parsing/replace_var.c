@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msbai <msbai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/07/23 11:00:32 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:16:29 by msbai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,87 +68,88 @@ char	*get_val(char *str, t_env *en, t_box *box)
 char	*replace(t_com *str, t_box *box)
 {
 	char	*ptr[5];
-	// char	*li;
-	// int		i;
+	char	*li;
+	int		i;
 	
 	str->type = -1;
-	// ptr[1] = str->com;
-	// ptr[2] = ft_strdup("");
-	// i = 0;
-	// li = ft_strdup(" ");
-	// while (ptr[1] && ptr[1][i])
-	// {
-	// 	if (ptr[1][i] == '\'')
-	// 	{
-	// 		ptr[3] = ft_substr(&ptr[1][i + 1], 0, slen(&ptr[1][i]) - 2);
-	// 		i += slen(&ptr[1][i]);
-	// 		join(&ptr[2], ptr[3],1);
-	// 	}
-	// 	else if (ptr[1][i] == '\"')
-	// 	{
-	// 		i++;
-	// 		while (ptr[1][i] != '\"')
-	// 		{
-	// 			if (ptr[1][i] == '$')
-	// 			{
-	// 				ptr[3] = get_to(&ptr[1][i], ' ');
-	// 				ptr[4] = get_val(ptr[3] + 1, box->env, box);
-	// 				i += ft_strlen(ptr[3]);
-	// 				free(ptr[3]);
-	// 				join(&ptr[2], ptr[4],1);
-	// 			}
-	// 			else
-	// 			{
-	// 				*li = ptr[1][i];
-	// 				join(&ptr[2], li,0);
-	// 				i++;
-	// 			}
-				
-	// 		}
-	// 		i++;
-	// 	}
-	// 	else if (ptr[1][i] == '$')
-	// 	{
-	// 		ptr[3] = get_to(&ptr[1][i], ' ');
-	// 		ptr[4] = get_val(ptr[3] + 1, box->env, box);
-	// 		remove_spes(ptr[4]);
-	// 		if(!ptr[3][0])
-	// 		{
-	// 			*li = ptr[1][i];
-	// 			join(&ptr[2], li,0);
-	// 			i++;
-	// 		}
-	// 		else
-	// 		{
-	// 			i += ft_strlen(ptr[3]);
-	// 			join(&ptr[2], ptr[4],1);
-	// 		}
-	// 		free(ptr[3]);
-	// 	}
-	// 	else
-	// 	{
-	// 		*li = ptr[1][i];
-	// 		join(&ptr[2], li,0);
-	// 		i++;
-	// 	}
-	// }
-	// free(li);
-	ptr[4] = ft_strdup(str->com);
-	ptr[3] = ft_strdup(str->com);
-	ptr[2] = ptr[4];
-	ptr[2] = ft_dchr(ptr[2], '$');
-	while (ptr[2])
+	ptr[1] = str->com;
+	ptr[2] = ft_strdup("");
+	i = 0;
+	li = ft_strdup(" ");
+	while (ptr[1] && ptr[1][i])
 	{
-		ptr[1] = get_to(ptr[2], ' ');
-		ptr[0] = get_val(ptr[1] + 1, box->env, box);
-		ptr[3] = str_replace(ptr[3], ptr[1], ptr[0]);
-		free(ptr[1]);
-		free(ptr[0]);
-		ptr[2] = ft_dchr(ptr[2] + 1, '$');
+		if (ptr[1][i] == '\'')
+		{
+			ptr[3] = ft_substr(&ptr[1][i + 1], 0, slen(&ptr[1][i]) - 2);
+			i += slen(&ptr[1][i]);
+			join(&ptr[2], ptr[3],1);
+		}
+		else if (ptr[1][i] == '\"')
+		{
+			i++;
+			while (ptr[1][i] != '\"')
+			{
+				if (ptr[1][i] == '$')
+				{
+					ptr[3] = get_to(&ptr[1][i], ' ');
+					ptr[4] = get_val(ptr[3] + 1, box->env, box);
+					i += ft_strlen(ptr[3]);
+					free(ptr[3]);
+					join(&ptr[2], ptr[4],1);
+				}
+				else
+				{
+					*li = ptr[1][i];
+					join(&ptr[2], li,0);
+					i++;
+				}
+				
+			}
+			i++;
+		}
+		else if (ptr[1][i] == '$')
+		{
+			ptr[3] = get_to(&ptr[1][i], ' ');
+			ptr[4] = get_val(ptr[3] + 1, box->env, box);
+			// remove_spes(ptr[4]);
+			if(!ptr[3][0])
+			{
+				*li = ptr[1][i];
+				join(&ptr[2], li,0);
+				i++;
+			}
+			else
+			{
+				i += ft_strlen(ptr[3]) ;
+				join(&ptr[2], ptr[4],1);
+			}
+			free(ptr[3]);
+		}
+		else
+		{
+			*li = ptr[1][i];
+			join(&ptr[2], li,0);
+			i++;
+		}
 	}
+	free(li);
+	return (ptr[2]);
+	// ptr[4] = ft_strdup(str->com);
+	// ptr[3] = ft_strdup(str->com);
+	// ptr[2] = ptr[4];
+	// ptr[2] = ft_dchr(ptr[2], '$');
+	// while (ptr[2])
+	// {
+	// 	ptr[1] = get_to(ptr[2], ' ');
+	// 	ptr[0] = get_val(ptr[1] + 1, box->env, box);
+	// 	ptr[3] = str_replace(ptr[3], ptr[1], ptr[0]);
+	// 	free(ptr[1]);
+	// 	free(ptr[0]);
+	// 	ptr[2] = ft_dchr(ptr[2] + 1, '$');
+	// }
 	
-	free(ptr[4]);
-	return (ptr[3]);
+	// free(ptr[4]);
+	// return (ptr[3]);
 }
 
 void	replace_var(t_box *box)

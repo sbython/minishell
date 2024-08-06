@@ -6,48 +6,37 @@
 /*   By: zibnoukh <zibnoukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:43:08 by msbai             #+#    #+#             */
-/*   Updated: 2024/08/05 14:18:49 by zibnoukh         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:47:06 by zibnoukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	sizeee(t_box *box)
+int sizeee(t_box *box)
 {
-	int			count;
-	t_command	*curr;
-
-	count = 0;
-	if (!box || !box->node || !box->node->command)
-		return (count);
-	curr = box->node->command;
+	int count = 0;
+	if (!box || !box->node || !box->node->command) 
+        return count;
+	t_command* curr = box->node->command;
 	while (curr)
 	{
 		count++;
 		curr = curr->next;
 	}
-	return (count);
+	return count;
 }
 
-int	execute(t_box *box)
+void	execute(t_box *box)
 {
-	int	status;
-
-	status = 0;
-	if (sizeee(box) == 1 && box->node->command->options
-		&& put_builtins(box->node->command->options[0])
-		&& !box->node->command->redirection)
-		status = builtins(box->node->command->options, box, 1);
-	else if (sizeee(box) == 1 && box->node->command->options
-		&& put_builtins(box->node->command->options[0])
-		&& box->node->command->redirection)
+	char** files;
+	files = NULL;
+	if(sizeee(box) == 1 && box->node->command->options && put_builtins(box->node->command->options[0]))
+		builtins(box->node->command->options, box);
+	else if(sizeee(box) == 1 && box->node->command->redirection)
 	{
-		run_all_heardocs(box->node->command, box);
-		ft_redirection(box->node->command, box->node->command->redirection,
-			box->node->command->files[0], 0);
-		status = builtins(box->node->command->options, box, 1);
+		files = run_all_heardocs(box);
+		ft_redirection(box, box->node->command->redirection, files[0], 0);
 	}
 	else
-		status = more_then___(box);
-	return (status);
+		more_then___(box);
 }
