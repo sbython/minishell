@@ -12,34 +12,42 @@
 
 #include "../../minishell.h"
 
-int sizeee(t_box *box)
+int	sizeee(t_box *box)
 {
-	int count = 0;
-	if (!box || !box->node || !box->node->command) 
-        return count;
-	t_command* curr = box->node->command;
+	int			count;
+	t_command	*curr;
+
+	count = 0;
+	if (!box || !box->node || !box->node->command)
+		return (count);
+	curr = box->node->command;
 	while (curr)
 	{
 		count++;
 		curr = curr->next;
 	}
-	return count;
+	return (count);
 }
 
-int    execute(t_box *box)
+int	execute(t_box *box)
 {
-    int status;
+	int	status;
 
-    status = 0;
-    if(sizeee(box) == 1 && box->node->command->options && put_builtins(box->node->command->options[0]) && !box->node->command->redirection)
-        status = builtins(box->node->command->options, box, 1);
-    else if(sizeee(box) == 1 && box->node->command->options && put_builtins(box->node->command->options[0]) && box->node->command->redirection)
-    {
-        run_all_heardocs(box->node->command, box);
-        ft_redirection(box->node->command, box->node->command->redirection, box->node->command->files[0], 0);
-        status = builtins(box->node->command->options, box, 1);
-    }
-    else
-        status = more_then___(box);
-    return status;
+	status = 0;
+	if (sizeee(box) == 1 && box->node->command->options
+		&& put_builtins(box->node->command->options[0])
+		&& !box->node->command->redirection)
+		status = builtins(box->node->command->options, box, 1);
+	else if (sizeee(box) == 1 && box->node->command->options
+		&& put_builtins(box->node->command->options[0])
+		&& box->node->command->redirection)
+	{
+		run_all_heardocs(box->node->command, box);
+		ft_redirection(box->node->command, box->node->command->redirection,
+			box->node->command->files[0], 0);
+		status = builtins(box->node->command->options, box, 1);
+	}
+	else
+		status = more_then___(box);
+	return (status);
 }
